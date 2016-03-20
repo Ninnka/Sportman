@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:background="@color/md_grey_50"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:elevation="1dp">
+
+        <LinearLayout
+            android:id="@+id/tab_1"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/tab_image_1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/wrestling2"
+                android:layout_width="60dp"
+                android:layout_height="30dp"/>
+
+            <TextView
+                android:text="@string/Buttom_navigation_first"
+                android:textSize="6pt"
+                android:textColor="@color/md_black_1000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_2"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/tab_image_2"
+                android:scaleType="fitCenter"
+                android:src="@drawable/sms1"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                />
+
+            <TextView
+                android:textSize="6pt"
+                android:textColor="@color/md_black_1000"
+                android:text="@string/Buttom_navigation_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_3"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/tab_image_3"
+                android:scaleType="fitCenter"
+                android:src="@drawable/user_male1"
+                android:layout_width="60dp"
+                android:layout_height="30dp"/>
+
+            <TextView
+                android:textSize="6pt"
+                android:textColor="@color/md_black_1000"
+
+                android:text="@string/Buttom_navigation_third"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+</LinearLayout>

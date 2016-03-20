@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ToolBarColorPrimary">#FB8041</color>
+    <color name="ToolBarColorPrimaryDark">#FB681A</color>
+    <color name="ToolBarColorPrimary_other">#FDFDFD</color>
+    <color name="ToolBarColorPrimary_activities_detail_first">#00FEFEFE</color>
+    <color name="ToolBarColorPrimary_activities_detail_second">#FFFEFEFE</color>
+    <color name="navigation_press">#709E9E9E</color>
+    <color name="navigatiom_release">#11B39DDB</color>
+    <color name="banner_switcher_container_in">#33BDBDBD</color>
+    <color name="banner_switcher_container_out">#00FFFFFF</color>
+    <color name="expandablelist_navigation_indicator">#889E9E9E</color>
+</resources>

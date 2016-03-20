@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <GridLayout
+        android:background="@color/md_grey_300"
+        android:id="@+id/activity_city_selection_expandablelist_child_other_container"
+        android:rowCount="1"
+        android:columnCount="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<TextView-->
+            <!--android:background="@color/md_white_1000"-->
+            <!--android:layout_marginLeft="25dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:text="adfgjt"-->
+            <!--android:gravity="center"-->
+
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="40dp"/>-->
+
+        <!--<TextView-->
+            <!--android:background="@color/md_white_1000"-->
+            <!--android:layout_marginLeft="25dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:text="adfgjt"-->
+            <!--android:gravity="center"-->
+
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="40dp"/>-->
+
+        <!--<TextView-->
+            <!--android:background="@color/md_white_1000"-->
+            <!--android:layout_marginLeft="25dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:text="adfgjt"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_width="50dp"-->
+
+            <!--android:layout_height="40dp"/>-->
+
+        <!--<TextView-->
+            <!--android:background="@color/md_white_1000"-->
+            <!--android:layout_marginLeft="25dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:text="adfgjt"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_width="50dp"-->
+
+            <!--android:layout_height="40dp"/>-->
+
+
+    </GridLayout>
+
+</LinearLayout>

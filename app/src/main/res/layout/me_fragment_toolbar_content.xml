@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="280dp"
+        android:layout_height="40dp">
+
+        <TextView
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:text="Me"
+            android:textSize="22sp"
+            android:textColor="@color/md_white_1000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/me_fragment_toolbar_content_setting"
+            android:layout_marginLeft="15dp"
+            android:padding="2dp"
+            android:src="@drawable/setting_big"
+            android:scaleType="fitCenter"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</LinearLayout>

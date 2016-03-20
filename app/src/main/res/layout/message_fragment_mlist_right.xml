@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:id="@+id/message_fragment_mlist_right_scrollview"
+        android:focusable="true"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/message_fragment_mlist_right_top_container"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="#FEFEFE"
+                android:elevation="0.5dp"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="145dp">
+
+                <LinearLayout
+                    android:id="@+id/message_fragment_mlist_right_top_newFriend"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:src="@drawable/message_fragment_newfriend"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="9dp"
+                            android:layout_marginRight="12dp"
+                            android:scaleType="fitCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:gravity="center|left"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="新的动友"
+                            android:textSize="15sp"
+                            android:textColor="@color/md_grey_700"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:background="@color/md_grey_200"
+                    android:layout_width="330dp"
+                    android:layout_height="0.5dp"/>
+
+                <LinearLayout
+                    android:id="@+id/message_fragment_mlist_right_top_groupChat"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:src="@drawable/message_fragment_groupchat"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="9dp"
+                            android:layout_marginRight="12dp"
+                            android:scaleType="fitCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:gravity="center|left"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="群聊"
+                            android:textSize="15sp"
+                            android:textColor="@color/md_grey_700"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:background="@color/md_grey_200"
+                    android:layout_width="330dp"
+                    android:layout_height="0.5dp"/>
+
+                <LinearLayout
+                    android:id="@+id/message_fragment_mlist_right_top_myStar"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:src="@drawable/message_fragment_mystar"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="9dp"
+                            android:layout_marginRight="12dp"
+                            android:scaleType="fitCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:gravity="center|left"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="我的关注"
+                            android:textSize="15sp"
+                            android:textColor="@color/md_grey_700"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/message_fragment_mlist_right_expandablelist_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ExpandableListView
+                    android:id="@+id/message_fragment_mlist_right_expandablelist"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ExpandableListView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <TextView
+                    android:id="@+id/message_fragment_mlist_right_counter"
+                    android:textSize="20sp"
+                    android:textColor="@color/md_grey_500"
+                    android:background="@color/md_grey_200"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/message_fragment_mlist_right_expandablelist_navigation_parent"
+        android:layout_gravity="right"
+        android:background="@color/navigatiom_release"
+        android:orientation="vertical"
+        android:layout_width="19dp"
+        android:layout_height="match_parent">
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/md_white_1000"
+        android:textSize="34sp"
+        android:focusable="false"
+        android:visibility="invisible"
+        android:background="@color/expandablelist_navigation_indicator"
+        android:id="@+id/message_fragment_mlist_right_expandablelist_navigation_indicator"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
+
+
+</FrameLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <TextView
+        android:text="A"
+        android:textSize="13sp"
+        android:gravity="center|left"
+        android:paddingLeft="20dp"
+        android:textColor="@color/md_grey_800"
+        android:id="@+id/activity_city_selection_expandablelist_group_groupname"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/md_grey_300"/>
+
+</LinearLayout>

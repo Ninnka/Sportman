@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sportman</string>
+    <string name="current_location">广州</string>
+    <string name="Buttom_navigation_second">Message</string>
+    <string name="Buttom_navigation_third">Me</string>
+    <string name="Buttom_navigation_first">Activity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

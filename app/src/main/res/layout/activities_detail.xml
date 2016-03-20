@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/activity_detail"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <ImageView
+        android:scaleType="center"
+        android:src="@drawable/activities_detail_post"
+        android:id="@+id/activities_detail_headerView"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"/>
+
+    <com.example.macyaren.sportman.ObservableScrollView
+        android:scrollbars="none"
+        android:id="@+id/activities_detail_observableScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:background="#00FFFFFF"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <ImageView
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:padding="5dp"
+                        android:src="@drawable/activities_detail_content_header_description_post"
+                        android:scaleType="fitCenter"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"/>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            android:text="2016广州马拉松"
+                            android:textSize="22sp"
+                            android:textColor="@color/md_white_1000"
+                            android:background="#00FFFFFF"
+                            android:id="@+id/activities_detail_content_header_description_name"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:paddingLeft="5dp"
+                            android:text="活动官网:www.gzmarathon.com"
+                            android:textSize="16sp"
+                            android:textColor="@color/md_white_1000"
+                            android:background="#00FFFFFF"
+                            android:id="@+id/activities_detail_content_header_description_webaddress"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/md_grey_200"
+                    android:orientation="vertical"
+                    android:id="@+id/activities_detail_content_center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:id="@+id/activities_detail_placeHolder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp">
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:background="@color/md_grey_200"
+                        android:layout_width="match_parent"
+                        android:layout_height="12dp"/>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:animateLayoutChanges="true"
+                        android:background="@color/md_white_1000"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:gravity="center|left"
+                            android:paddingLeft="20dp"
+                            android:background="#FDFDFD"
+                            android:text="Sign Up Detail"
+                            android:textSize="17sp"
+                            android:translationZ="0.6dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"/>
+
+                        <!--<TextView-->
+                        <!--android:background="@color/md_grey_200"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="0.6dp"/>-->
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:gravity="center|left"
+                            android:paddingLeft="20dp"
+                            android:background="#FEFEFE"
+                            android:text="报名日期：2016年01月06日 - 2016年03月01日"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                        <LinearLayout
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:gravity="center|left"
+                                android:paddingLeft="20dp"
+                                android:background="#FEFEFE"
+                                android:text="报名名额："
+                                android:textSize="14sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <RelativeLayout
+                                android:layout_gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp">
+
+                                <TextView
+                                    android:layout_centerInParent="true"
+                                    android:background="@color/md_orange_600"
+                                    android:layout_width="120dp"
+                                    android:layout_height="10dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentStart="true"/>
+
+                                <TextView
+                                    android:layout_centerInParent="true"
+                                    android:background="@color/md_purple_500"
+                                    android:layout_width="80dp"
+                                    android:layout_height="10dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentStart="true"/>
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:gravity="center|left"
+                            android:paddingLeft="20dp"
+                            android:background="#FEFEFE"
+                            android:text="选手登记：在线登记"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:gravity="center|left"
+                            android:paddingLeft="20dp"
+                            android:background="#FEFEFE"
+                            android:text="是否分组：是"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+
+                        <TextView
+                            android:text="click to more >>"
+                            android:textSize="15sp"
+                            android:textColor="@color/md_blue_200"
+                            android:gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:background="@color/md_grey_200"
+                        android:layout_width="match_parent"
+                        android:layout_height="12dp"/>
+
+                    <LinearLayout
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        android:background="@color/md_white_1000"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp">
+
+                        <TextView
+                            android:gravity="center|left"
+                            android:paddingLeft="20dp"
+                            android:background="#FDFDFD"
+                            android:text="Organizer"
+                            android:textSize="17sp"
+                            android:translationZ="0.6dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"/>
+
+                        <!--<TextView-->
+                        <!--android:background="@color/md_grey_200"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="0.6dp"/>-->
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_weight="4"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:text="广州体育局"
+                                    android:textSize="16sp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center|left"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:text="广州市天河区天河路299号天河体育中心"
+                                    android:singleLine="true"
+                                    android:ellipsize="end"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/md_grey_400"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center|left"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:background="@color/md_grey_300"
+                                android:layout_width="1dp"
+                                android:layout_height="55dp"/>
+
+                            <ImageView
+                                android:padding="3dp"
+                                android:src="@drawable/phone"
+                                android:scaleType="fitCenter"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:background="@color/md_grey_200"
+                        android:layout_width="match_parent"
+                        android:layout_height="12dp"/>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@color/md_white_1000"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:gravity="center|left"
+                            android:paddingLeft="20dp"
+                            android:background="#FDFDFD"
+                            android:translationZ="0.6dp"
+                            android:text="Activity Process"
+                            android:textSize="17sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"/>
+
+                        <!--<TextView-->
+                        <!--android:background="@color/md_grey_200"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="0.6dp"/>-->
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:gravity="center|left"
+                            android:paddingLeft="20dp"
+                            android:background="#FEFEFE"
+                            android:text="I. Race Event\n\n1. Marathon (42.195 km)\n2. Half Marathon (21.0975 km)\n3. Mini Marathon (5 km)"
+                            android:singleLine="false"
+                            android:maxLines="20"
+                            android:ellipsize="end"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:text="click to more >>"
+                            android:textSize="15sp"
+                            android:textColor="@color/md_blue_200"
+                            android:gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:background="@color/md_grey_200"
+                        android:layout_width="match_parent"
+                        android:layout_height="12dp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <include
+                layout="@layout/activity_detail_container_signup"
+                android:id="@+id/activities_detail_content_center_container_signup"/>
+
+        </FrameLayout>
+
+    </com.example.macyaren.sportman.ObservableScrollView>
+
+    <Toolbar
+        android:layout_gravity="top"
+        android:id="@+id/activities_detail_toolbar"
+        android:minHeight="?android:actionBarSize"
+        android:background="#00FEFEFE"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:elevation="3dp"
+        android:popupTheme="@android:style/ThemeOverlay.Material.Light">
+
+        <LinearLayout
+            android:gravity="left|center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/activity_return"
+                android:padding="10dp"
+                android:src="@drawable/activity_return_color"
+                android:scaleType="fitCenter"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+
+                android:paddingLeft="20dp"
+                android:gravity="center|left"
+                android:text="Detail"
+                android:textColor="@color/md_deep_orange_900"
+                android:textSize="20sp"
+                android:id="@+id/activities_detail_toolbar_centertext"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"/>
+
+
+            <ImageView
+                android:src="@drawable/share"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:src="@drawable/activity_detail_unstared"
+                android:scaleType="fitCenter"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+
+        </LinearLayout>
+
+
+    </Toolbar>
+
+</FrameLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:gravity="center|left"
+        android:paddingLeft="20dp"
+        android:text="childname"
+        android:textSize="16sp"
+        android:id="@+id/activity_city_selection_expandablelist_child_childname"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+</LinearLayout>

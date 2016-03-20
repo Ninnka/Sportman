@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/message_fragment_mlist_right_top_newFriend"
+    android:layout_width="match_parent"
+    android:layout_height="45dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="80dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/message_fragment_listview_right_child_photo"
+            android:src="@drawable/message_fragment_contact_adu"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="12dp"
+            android:scaleType="fitCenter"
+            android:layout_width="37dp"
+            android:layout_height="37dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="5"
+        android:layout_width="0dp"
+        android:gravity="center|left"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/message_fragment_listview_right_child_name"
+            android:text="阿杜"
+            android:textSize="15sp"
+            android:textColor="@color/md_grey_800"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

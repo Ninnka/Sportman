@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/ToolBarColorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/ToolBarColorPrimaryDark</item>
+        <item name="android:colorAccent">@color/md_blue_200</item>
+        <item name="android:windowBackground">@color/md_white_1000</item>
+    </style>
+</resources>
