@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -181,7 +180,6 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 					ViewTreeObserver.OnGlobalLayoutListener() {
 				@Override
 				public void onGlobalLayout() {
-
 					onScrollchanged(observableScrollView.getScrollY());
 				}
 			});
@@ -440,9 +438,9 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 	@Override
 	public void onScrollchanged(int t) {
 		int translation = Math.max(t, placeholder.getTop());
-		Log.i("ZRH", "observableScrollView getScrollY: " + observableScrollView
-				.getScrollY());
-		Log.i("ZRH", "placeHolder getTop: " + placeholder.getTop());
+//		Log.i("ZRH", "observableScrollView getScrollY: " + observableScrollView
+//				.getScrollY());
+//		Log.i("ZRH", "placeHolder getTop: " + placeholder.getTop());
 		filter.setTranslationY(translation);
 	}
 

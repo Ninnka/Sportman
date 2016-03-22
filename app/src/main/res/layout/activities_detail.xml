@@ -102,6 +102,7 @@
                         android:layout_height="12dp"/>
 
                     <LinearLayout
+                        android:id="@+id/activities_detail_content_center_signupdetail"
                         android:orientation="vertical"
                         android:animateLayoutChanges="true"
                         android:background="@color/md_white_1000"
@@ -127,7 +128,6 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center|left"
                             android:paddingLeft="20dp"
-                            android:background="#FEFEFE"
                             android:text="报名日期：2016年01月06日 - 2016年03月01日"
                             android:textSize="14sp"
                             android:layout_width="match_parent"
@@ -143,7 +143,6 @@
                             <TextView
                                 android:gravity="center|left"
                                 android:paddingLeft="20dp"
-                                android:background="#FEFEFE"
                                 android:text="报名名额："
                                 android:textSize="14sp"
                                 android:layout_width="wrap_content"
@@ -176,10 +175,10 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/detail_sample"
                             android:layout_marginTop="10dp"
                             android:gravity="center|left"
                             android:paddingLeft="20dp"
-                            android:background="#FEFEFE"
                             android:text="选手登记：在线登记"
                             android:textSize="14sp"
                             android:layout_width="match_parent"
@@ -189,7 +188,6 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center|left"
                             android:paddingLeft="20dp"
-                            android:background="#FEFEFE"
                             android:text="是否分组：是"
                             android:textSize="14sp"
                             android:layout_width="match_parent"
@@ -197,7 +195,8 @@
 
 
                         <TextView
-                            android:text="click to more >>"
+                            android:id="@+id/activities_detail_content_center_signupdetail_clicktoviewmore"
+                            android:text="Click to view more >>"
                             android:textSize="15sp"
                             android:textColor="@color/md_blue_200"
                             android:gravity="center"
@@ -294,6 +293,7 @@
                         android:layout_height="12dp"/>
 
                     <LinearLayout
+                        android:id="@+id/activities_detail_content_center_process"
                         android:animateLayoutChanges="true"
                         android:orientation="vertical"
                         android:background="@color/md_white_1000"
@@ -316,10 +316,10 @@
                         <!--android:layout_height="0.6dp"/>-->
 
                         <TextView
+                            android:id="@+id/activities_detail_content_center_process_sample_tv"
                             android:layout_marginTop="10dp"
                             android:gravity="center|left"
                             android:paddingLeft="20dp"
-                            android:background="#FEFEFE"
                             android:text="I. Race Event\n\n1. Marathon (42.195 km)\n2. Half Marathon (21.0975 km)\n3. Mini Marathon (5 km)"
                             android:singleLine="false"
                             android:maxLines="20"
@@ -329,7 +329,8 @@
                             android:layout_height="wrap_content"/>
 
                         <TextView
-                            android:text="click to more >>"
+                            android:id="@+id/activities_detail_content_center_process_clicktoviewmore"
+                            android:text="Click to view more >>"
                             android:textSize="15sp"
                             android:textColor="@color/md_blue_200"
                             android:gravity="center"
@@ -346,6 +347,8 @@
                         android:layout_height="12dp"/>
 
                     <LinearLayout
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:animateLayoutChanges="true"
                         android:orientation="vertical"
                         android:background="@color/md_white_1000"
@@ -389,16 +392,42 @@
 
                         </ListView>
 
-                        <TextView
-                            android:id="@+id/activities_detail_content_center_commentsmore"
-                            android:text="click to more >>"
-                            android:textSize="15sp"
-                            android:textColor="@color/md_blue_200"
-                            android:gravity="center"
+                        <LinearLayout
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="20dp"
+                            android:background="@color/md_white_1000"
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/activities_detail_content_center_comments_cllapseview"
+                                android:text=""
+                                android:textSize="15sp"
+                                android:textColor="@color/md_blue_200"
+                                android:gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"/>
+
+                            <TextView
+                                android:id="@+id/activities_detail_content_center_comments_clicktoviewmore"
+                                android:text="Click to view more >>"
+                                android:textSize="15sp"
+                                android:textColor="@color/md_blue_200"
+                                android:gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"/>
+
+                        </LinearLayout>
+
+
 
                     </LinearLayout>
 
@@ -408,7 +437,7 @@
             </LinearLayout>
 
             <include
-                layout="@layout/activity_detail_container_signup"
+                layout="@layout/activities_detail_container_signup"
                 android:id="@+id/activities_detail_content_center_container_signup"/>
 
         </FrameLayout>
@@ -432,7 +461,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/activity_return"
+                android:id="@+id/activity_detail_return"
                 android:padding="10dp"
                 android:src="@drawable/activity_return_color"
                 android:scaleType="fitCenter"

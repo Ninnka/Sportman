@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class ActivitiesDetailCommentsListAdapter extends BaseAdapter {
 
 	LayoutInflater inflater;
 	Context context;
-	List<String> list;
+	List<ActivitiesDetailCommentsListCommInfo> list;
 
 
 	public ActivitiesDetailCommentsListAdapter(Context context) {
@@ -38,25 +40,48 @@ public class ActivitiesDetailCommentsListAdapter extends BaseAdapter {
 		return position;
 	}
 
-	public void setList(List<String> list) {
+	public void setList(List<ActivitiesDetailCommentsListCommInfo> list) {
 		this.list = list;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ActivitiesDetailCommentsListHolder activitiesDetailCommentsListHolder;
-		if(convertView == null){
-			convertView = inflater.inflate(R.layout.listitem,parent,false);
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.activities_detail_comments_list, parent, false);
 			activitiesDetailCommentsListHolder = new ActivitiesDetailCommentsListHolder();
-			activitiesDetailCommentsListHolder.comments = (android.widget.TextView) convertView
-					.findViewById(R.id.comments);
+			activitiesDetailCommentsListHolder.photo = (ImageView) convertView
+					.findViewById(R.id.activities_detail_comments_list_photo);
+			activitiesDetailCommentsListHolder.uname = (TextView) convertView
+					.findViewById(R.id.activities_detail_comments_list_name);
+			activitiesDetailCommentsListHolder.comment = (TextView) convertView.findViewById(R.id
+					.activities_detail_comments_list_comment);
+			activitiesDetailCommentsListHolder.praise = (TextView) convertView.findViewById(R.id
+					.activities_detail_comments_list_praise);
+			activitiesDetailCommentsListHolder.good = (ImageView) convertView.findViewById(R.id
+					.activities_detail_comments_list_good);
+			activitiesDetailCommentsListHolder.date = (TextView) convertView.findViewById(R.id
+					.activities_detail_comments_list_date);
 			convertView.setTag(activitiesDetailCommentsListHolder);
-		}else {
+		} else {
 			activitiesDetailCommentsListHolder = (ActivitiesDetailCommentsListHolder) convertView
 					.getTag();
 		}
-		String comment = list.get(position);
-		activitiesDetailCommentsListHolder.comments.setText(comment);
+		ActivitiesDetailCommentsListCommInfo activitiesDetailCommentsListCommInfo = list.get
+				(position);
+		activitiesDetailCommentsListHolder.photo.setImageResource
+				(activitiesDetailCommentsListCommInfo.photo);
+		activitiesDetailCommentsListHolder.uname.setText(activitiesDetailCommentsListCommInfo
+				.uname);
+		activitiesDetailCommentsListHolder.comment.setText(activitiesDetailCommentsListCommInfo
+				.comment);
+		activitiesDetailCommentsListHolder.praise.setText(String.valueOf
+				(activitiesDetailCommentsListCommInfo.praise));
+		String name = activitiesDetailCommentsListCommInfo.uname;
+		if(name == "天上的日"){
+			activitiesDetailCommentsListHolder.good.setImageResource(R.drawable.praise_small);
+		}
+		activitiesDetailCommentsListHolder.date.setText(activitiesDetailCommentsListCommInfo.date);
 		return convertView;
 	}
 }

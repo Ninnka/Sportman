@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:id="@+id/activities_detail_comments_list_photo"
+            android:src="@drawable/activity_detail_content_comments_profile_1"
+            android:scaleType="fitCenter"
+            android:padding="4dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:id="@+id/activities_detail_comments_list_name"
+            android:text="广州凉风"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:textSize="17sp"
+            android:textColor="@color/md_grey_700"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/activities_detail_comments_list_comment"
+        android:layout_marginRight="10dp"
+        android:gravity="left"
+        android:text="texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"
+        android:textSize="15sp"
+        android:ellipsize="end"
+        android:maxLines="8"
+        android:layout_gravity="right"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_gravity="right"
+        android:layout_width="275dp"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:padding="2dp"
+            android:id="@+id/activities_detail_comments_list_good"
+            android:src="@drawable/unpraise_small"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/activities_detail_comments_list_praise"
+            android:text="23333"
+            android:gravity="center_vertical"
+            android:layout_gravity="center|left"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/activities_detail_comments_list_date"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:text="2016-01-12 12:30:50"
+            android:layout_weight="7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>
