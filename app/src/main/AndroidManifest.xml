@@ -22,7 +22,6 @@
             android:windowSoftInputMode="adjustPan">
 
             <intent-filter>
-
                 <action android:name="com.macya.intent.action.CITY_SELECTION"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
@@ -32,6 +31,33 @@
 
             <intent-filter>
                 <action android:name="com.macya.intent.action.ACTIVITIES_DETAIL"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ActivitiesDetailRegistrationInstruction">
+
+            <intent-filter>
+                <action
+                    android:name="com.macya.intent.action.ACTIVITIES_DETAIL_REGISTRATION_INSTRUCTION"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ActivitiesDetailRegistrationInfomation">
+
+            <intent-filter>
+                <action
+                    android:name="com.macya.intent.action.ACTIVITIES_DETAIL_REGISTRATION_INFORMATION"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ActivitiesDetailRegistrationComplete">
+
+            <intent-filter>
+                <action
+                    android:name="com.macya.intent.action.ACTIVITIES_DETAIL_REGISTRATION_COMPLETE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

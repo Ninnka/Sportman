@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activities_detail_content_center_container_signup"
+    android:id="@+id/activities_detail_content_center_container_registration"
     android:gravity="center"
     android:elevation="1dp"
     android:orientation="horizontal"
@@ -49,14 +49,14 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/activities_detail_content_center_button_signup"
+        android:id="@+id/activities_detail_content_center_button_registration"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="10dp"
         android:gravity="center"
         android:textColor="@color/md_white_1000"
-        android:background="@drawable/activity_detail_signup"
-        android:textSize="16sp"
-        android:text="SIGN UP"
+        android:background="@drawable/activity_detail_registration"
+        android:textSize="14sp"
+        android:text="REGISTRATION"
         android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="40dp"/>

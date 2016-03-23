@@ -25,70 +25,75 @@ import java.util.List;
 public class ActivitiesDetail extends Activity implements ObservableScrollView.Callbacks,
 		View.OnClickListener {
 
-	public Intent intent;
 	public ImageView headerView;
 	public ObservableScrollView scrollView;
 	public Toolbar toolbar;
-	public LinearLayout container_signup;
+	public LinearLayout container_registration;
 	public ListView commentsListView;
 	public TextView commentsMore;
 	public TextView commentsCollapse;
-	public TextView signupdetailMore;
+	public TextView registrationdetailMore;
 	public TextView processMore;
 	public TextView sample;
 	public TextView process_sample;
 	public LinearLayout process_container;
-	public LinearLayout signupdetail_container;
+	public LinearLayout registrationdetail_container;
 	public TextView process_expand_tv;
-	public TextView signupdetail_expanded_tv;
+	public TextView registrationdetail_expanded_tv;
 	public List<ActivitiesDetailCommentsListCommInfo> list;
 	public ImageView detail_return;
+	public TextView registration_button_tv;
 
 	public View cachedView;
 
 	public float distance_to_top;
 	public float distance_to_toolbar;
 
-	public boolean hasExpanded_signupdetail = false;
+	public boolean hasExpanded_registrationdetail = false;
 	public boolean hasExpanded_process = false;
 
-	public final static int EXPAND_SUD = 0;
-	public final static int COLLAPSE_SUD = 1;
+	public final static int EXPAND_REGIS = 0;
+	public final static int COLLAPSE_REGIS = 1;
 	public final static int EXPAND_PRO = 2;
 	public final static int COLLAPSE_PRO = 3;
+
+	public final static String INTENT_TO_NEXT = "com.macya.intent.action.ACTIVITIES_DETAIL_REGISTRATION_INSTRUCTION";
 
 	public ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter;
 	public ActivitiesDetailCommentsListCommData activitiesDetailCommentsListCommData;
 	public ActivitiesDetailCommentsListCommInfo[] activitiesDetailCommentsListCommInfo;
 
+	public Intent intent_to_next;
+
 	Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-				case EXPAND_SUD:
-					if (cachedView.getTag(R.id.EXPAND_SUD) == null) {
-						signupdetail_expanded_tv = new TextView(ActivitiesDetail.this);
-						signupdetail_expanded_tv.setLayoutParams(sample.getLayoutParams());
-						signupdetail_expanded_tv.setGravity(Gravity.CENTER | Gravity.LEFT);
-						signupdetail_expanded_tv.setPadding(Utility.dip2px(ActivitiesDetail.this, 20), 0, 0, 0);
-						signupdetail_expanded_tv.setTextSize(14);
-						signupdetail_expanded_tv.setText("登记材料：身份证明，联系方式等");
-						cachedView.setTag(R.id.EXPAND_SUD, signupdetail_expanded_tv);
+				case EXPAND_REGIS:
+					if (cachedView.getTag(R.id.EXPAND_REGIS) == null) {
+						registrationdetail_expanded_tv = new TextView(ActivitiesDetail.this);
+						registrationdetail_expanded_tv.setLayoutParams(sample.getLayoutParams());
+						registrationdetail_expanded_tv.setGravity(Gravity.CENTER | Gravity.LEFT);
+						registrationdetail_expanded_tv.setPadding(Utility.dip2px(ActivitiesDetail.this, 20), 0, 0, 0);
+						registrationdetail_expanded_tv.setTextSize(14);
+						registrationdetail_expanded_tv.setText("登记材料：身份证明，联系方式等");
+						cachedView.setTag(R.id.EXPAND_REGIS, registrationdetail_expanded_tv);
 					} else {
-						signupdetail_expanded_tv = (TextView) cachedView.getTag(R.id.EXPAND_SUD);
+						registrationdetail_expanded_tv = (TextView) cachedView.getTag(R.id
+								.EXPAND_REGIS);
 					}
-					signupdetail_container.addView(signupdetail_expanded_tv);
-					signupdetail_container.removeView(signupdetailMore);
-					signupdetailMore.setText("Collapse view <<");
-					signupdetail_container.addView(signupdetailMore);
-					hasExpanded_signupdetail = true;
+					registrationdetail_container.addView(registrationdetail_expanded_tv);
+					registrationdetail_container.removeView(registrationdetailMore);
+					registrationdetailMore.setText("Collapse view <<");
+					registrationdetail_container.addView(registrationdetailMore);
+					hasExpanded_registrationdetail = true;
 					break;
-				case COLLAPSE_SUD:
-					signupdetail_container.removeView(signupdetailMore);
-					signupdetailMore.setText("Click to view more >>");
-					signupdetail_container.removeView(signupdetail_expanded_tv);
-					signupdetail_container.addView(signupdetailMore);
-					hasExpanded_signupdetail = false;
+				case COLLAPSE_REGIS:
+					registrationdetail_container.removeView(registrationdetailMore);
+					registrationdetailMore.setText("Click to view more >>");
+					registrationdetail_container.removeView(registrationdetail_expanded_tv);
+					registrationdetail_container.addView(registrationdetailMore);
+					hasExpanded_registrationdetail = false;
 					break;
 				case EXPAND_PRO:
 					if (cachedView.getTag(R.id.EXPAND_PRO) == null) {
@@ -98,8 +103,8 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 								0, 0);
 						process_expand_tv.setGravity(Gravity.CENTER | Gravity.LEFT);
 						process_expand_tv.setSingleLine(false);
-//						process_expand_tv.setMaxLines(30);
-//						process_expand_tv.setEllipsize(TextUtils.TruncateAt.END);
+						//						process_expand_tv.setMaxLines(30);
+						//						process_expand_tv.setEllipsize(TextUtils.TruncateAt.END);
 						process_expand_tv.setTextSize(14);
 						process_expand_tv.setText("II. Race Course \n(I) Mini Marathon: \n" +
 								"Huacheng Square (Starting Point) → Linjiang Ave (Eastwards) →" +
@@ -168,8 +173,8 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 				onScrollchanged(scrollView.getScrollY());
 			}
 		});
-		container_signup = (LinearLayout) findViewById(R.id
-				.activities_detail_content_center_container_signup);
+		container_registration = (LinearLayout) findViewById(R.id
+				.activities_detail_content_center_container_registration);
 		commentsListView = (ListView) findViewById(R.id
 				.activities_detail_content_center_commentslist);
 		activitiesDetailCommentsListAdapter = new ActivitiesDetailCommentsListAdapter(this);
@@ -188,7 +193,7 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 					.PRAISES[i];
 			activitiesDetailCommentsListCommInfo[i].date = activitiesDetailCommentsListCommData
 					.DATES[i];
-//			list.add(activitiesDetailCommentsListCommInfo[i]);
+			//			list.add(activitiesDetailCommentsListCommInfo[i]);
 		}
 		activitiesDetailCommentsListAdapter.setList(list);
 		commentsListView.setAdapter(activitiesDetailCommentsListAdapter);
@@ -196,8 +201,12 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 
 		process_container = (LinearLayout) findViewById(R.id
 				.activities_detail_content_center_process);
-		signupdetail_container = (LinearLayout) findViewById(R.id
-				.activities_detail_content_center_signupdetail);
+		registrationdetail_container = (LinearLayout) findViewById(R.id
+				.activities_detail_content_center_registrationdetail);
+
+		registration_button_tv = (TextView) findViewById(R.id
+				.activities_detail_content_center_button_registration);
+		registration_button_tv.setOnClickListener(this);
 
 		commentsMore = (TextView) findViewById(R.id
 				.activities_detail_content_center_comments_clicktoviewmore);
@@ -205,9 +214,9 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 		commentsCollapse = (TextView) findViewById(R.id
 				.activities_detail_content_center_comments_cllapseview);
 		commentsCollapse.setOnClickListener(this);
-		signupdetailMore = (TextView) findViewById(R.id
-				.activities_detail_content_center_signupdetail_clicktoviewmore);
-		signupdetailMore.setOnClickListener(this);
+		registrationdetailMore = (TextView) findViewById(R.id
+				.activities_detail_content_center_registrationdetail_clicktoviewmore);
+		registrationdetailMore.setOnClickListener(this);
 		processMore = (TextView) findViewById(R.id
 				.activities_detail_content_center_process_clicktoviewmore);
 		processMore.setOnClickListener(this);
@@ -239,7 +248,7 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 			translation = t + Utility.dip2px(this, 50);
 			alphaFactor = 1;
 		}
-		container_signup.setTranslationY(translation);
+		container_registration.setTranslationY(translation);
 
 		alphaReal = (int) Math.ceil(255 * alphaFactor);
 		Log.i("ZRH", "alphaReal: " + alphaReal);
@@ -264,7 +273,7 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 		switch (v.getId()) {
 			case R.id.activities_detail_content_center_comments_clicktoviewmore:
 				int size = list.size();
-				if(size == 0){
+				if (size == 0) {
 					commentsCollapse.setText("Collapse view <<");
 				}
 				if (size < 10) {
@@ -278,11 +287,14 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 				}
 				break;
 			case R.id.activities_detail_content_center_comments_cllapseview:
-				if(!commentsCollapse.getText().toString().equals("")){
+				if (!commentsCollapse.getText().toString().equals("")) {
 					list.clear();
 					activitiesDetailCommentsListAdapter.notifyDataSetChanged();
 					Utility.setListViewHeightBasedOnChildren(commentsListView);
 					commentsCollapse.setText("");
+					if(commentsMore.getText().toString().equals("最后一页")){
+						commentsMore.setText("Click to view more >>");
+					}
 				}
 				break;
 			case R.id.activities_detail_content_center_process_clicktoviewmore:
@@ -295,18 +307,24 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 					handler.sendMessage(message_process);
 				}
 				break;
-			case R.id.activities_detail_content_center_signupdetail_clicktoviewmore:
-				Message message_signupdetail = new Message();
-				if (hasExpanded_signupdetail) {
-					message_signupdetail.what = COLLAPSE_SUD;
-					handler.sendMessage(message_signupdetail);
+			case R.id.activities_detail_content_center_registrationdetail_clicktoviewmore:
+				Message message_registrationdetail = new Message();
+				if (hasExpanded_registrationdetail) {
+					message_registrationdetail.what = COLLAPSE_REGIS;
+					handler.sendMessage(message_registrationdetail);
 				} else {
-					message_signupdetail.what = EXPAND_SUD;
-					handler.sendMessage(message_signupdetail);
+					message_registrationdetail.what = EXPAND_REGIS;
+					handler.sendMessage(message_registrationdetail);
 				}
 				break;
 			case R.id.activity_detail_return:
 				finish();
+				break;
+			case R.id.activities_detail_content_center_button_registration:
+				intent_to_next = new Intent();
+				intent_to_next.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+				intent_to_next.setAction(INTENT_TO_NEXT);
+				startActivity(intent_to_next);
 				break;
 		}
 	}
