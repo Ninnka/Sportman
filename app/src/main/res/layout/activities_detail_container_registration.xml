@@ -56,7 +56,7 @@
         android:textColor="@color/md_white_1000"
         android:background="@drawable/activity_detail_registration"
         android:textSize="14sp"
-        android:text="REGISTRATION"
+        android:text="REGISTER"
         android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="40dp"/>

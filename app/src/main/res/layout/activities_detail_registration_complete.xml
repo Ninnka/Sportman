@@ -1,13 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="@color/md_grey_200"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-        android:text="registration_complete"
-        android:gravity="center"
+    <Toolbar
+        android:layout_gravity="top"
+        android:id="@+id/activities_detail_registration_complete_toolbar"
+        android:minHeight="?android:actionBarSize"
+        android:background="#FEFEFE"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="50dp"
+        android:elevation="3dp"
+        android:popupTheme="@android:style/ThemeOverlay.Material.Light">
+
+        <LinearLayout
+            android:gravity="left|center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/activity_detail_registration_complete_return"
+                android:padding="10dp"
+                android:src="@drawable/activity_back_color_big"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:gravity="center|left"
+                android:layout_marginLeft="30dp"
+                android:text="Registration Result"
+                android:textColor="@color/md_deep_orange_900"
+                android:textSize="20sp"
+                android:id="@+id/activities_detail_registration_complete_toolbar_centertext"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_weight="6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+
+    </Toolbar>
+
+    <com.example.macyaren.sportman.ObservableScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/md_grey_200"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:background="@color/md_white_1000"
+                android:layout_width="match_parent"
+                android:layout_height="130dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="14dp"
+                            android:text="2016广州马拉松"
+                            android:textSize="20sp"
+                            android:textColor="@color/md_grey_900"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_marginLeft="14dp"
+                            android:text="2016-04-01 07:00 ~ 11:30"
+                            android:textColor="@color/md_red_500"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_marginLeft="14dp"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:text="广州市天河区珠江新城花城广场（起点）"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_marginLeft="14dp"
+                            android:text="报名项目：全程马拉松"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:src="@drawable/activities_detail_registration_complete_result_holder_post"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="130dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/activities_detail_registration_complete_floatnotification"
+                    android:visibility="visible"
+                    android:orientation="horizontal"
+                    android:background="#FDFDA6"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:id="@+id/activities_detail_registration_complete_notificationtext"
+                        android:text="你已报名成功，请等待审核"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="#FB8041"
+                        android:layout_weight="8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/activities_detail_registration_complete_closenotification"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/activity_back_color"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:translationZ="0.7dp"
+                android:background="@color/md_grey_50"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:text="2016广州马拉松路线图"
+                    android:textColor="@color/md_grey_700"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25dp"
+                    android:layout_weight="8"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+                <ImageView
+                    android:src="@drawable/more_small"
+                    android:padding="8dp"
+                    android:scaleType="fitCenter"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="14dp"
+                android:background="@color/md_white_1000"
+                android:layout_width="match_parent"
+                android:layout_height="130dp">
+
+                <LinearLayout
+                    android:translationZ="0.7dp"
+                    android:background="@color/md_grey_50"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:text="选手信息"
+                        android:textColor="@color/md_grey_700"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="25dp"
+                        android:layout_weight="8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="详细"
+                        android:textColor="#FB8041"
+                        android:gravity="center"
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="审核通过后显示"
+                        android:textColor="@color/md_grey_700"
+                        android:textSize="17sp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"/>
+
+                    <TextView
+                        android:text="人工审核流程可能需要3-7个工作日，请耐心等待"
+                        android:textColor="@color/md_grey_500"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="14dp"
+                android:orientation="vertical"
+                android:background="@color/md_white_1000"
+                android:layout_width="match_parent"
+                android:layout_height="170dp">
+
+                <LinearLayout
+                    android:translationZ="0.7dp"
+                    android:background="@color/md_grey_50"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:text="参赛须知"
+                        android:textColor="@color/md_grey_700"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="25dp"
+                        android:layout_weight="8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="详细"
+                        android:textColor="#FB8041"
+                        android:gravity="center"
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.example.macyaren.sportman.ObservableScrollView>
 
 </LinearLayout>
