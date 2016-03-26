@@ -1,6 +1,8 @@
 package com.example.macyaren.sportman;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -53,6 +55,57 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 	LinearLayout right_top_star;
 	TextView counter;
 	TextView navigation_indicator;
+	ViewTreeObserver viewTreeObserver_linearLayout_container;
+	ViewTreeObserver viewTreeObserver_navigation_parent;
+
+	Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			if(msg.what == 0){
+				/*
+				* 设置MessageFragmentRightListAdapter
+				* */
+				messageFragmentRightListAdapter = new MessageFragmentRightListAdapter(getContext());
+				messageFragmentRightListAdapter.setListPY(listPY);
+				messageFragmentRightListAdapter.setListInfos(listInfos);
+
+				/*
+				* 设置ExpandableListView的Adapter
+				* 展开所有groupItem
+				* */
+				expandableListView.setAdapter(messageFragmentRightListAdapter);
+				for (int i = 0; i < messageFragmentRightListAdapter.getGroupCount(); i++) {
+					expandableListView.expandGroup(i);
+				}
+
+				/*
+				* ExpandableListView的部分布局显示更改
+				* 重写ExpandableListView的group、child点击事件
+				* */
+				expandableListView.setGroupIndicator(null);
+				expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+					@Override
+					public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+						return true;
+					}
+				});
+				expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+					@Override
+					public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+						Toast.makeText(getContext(), "ChildItem" + childPosition + " was clicked",
+								Toast.LENGTH_SHORT).show();
+						return true;
+					}
+				});
+				/*
+				* 禁止ExpandableListView获得焦点
+				* */
+				expandableListView.setFocusable(false);
+				Utility.setListViewHeightBasedOnChildren(expandableListView);
+
+			}
+		}
+	};
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,157 +143,165 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 		listInfos = new ArrayList<List<MessageFragmentRightListInfo>>();
 		listPYTemp = new ArrayList<String>();
 
-		try {
-			/*
-		* 准备listPY
-		* */
-			for (int i = 0; i < MessageFragmentRightListData.UNAME.length; i++) {
-				//				Log.i("ZRH", "第一种循环开始");
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
 				try {
-					rightListData_eng[i] = pingYinTool.toPinYin(MessageFragmentRightListData
-							.UNAME[i]);
-					char c = rightListData_eng[i].charAt(0);
-					String cc = String.valueOf(c);
-					if (((int) c >= 65 & (int) c <= 90) || ((int) c >= 97 & (int) c <= 122)) {
-						if (map.get(cc) == null) {
-							List<String> newlist = new ArrayList<String>();
-							newlist.add(rightListData_eng[i]);
-							map.put(cc.toUpperCase(), newlist);
-							listPYTemp.add(cc.toUpperCase());
-						} else {
-							map.get(cc.toUpperCase()).add(rightListData_eng[i]);
-						}
-					} else {
-						if (map.get("OTHERS") == null) {
-							List<String> newList = new ArrayList<String>();
-							newList.add(rightListData_eng[i]);
-							map.put("OTHERS", newList);
-						} else {
-							map.get("OTHERS").add(rightListData_eng[i]);
+					/*
+					* 准备listPY
+					* */
+					for (int i = 0; i < MessageFragmentRightListData.UNAME.length; i++) {
+						//				Log.i("ZRH", "第一种循环开始");
+						try {
+							rightListData_eng[i] = pingYinTool.toPinYin(MessageFragmentRightListData
+									.UNAME[i]);
+							char c = rightListData_eng[i].charAt(0);
+							String cc = String.valueOf(c);
+							if (((int) c >= 65 & (int) c <= 90) || ((int) c >= 97 & (int) c <= 122)) {
+								if (map.get(cc) == null) {
+									List<String> newlist = new ArrayList<String>();
+									newlist.add(rightListData_eng[i]);
+									map.put(cc.toUpperCase(), newlist);
+									listPYTemp.add(cc.toUpperCase());
+								} else {
+									map.get(cc.toUpperCase()).add(rightListData_eng[i]);
+								}
+							} else {
+								if (map.get("OTHERS") == null) {
+									List<String> newList = new ArrayList<String>();
+									newList.add(rightListData_eng[i]);
+									map.put("OTHERS", newList);
+								} else {
+									map.get("OTHERS").add(rightListData_eng[i]);
+								}
+							}
+						} catch (BadHanyuPinyinOutputFormatCombination bhypy) {
+							Log.i("ZRH FOR HANYUPINYIN", bhypy.getMessage());
 						}
 					}
-				} catch (BadHanyuPinyinOutputFormatCombination bhypy) {
-					Log.i("ZRH FOR HANYUPINYIN", bhypy.getMessage());
+					String[] temp = (String[]) listPYTemp.toArray(new String[listPYTemp.size()]);
+					Arrays.sort(temp);
+
+					/*
+					* 由数组转化而成的list不再具有动态增加元素的效果
+					* 巨坑，切记
+					* */
+					//			listPY = Arrays.asList(temp);
+					for (int i = 0; i < temp.length; i++) {
+						listPY.add(temp[i]);
+					}
+
+					Log.i("ZRH", "listPY is preparing");
+					Log.i("ZRH", "-----------------------------------------------------");
+
+					/*
+					* 准备listInfos
+					* */
+					for (int j = 0; j < listPY.size(); j++) {
+						//				Log.i("ZRH", "第二种循环开始");
+						if (map.get(listPY.get(j)) != null) {
+							List<MessageFragmentRightListInfo> listInfo = new ArrayList<MessageFragmentRightListInfo>();
+
+							List<String> tranList = map.get(listPY.get(j));
+							String[] tranTemp = tranList.toArray(new String[tranList.size()]);
+							Arrays.sort(tranTemp);
+							for (int i = 0; i < tranTemp.length; i++) {
+								String tempStr = tranTemp[i];
+								for (int k = 0; k < rightListData_eng.length; k++) {
+									if (tempStr == rightListData_eng[k]) {
+										MessageFragmentRightListInfo messageFragmentRightListInfo = new
+												MessageFragmentRightListInfo();
+										messageFragmentRightListInfo.uname = MessageFragmentRightListData
+												.UNAME[k];
+										messageFragmentRightListInfo.photo = MessageFragmentRightListData
+												.PHOTO[k];
+										listInfo.add(messageFragmentRightListInfo);
+										Log.i("ZRH", "添加成功");
+										break;
+									}
+								}
+							}
+							listInfos.add(listInfo);
+							//					Log.i("ZRH", "当前listInfos的长度： " + listInfos.size());
+						}
+					}
+				} catch (Exception e) {
+					Log.i("ZRH", e.getMessage());
 				}
-			}
-			String[] temp = (String[]) listPYTemp.toArray(new String[listPYTemp.size()]);
-			Arrays.sort(temp);
-
-			/*
-			* 由数组转化而成的list不再具有动态增加元素的效果
-			* 巨坑，切记
-			* */
-			//			listPY = Arrays.asList(temp);
-			for (int i = 0; i < temp.length; i++) {
-				listPY.add(temp[i]);
-			}
-
-			Log.i("ZRH", "listPY is preparing");
-			Log.i("ZRH", "-----------------------------------------------------");
-
-		/*
-		* 准备listInfos
-		* */
-			for (int j = 0; j < listPY.size(); j++) {
-				//				Log.i("ZRH", "第二种循环开始");
-				if (map.get(listPY.get(j)) != null) {
-					List<MessageFragmentRightListInfo> listInfo = new ArrayList<MessageFragmentRightListInfo>();
-
-					List<String> tranList = map.get(listPY.get(j));
-					String[] tranTemp = tranList.toArray(new String[tranList.size()]);
-					Arrays.sort(tranTemp);
-					for (int i = 0; i < tranTemp.length; i++) {
-						String tempStr = tranTemp[i];
-						for (int k = 0; k < rightListData_eng.length; k++) {
-							if (tempStr == rightListData_eng[k]) {
-								MessageFragmentRightListInfo messageFragmentRightListInfo = new
-										MessageFragmentRightListInfo();
-								messageFragmentRightListInfo.uname = MessageFragmentRightListData
-										.UNAME[k];
-								messageFragmentRightListInfo.photo = MessageFragmentRightListData
-										.PHOTO[k];
-								listInfo.add(messageFragmentRightListInfo);
-								Log.i("ZRH", "添加成功");
-								break;
+				try {
+					if (map.get("OTHERS") == null) {
+						Log.i("ZRH", "无#项");
+					} else {
+						listPY.add("#");
+						List<MessageFragmentRightListInfo> otherNameList = new
+								ArrayList<MessageFragmentRightListInfo>();
+						List<String> tempList = map.get("OTHERS");
+						for (int i = 0; i < tempList.size(); i++) {
+							for (int j = 0; j < rightListData_eng.length; j++) {
+								if (tempList.get(i) == rightListData_eng[j]) {
+									MessageFragmentRightListInfo messageFragmentRightListInfo = new
+											MessageFragmentRightListInfo();
+									messageFragmentRightListInfo.photo = MessageFragmentRightListData
+											.PHOTO[j];
+									messageFragmentRightListInfo.uname = MessageFragmentRightListData
+											.UNAME[j];
+									otherNameList.add(messageFragmentRightListInfo);
+									break;
+								}
 							}
 						}
+						listInfos.add(otherNameList);
 					}
-					listInfos.add(listInfo);
-					//					Log.i("ZRH", "当前listInfos的长度： " + listInfos.size());
+				} catch (Exception ee) {
+					Log.i("ZRH", ee.getMessage());
 				}
-			}
-		} catch (Exception e) {
-			Log.i("ZRH", e.getMessage());
-		}
-		try {
-			if (map.get("OTHERS") == null) {
-				Log.i("ZRH", "无#项");
-			} else {
-				listPY.add("#");
-				List<MessageFragmentRightListInfo> otherNameList = new
-						ArrayList<MessageFragmentRightListInfo>();
-				List<String> tempList = map.get("OTHERS");
-				for (int i = 0; i < tempList.size(); i++) {
-					for (int j = 0; j < rightListData_eng.length; j++) {
-						if (tempList.get(i) == rightListData_eng[j]) {
-							MessageFragmentRightListInfo messageFragmentRightListInfo = new
-									MessageFragmentRightListInfo();
-							messageFragmentRightListInfo.photo = MessageFragmentRightListData
-									.PHOTO[j];
-							messageFragmentRightListInfo.uname = MessageFragmentRightListData
-									.UNAME[j];
-							otherNameList.add(messageFragmentRightListInfo);
-							break;
-						}
-					}
-				}
-				listInfos.add(otherNameList);
-			}
-		} catch (Exception ee) {
-			Log.i("ZRH", ee.getMessage());
-		}
 
-		Log.i("ZRH", "----------------------------------------------------");
+				Log.i("ZRH", "----------------------------------------------------");
+
+				Message msg = new Message();
+				msg.what = 0;
+				handler.sendMessage(msg);
+			}
+		}).start();
 
 		/*
 		* 设置MessageFragmentRightListAdapter
 		* */
-		messageFragmentRightListAdapter = new MessageFragmentRightListAdapter(getContext());
-		messageFragmentRightListAdapter.setListPY(listPY);
-		messageFragmentRightListAdapter.setListInfos(listInfos);
+//		messageFragmentRightListAdapter = new MessageFragmentRightListAdapter(getContext());
+//		messageFragmentRightListAdapter.setListPY(listPY);
+//		messageFragmentRightListAdapter.setListInfos(listInfos);
 
 		/*
 		*设置ExpandableListView的Adapter
 		* */
-		expandableListView.setAdapter(messageFragmentRightListAdapter);
-		for (int i = 0; i < messageFragmentRightListAdapter.getGroupCount(); i++) {
-			expandableListView.expandGroup(i);
-		}
+//		expandableListView.setAdapter(messageFragmentRightListAdapter);
+//		for (int i = 0; i < messageFragmentRightListAdapter.getGroupCount(); i++) {
+//			expandableListView.expandGroup(i);
+//		}
+
 		/*
 		* ExpandableListView的部分布局显示更改
 		* 重写ExpandableListView的group、child点击事件
 		* */
-		expandableListView.setGroupIndicator(null);
-		expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-			@Override
-			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-				return true;
-			}
-		});
-		expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-			@Override
-			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				Toast.makeText(getContext(), "ChildItem" + childPosition + " was clicked",
-						Toast.LENGTH_SHORT).show();
-				return true;
-			}
-		});
+//		expandableListView.setGroupIndicator(null);
+//		expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+//			@Override
+//			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+//				return true;
+//			}
+//		});
+//		expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+//			@Override
+//			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+//				Toast.makeText(getContext(), "ChildItem" + childPosition + " was clicked",
+//						Toast.LENGTH_SHORT).show();
+//				return true;
+//			}
+//		});
+
 		/*
-		* 禁止ExpandableListView获得焦点
 		* 解决在切换页面时ExpandableListView定位到获得焦点的Item上的问题
 		* */
-		expandableListView.setFocusable(false);
-		Utility.setListViewHeightBasedOnChildren(expandableListView);
 		final ScrollView scrollView = (ScrollView) resView.findViewById(R.id
 				.message_fragment_mlist_right_scrollview);
 		scrollView.setFocusable(true);
@@ -252,13 +313,14 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 		* */
 		linearLayout_container = (LinearLayout) resView.findViewById(R.id
 				.message_fragment_mlist_right_top_container);
-		ViewTreeObserver viewTreeObserver_linearLayout_container = linearLayout_container
+		viewTreeObserver_linearLayout_container = linearLayout_container
 				.getViewTreeObserver();
 		viewTreeObserver_linearLayout_container.addOnGlobalLayoutListener(new ViewTreeObserver
 				.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
 				container_height = linearLayout_container.getBottom();
+				linearLayout_container.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 			}
 		});
 
@@ -276,7 +338,7 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 		* */
 		navigation_parent = (LinearLayout) resView.findViewById(R.id
 				.message_fragment_mlist_right_expandablelist_navigation_parent);
-		ViewTreeObserver viewTreeObserver_navigation_parent = navigation_parent
+		viewTreeObserver_navigation_parent = navigation_parent
 				.getViewTreeObserver();
 		viewTreeObserver_navigation_parent.addOnGlobalLayoutListener(new ViewTreeObserver
 				.OnGlobalLayoutListener() {
@@ -284,10 +346,12 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 			public void onGlobalLayout() {
 				navigation_parent_height = navigation_parent.getHeight();
 				navigation_tv_height = navigation_parent_height / 27;
-				Log.i("ZRH", "navigation_parent_height: " + navigation_parent_height);
-				Log.i("ZRH", "navigation_tv_height: " + navigation_tv_height);
+				navigation_parent.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//				Log.i("ZRH", "navigation_parent_height: " + navigation_parent_height);
+//				Log.i("ZRH", "navigation_tv_height: " + navigation_tv_height);
 			}
 		});
+
 		navigation_parent.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -403,39 +467,6 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 //			}
 			navigation_parent.addView(navigation_tv);
 		}
-
-		/*
-		* 测试用
-		* */
-		//		navigation_tv = new TextView(getContext());
-		//		navigation_tv.setText("A");
-		//		navigation_tv.setTextColor(getResources().getColor(R.color.md_grey_700));
-		//		navigation_tv.setLayoutParams(layoutParams);
-		//		navigation_tv.setOnClickListener(new View.OnClickListener() {
-		//			@Override
-		//			public void onClick(View v) {
-		//				Toast.makeText(getContext(), "can be clicked", Toast.LENGTH_SHORT).show();
-		//			}
-		//		});
-		//		navigation_parent.addView(navigation_tv);
-		/*
-		* 事前准备
-		* 测试导航栏用
-		* */
-		//		TextView textView = (TextView) resView.findViewById(R.id
-		//				.message_fragment_mlist_right_expandablelist_navigation_A);
-		//		textView.setOnClickListener(new View.OnClickListener() {
-		//			@Override
-		//			public void onClick(View v) {
-		//				//				expandableListView.setFocusable(true);
-		//				//				expandableListView.setSelectedGroup(0);
-		//				int distance = container_height;
-		//				//				scrollView.setScrollY(distance);
-		//				scrollView.smoothScrollTo(0, distance);
-		//				Toast.makeText(getContext(), "ExpandableListView's Item-event: ",
-		//						Toast.LENGTH_SHORT).show();
-		//			}
-		//		});
 
 		/*
 		* 部分核心数据测试日志

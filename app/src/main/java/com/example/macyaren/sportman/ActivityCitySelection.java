@@ -6,7 +6,6 @@ import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,6 +54,9 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 	Handler handler;
 	PingYinTool pingYinTool;
 	String[] navigation_alpha;
+
+	ViewTreeObserver viewTreeObserver_city_selection_navigation;
+
 	float navigation_container_height;
 	float navigation_tv_height;
 	public final static int LOADING_CITY_NAME = 233;
@@ -114,7 +116,6 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup
 				.LayoutParams.MATCH_PARENT, 0, 1);
 		for (int i = 0; i < navigation_alpha.length; i++) {
-			Log.i("ZRH", "创建navigation_tv");
 			navigation_tv = new TextView(this);
 			navigation_tv.setText(navigation_alpha[i]);
 			//noinspection deprecation
@@ -126,7 +127,7 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 
 		/*
 		* 右侧导航栏的手势action事件*/
-		ViewTreeObserver viewTreeObserver_city_selection_navigation = cities_selection_navigation
+		viewTreeObserver_city_selection_navigation = cities_selection_navigation
 				.getViewTreeObserver();
 		viewTreeObserver_city_selection_navigation.addOnGlobalLayoutListener(new ViewTreeObserver
 				.OnGlobalLayoutListener() {
@@ -134,8 +135,10 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 			public void onGlobalLayout() {
 				navigation_container_height = cities_selection_navigation.getHeight();
 				navigation_tv_height = navigation_container_height / 29;
+				cities_selection_navigation.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 			}
 		});
+
 		navigation_indicator = (TextView) findViewById(R.id
 				.activity_cities_selection_expandablelist_navigation_indicator);
 		cities_selection_navigation.setOnTouchListener(new View.OnTouchListener() {
@@ -259,8 +262,8 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 					}
 				}
 				listGroup.addAll(listGroupTemp);
-				Log.i("ZRH", "listGroup的长度：" + listGroup.size());
-				Log.i("ZRH", "listChild的长度：" + listChild.size());
+//				Log.i("ZRH", "listGroup的长度：" + listGroup.size());
+//				Log.i("ZRH", "listChild的长度：" + listChild.size());
 
 				Message loadcityname = new Message();
 				loadcityname.what = LOADING_CITY_NAME;

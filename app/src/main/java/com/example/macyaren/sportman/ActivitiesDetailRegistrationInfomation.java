@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -20,7 +22,9 @@ public class ActivitiesDetailRegistrationInfomation extends Activity implements 
 	public ImageView registration_information_back;
 	public TextView registration_information_submit;
 	public TextView registration_information_applytoken;
-	public TextView registration_information_token;
+	public EditText registration_information_texttoken;
+	public EditText registration_information_textphonenumber;
+	public EditText registration_information_textidentity;
 	public Intent intent_to_complete;
 	public Random random;
 
@@ -43,9 +47,12 @@ public class ActivitiesDetailRegistrationInfomation extends Activity implements 
 		registration_information_applytoken = (TextView) findViewById(R.id
 				.activities_detail_registration_information_applytoken);
 		registration_information_applytoken.setOnClickListener(this);
-		registration_information_token = (TextView) findViewById(R.id
-				.activities_detail_registration_information_token);
-//		registration_information_token.setOnClickListener(this);
+		registration_information_texttoken = (EditText) findViewById(R.id
+				.activities_detail_registration_information_texttoken);
+		registration_information_textphonenumber = (EditText) findViewById(R.id
+				.activities_detail_registration_information_textphonenumber);
+		registration_information_textidentity = (EditText) findViewById(R.id
+				.activities_detail_registration_information_textidentity);
 
 		random = new Random();
 	}
@@ -57,10 +64,31 @@ public class ActivitiesDetailRegistrationInfomation extends Activity implements 
 				finish();
 				break;
 			case R.id.activities_detail_registration_information_submit:
-				intent_to_complete = new Intent();
-				intent_to_complete.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-				intent_to_complete.setAction(INTENT_TO_COMPLETE);
-				startActivity(intent_to_complete);
+				int strlen_iden = registration_information_textidentity.getText().toString()
+						.equals("") ? 0 : registration_information_textidentity.getText()
+						.toString().length();
+				if (strlen_iden == 18) {
+					int strlen_pn = registration_information_textphonenumber.getText().toString()
+							.equals("") ? 0 : registration_information_textphonenumber.getText()
+							.toString().length();
+					if (strlen_pn == 11) {
+						int strlen_vertifyCode = registration_information_texttoken.getText()
+								.toString().equals("") ? 0 : registration_information_texttoken
+								.getText().toString().length();
+						if (strlen_vertifyCode == 4) {
+							intent_to_complete = new Intent();
+							intent_to_complete.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+							intent_to_complete.setAction(INTENT_TO_COMPLETE);
+							startActivity(intent_to_complete);
+						} else {
+							Toast.makeText(this, "验证码格式错误", Toast.LENGTH_SHORT).show();
+						}
+					} else {
+						Toast.makeText(this, "电话号码格式错误", Toast.LENGTH_SHORT).show();
+					}
+				} else {
+					Toast.makeText(this, "身份证号码格式错误", Toast.LENGTH_SHORT).show();
+				}
 				break;
 			case R.id.activities_detail_registration_information_applytoken:
 				StringBuilder vertify = new StringBuilder("");
@@ -68,7 +96,7 @@ public class ActivitiesDetailRegistrationInfomation extends Activity implements 
 					int rd = random.nextInt(10);
 					vertify.append(String.valueOf(rd));
 				}
-				registration_information_token.setText(vertify);
+				registration_information_texttoken.setText(vertify);
 				break;
 		}
 	}

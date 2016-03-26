@@ -125,12 +125,13 @@
                 android:layout_height="match_parent"/>
 
             <EditText
+                android:id="@+id/activities_detail_registration_information_textidentity"
                 android:background="@color/md_white_1000"
                 android:gravity="center|left"
                 android:editable="true"
                 android:hint="请输入身份证号码"
                 android:textColorHint="@color/md_grey_400"
-                android:inputType="textPassword|numberPassword"
+                android:inputType="text"
                 android:textSize="16sp"
                 android:textColor="@color/md_grey_600"
                 android:layout_weight="2"
@@ -171,6 +172,7 @@
                 android:layout_height="match_parent">
 
                 <EditText
+                    android:id="@+id/activities_detail_registration_information_textphonenumber"
                     android:background="@color/md_white_1000"
                     android:gravity="center|left"
                     android:editable="true"
@@ -226,7 +228,7 @@
                 android:layout_height="match_parent"/>
 
             <EditText
-                android:id="@+id/activities_detail_registration_information_token"
+                android:id="@+id/activities_detail_registration_information_texttoken"
                 android:background="@color/md_white_1000"
                 android:gravity="center|left"
                 android:inputType="textPersonName"
