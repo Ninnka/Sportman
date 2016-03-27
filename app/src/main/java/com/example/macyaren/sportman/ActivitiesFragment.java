@@ -51,14 +51,15 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 
 	Intent intent_in_list;
 
-	final static int LEFT_SWITCHER = 1;
-	final static int OTHER_SWITCHER = 2;
+	public final static int LEFT_SWITCHER = 1;
+	public final static int OTHER_SWITCHER = 2;
 
 	int margin_other;
 	int margin_top_bottom;
 
-	public static int final_position = 1;
-	public static String action_to_activity_detail = "com.macya.intent.action.ACTIVITIES_DETAIL";
+	public int final_position = 1;
+	public final static String action_to_activity_detail = "com.macya.intent.action" +
+			".ACTIVITIES_DETAIL";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

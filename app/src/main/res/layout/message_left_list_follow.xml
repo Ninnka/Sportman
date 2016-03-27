@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/activity_cities_selection_toolbar"
+        android:minHeight="?android:actionBarSize"
+        android:background="@color/ToolBarColorPrimary_other"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:elevation="3dp"
+        android:popupTheme="@android:style/ThemeOverlay.Material.Light">
+
+        <ImageView
+            android:id="@+id/message_left_list_follow_return"
+            android:src="@drawable/activity_back"
+            android:scaleType="center"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="@color/md_grey_700"
+            android:text="my follow"
+            android:gravity="center_vertical"
+            android:paddingLeft="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:background="@color/md_grey_200"
+        android:id="@+id/message_left_list_follow_recyclerView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
+</LinearLayout>

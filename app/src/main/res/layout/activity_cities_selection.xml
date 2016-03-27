@@ -22,7 +22,7 @@
 
         <TextView
             android:textSize="20sp"
-            android:textColor="@color/md_grey_800"
+            android:textColor="@color/md_grey_700"
             android:text="city_selection"
             android:gravity="center"
             android:layout_width="match_parent"

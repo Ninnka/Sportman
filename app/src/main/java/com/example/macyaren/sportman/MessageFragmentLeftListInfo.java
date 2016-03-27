@@ -9,5 +9,6 @@ public class MessageFragmentLeftListInfo {
 	public String uname;
 	public String profile;
 	public String date;
+	public String type;
 
 }

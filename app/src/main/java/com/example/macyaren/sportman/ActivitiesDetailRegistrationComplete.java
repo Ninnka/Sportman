@@ -24,7 +24,7 @@ public class ActivitiesDetailRegistrationComplete extends Activity implements Vi
 	public int TOOL_SCROLL;
 	public double FINALLY_SCROLLY = 0;
 	public double CURR_SCROLLY = 0;
-	public static Boolean TOOL_HAS_HIDE = false;
+//	public static Boolean TOOL_HAS_HIDE = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,21 +68,7 @@ public class ActivitiesDetailRegistrationComplete extends Activity implements Vi
 
 	@Override
 	public void onScrollchanged(int t) {
-//		CURR_SCROLLY = t;
-//		if (TOOL_HAS_HIDE) {
-//			if (CURR_SCROLLY < FINALLY_SCROLLY) {
-//				toolbar_container.scrollTo(0, -TOOL_SCROLL);
-//				TOOL_HAS_HIDE = false;
-//				scrollView_container.scrollTo(0, -TOOL_SCROLL);
-//			}
-//		} else {
-//			if (CURR_SCROLLY > FINALLY_SCROLLY) {
-//				toolbar_container.scrollTo(0, TOOL_SCROLL);
-//				TOOL_HAS_HIDE = true;
-//				scrollView_container.scrollTo(0, TOOL_SCROLL);
-//			}
-//		}
-//		FINALLY_SCROLLY = CURR_SCROLLY;
+
 	}
 
 	@Override

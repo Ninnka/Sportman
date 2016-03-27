@@ -1,5 +1,6 @@
 package com.example.macyaren.sportman;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,16 @@ import java.util.List;
 /**
  * Created by hennzr on 2016/3/6.
  */
-public class Msg_fragment_mlist_left extends Fragment implements AdapterView.OnItemClickListener{
+public class Msg_fragment_mlist_left extends Fragment implements AdapterView.OnItemClickListener {
 
 	ListView listView;
 	List<MessageFragmentLeftListInfo> list;
 	MessageFragmentLeftListAdapter messageFragmentLeftListAdapter;
 	MessageFragmentLeftListInfo[] messageFragmentLeftListInfos = new MessageFragmentLeftListInfo[7];
+	Intent intent;
+	public final static String INTENT_TO_FOLLOW= "com.macya.intent.action.Message_Left_List_Follow";
 
-//	MessageFragmentLeftListInfo messageFragmentLeftListInfo;
+	//	MessageFragmentLeftListInfo messageFragmentLeftListInfo;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,28 +46,39 @@ public class Msg_fragment_mlist_left extends Fragment implements AdapterView.OnI
 			messageFragmentLeftListInfos[i].uname = MessageFragmentLeftListData.NAME[i];
 			messageFragmentLeftListInfos[i].profile = MessageFragmentLeftListData.PROFILE[i];
 			messageFragmentLeftListInfos[i].date = MessageFragmentLeftListData.DATE[i];
+			messageFragmentLeftListInfos[i].type = MessageFragmentLeftListData.TYPE[i];
 			list.add(messageFragmentLeftListInfos[i]);
 		}
-
-//		messageFragmentLeftListInfo = new MessageFragmentLeftListInfo();
-//		messageFragmentLeftListInfo.photo = MessageFragmentLeftListData.PHOTO[6];
-//		messageFragmentLeftListInfo.uname = MessageFragmentLeftListData.NAME[6];
-//		messageFragmentLeftListInfo.profile = MessageFragmentLeftListData.PROFILE[6];
-//		messageFragmentLeftListInfo.date = MessageFragmentLeftListData.DATE[6];
-//		list.add(messageFragmentLeftListInfo);
 
 		messageFragmentLeftListAdapter = new MessageFragmentLeftListAdapter(getActivity());
 		messageFragmentLeftListAdapter.setList(list);
 		listView.setAdapter(messageFragmentLeftListAdapter);
 		listView.setOnItemClickListener(this);
+
+		intent = new Intent();
+
 		return resView;
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		int realPosition = position + 1;
-		Toast.makeText(getContext(),"ensure message_fragment_listview's item" + realPosition +" can" +
-						" be click",
-				Toast.LENGTH_SHORT).show();
+		//		int realPosition = position + 1;
+		//		Toast.makeText(getContext(), "ensure message_fragment_listview's item" + realPosition + " can" +
+		//				" be click", Toast.LENGTH_SHORT).show();
+		MessageFragmentLeftListInfo messageFragmentLeftListInfo = (MessageFragmentLeftListInfo)
+				listView.getAdapter().getItem(position);
+		String intent_for = messageFragmentLeftListInfo.type;
+		switch (intent_for){
+			case "chat":
+				break;
+			case "groupchar":
+				break;
+			case "news":
+				break;
+			case "follow":
+				intent.setAction(INTENT_TO_FOLLOW);
+				startActivity(intent);
+				break;
+		}
 	}
 }

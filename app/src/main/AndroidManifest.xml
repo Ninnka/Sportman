@@ -14,6 +14,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="com.macya.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -59,6 +60,17 @@
             <intent-filter>
                 <action
                     android:name="com.macya.intent.action.ACTIVITIES_DETAIL_REGISTRATION_COMPLETE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MessageLeftListFollow"
+            android:noHistory="true">
+
+            <intent-filter>
+
+                <action android:name="com.macya.intent.action.Message_Left_List_Follow"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
