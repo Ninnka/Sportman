@@ -65,12 +65,12 @@
         </activity>
 
         <activity
-            android:name=".MessageLeftListFollow"
+            android:name=".MessageLeftListFollowNews"
             android:noHistory="true">
 
             <intent-filter>
 
-                <action android:name="com.macya.intent.action.Message_Left_List_Follow"/>
+                <action android:name="com.macya.intent.action.Message_Left_List_Follow_News"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

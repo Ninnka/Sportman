@@ -5,7 +5,7 @@
               android:layout_height="match_parent">
 
     <Toolbar
-        android:id="@+id/activity_cities_selection_toolbar"
+        android:id="@+id/message_left_list_follow_news_toolbar"
         android:minHeight="?android:actionBarSize"
         android:background="@color/ToolBarColorPrimary_other"
         android:layout_width="match_parent"
@@ -15,15 +15,16 @@
 
         <ImageView
             android:id="@+id/message_left_list_follow_return"
-            android:src="@drawable/activity_back"
+            android:src="@drawable/activity_back_color"
             android:scaleType="center"
             android:layout_width="30dp"
             android:layout_height="match_parent"/>
 
         <TextView
+            android:id="@+id/message_left_list_follow_news_toolbar_title"
             android:textSize="20sp"
-            android:textColor="@color/md_grey_700"
-            android:text="my follow"
+            android:textColor="#FB8041"
+            android:text=""
             android:gravity="center_vertical"
             android:paddingLeft="30dp"
             android:layout_width="match_parent"

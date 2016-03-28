@@ -3,13 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_height="300dp"
+    android:layout_height="340dp"
     android:layout_width="match_parent">
 
     <TextView
         android:layout_marginTop="10dp"
         android:id="@+id/message_left_list_follow_date"
-        android:text="date"
         android:textSize="15sp"
         android:textColor="@color/md_white_1000"
         android:background="@drawable/follow_date_background"
@@ -22,9 +21,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:id="@+id/message_left_list_follow_cardView"
-        app:cardCornerRadius="10dp"
-        android:elevation="5dp"
-        android:layout_height="250dp"
+        app:cardCornerRadius="12dp"
+        android:background="@color/md_white_1000"
+        android:elevation="25dp"
+        android:layout_height="280dp"
         android:layout_width="320dp">
 
         <LinearLayout
@@ -38,7 +38,6 @@
 
                 <ImageView
                     android:id="@+id/message_left_list_follow_post"
-                    android:src="@drawable/message_left_list_follow_post_top"
                     android:scaleType="fitCenter"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
@@ -51,7 +50,6 @@
                     android:background="#99444444"
                     android:textSize="20sp"
                     android:textColor="@color/md_white_1000"
-                    android:text="HOT:阿迪达斯最新款体育套装"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"/>
 
@@ -62,23 +60,22 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="20dp"
                     android:id="@+id/message_left_list_follow_subtitle_1"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="阿迪王与阿迪达斯私下和解"
+                    android:textSize="16sp"
+                    android:textColor="@color/md_grey_700"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <ImageView
                     android:id="@+id/message_left_list_follow_subpost_1"
-                    android:src="@drawable/message_left_list_follow_post_bottom1"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_alignBottom="@+id/message_left_list_follow_subtitle_1"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="14dp"/>
 
                 <TextView
                     android:id="@+id/message_left_list_follow_post_line"
@@ -88,24 +85,24 @@
                     android:layout_height="1dp"/>
 
                 <TextView
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="20dp"
                     android:id="@+id/message_left_list_follow_subtitle_2"
                     android:layout_below="@+id/message_left_list_follow_post_line"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="阿迪达斯经典跑鞋五折销售"
+                    android:textSize="16sp"
+                    android:textColor="@color/md_grey_700"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <ImageView
                     android:id="@+id/message_left_list_follow_subpost_2"
-                    android:src="@drawable/message_left_list_follow_post_bottom2"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_alignBottom="@+id/message_left_list_follow_subtitle_2"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_marginBottom="14dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"/>
 
             </RelativeLayout>
 

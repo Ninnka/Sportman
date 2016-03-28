@@ -23,7 +23,11 @@ public class Msg_fragment_mlist_left extends Fragment implements AdapterView.OnI
 	MessageFragmentLeftListAdapter messageFragmentLeftListAdapter;
 	MessageFragmentLeftListInfo[] messageFragmentLeftListInfos = new MessageFragmentLeftListInfo[7];
 	Intent intent;
-	public final static String INTENT_TO_FOLLOW= "com.macya.intent.action.Message_Left_List_Follow";
+
+	public final static String INTENT_TO_FOLLOW_KEY = "intent_from_follow";
+	public final static String INTENT_TO_NEWS_KEY = "intent_from_news";
+	public final static String INTENT_TO_FOLLOW_NEWS = "com.macya.intent.action" +
+			".Message_Left_List_Follow_News";
 
 	//	MessageFragmentLeftListInfo messageFragmentLeftListInfo;
 
@@ -55,7 +59,6 @@ public class Msg_fragment_mlist_left extends Fragment implements AdapterView.OnI
 		listView.setAdapter(messageFragmentLeftListAdapter);
 		listView.setOnItemClickListener(this);
 
-		intent = new Intent();
 
 		return resView;
 	}
@@ -68,15 +71,21 @@ public class Msg_fragment_mlist_left extends Fragment implements AdapterView.OnI
 		MessageFragmentLeftListInfo messageFragmentLeftListInfo = (MessageFragmentLeftListInfo)
 				listView.getAdapter().getItem(position);
 		String intent_for = messageFragmentLeftListInfo.type;
-		switch (intent_for){
+		switch (intent_for) {
 			case "chat":
 				break;
 			case "groupchar":
 				break;
 			case "news":
+				intent = new Intent();
+				intent.putExtra("data", INTENT_TO_NEWS_KEY);
+				intent.setAction(INTENT_TO_FOLLOW_NEWS);
+				startActivity(intent);
 				break;
 			case "follow":
-				intent.setAction(INTENT_TO_FOLLOW);
+				intent = new Intent();
+				intent.putExtra("data", INTENT_TO_FOLLOW_KEY);
+				intent.setAction(INTENT_TO_FOLLOW_NEWS);
 				startActivity(intent);
 				break;
 		}

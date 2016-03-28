@@ -8,7 +8,7 @@ import android.widget.TextView;
 /**
  * Created by hennzr on 2016/3/27.
  */
-public class MessageLeftListFollowRecyclerViewHolder extends RecyclerView.ViewHolder {
+public class MessageLeftListFollowNewsRecyclerViewHolder extends RecyclerView.ViewHolder {
 
 	public TextView date_tv;
 	public ImageView post_img;
@@ -18,7 +18,7 @@ public class MessageLeftListFollowRecyclerViewHolder extends RecyclerView.ViewHo
 	public ImageView sub_post_first_img;
 	public ImageView sub_post_second_img;
 
-	public MessageLeftListFollowRecyclerViewHolder(View itemView) {
+	public MessageLeftListFollowNewsRecyclerViewHolder(View itemView) {
 		super(itemView);
 		date_tv = (TextView) itemView.findViewById(R.id.message_left_list_follow_date);
 		post_img = (ImageView) itemView.findViewById(R.id.message_left_list_follow_post);
