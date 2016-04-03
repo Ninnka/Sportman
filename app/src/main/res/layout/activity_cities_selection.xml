@@ -1,59 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+              xmlns:customtoolbar="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <Toolbar
+    <!--<Toolbar-->
+    <!--android:id="@+id/activity_cities_selection_toolbar"-->
+    <!--android:minHeight="?android:actionBarSize"-->
+    <!--android:background="@color/ToolBarColorPrimary_other"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:elevation="3dp"-->
+    <!--android:popupTheme="@android:style/ThemeOverlay.Material.Light">-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/activity_return"-->
+    <!--android:src="@drawable/activity_back"-->
+    <!--android:scaleType="center"-->
+    <!--android:layout_width="30dp"-->
+    <!--android:layout_height="match_parent"/>-->
+
+    <!--<TextView-->
+    <!--android:textSize="20sp"-->
+    <!--android:textColor="@color/md_grey_700"-->
+    <!--android:text="city_selection"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"/>-->
+
+    <!--</Toolbar>-->
+
+    <com.example.macyaren.sportman.CustomToolbar
         android:id="@+id/activity_cities_selection_toolbar"
-        android:minHeight="?android:actionBarSize"
-        android:background="@color/ToolBarColorPrimary_other"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/ToolBarColorPrimary_other"
         android:elevation="3dp"
-        android:popupTheme="@android:style/ThemeOverlay.Material.Light">
+        android:minHeight="?android:actionBarSize"
+        android:popupTheme="@android:style/ThemeOverlay.Material.Light"
+        customtoolbar:toolbar_center_textColor="#FB8041"
+        customtoolbar:toolbar_center_textSize="20sp"
+        customtoolbar:toolbar_left_imgResources="@drawable/activity_back_color">
 
-        <ImageView
-            android:id="@+id/activity_return"
-            android:src="@drawable/activity_back"
-            android:scaleType="center"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:textSize="20sp"
-            android:textColor="@color/md_grey_700"
-            android:text="city_selection"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </Toolbar>
+    </com.example.macyaren.sportman.CustomToolbar>
 
     <LinearLayout
-        android:focusableInTouchMode="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:background="@color/md_grey_200"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        android:background="@color/md_grey_200"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/activity_cities_selection_searchtext"
-            android:background="@color/md_white_1000"
-            android:gravity="center"
-            android:paddingRight="10dp"
-            android:hint="city/spell"
-            android:textColorHint="@color/md_grey_400"
-            android:textSize="17sp"
-            android:drawableLeft="@drawable/search_small"
-            android:textColor="@color/md_grey_700"
             android:layout_width="300dp"
-            android:layout_height="26dp"/>
+            android:layout_height="26dp"
+            android:background="@color/md_white_1000"
+            android:drawableLeft="@drawable/search_small"
+            android:gravity="center"
+            android:hint="city/spell"
+            android:paddingRight="10dp"
+            android:textColor="@color/md_grey_700"
+            android:textColorHint="@color/md_grey_400"
+            android:textSize="17sp"/>
 
     </LinearLayout>
-
 
 
     <FrameLayout
@@ -61,17 +75,17 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <ExpandableListView
                 android:id="@+id/activity_cities_selection_expandablelist"
-                android:scrollbars="vertical"
-                android:scrollbarSize="2dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:scrollbarSize="2dp"
+                android:scrollbars="vertical">
 
             </ExpandableListView>
 
@@ -79,26 +93,26 @@
 
         <LinearLayout
             android:id="@+id/activity_cities_selection_navigation"
-            android:background="@color/navigatiom_release"
-            android:layout_gravity="right"
-            android:orientation="vertical"
             android:layout_width="20dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background="@color/navigatiom_release"
+            android:orientation="vertical">
 
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/activity_cities_selection_expandablelist_navigation_indicator"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
+            android:background="@color/expandablelist_navigation_indicator"
+            android:focusable="false"
             android:gravity="center"
             android:textColor="@color/md_white_1000"
             android:textSize="34sp"
-            android:focusable="false"
-            android:visibility="invisible"
-            android:background="@color/expandablelist_navigation_indicator"
-            android:id="@+id/activity_cities_selection_expandablelist_navigation_indicator"
-            android:layout_width="80dp"
-            android:layout_height="80dp"/>
+            android:visibility="invisible"/>
 
     </FrameLayout>
 

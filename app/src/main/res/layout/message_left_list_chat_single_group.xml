@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:customtoolbar="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.example.macyaren.sportman.CustomToolbar
+        android:id="@+id/message_left_list_chat_single_group_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/ToolBarColorPrimary_other"
+        android:elevation="3dp"
+        android:minHeight="?android:actionBarSize"
+        android:popupTheme="@android:style/ThemeOverlay.Material.Light"
+        customtoolbar:toolbar_center_textColor="#FB8041"
+        customtoolbar:toolbar_center_textSize="20sp"
+        customtoolbar:toolbar_left_imgResources="@drawable/activity_back_color">
+
+
+    </com.example.macyaren.sportman.CustomToolbar>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/MessageLeftListChat_single_group_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
+</LinearLayout>

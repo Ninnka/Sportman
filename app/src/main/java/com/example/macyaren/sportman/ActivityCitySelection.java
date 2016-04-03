@@ -1,7 +1,6 @@
 package com.example.macyaren.sportman;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,13 +16,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,11 +32,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by hennzr on 2016/3/14.
+ * Created by hennzr on 2016/3/14 11:38
+ * Package in com.example.macyaren.sportman
+ * Project name is Sportman
  */
-public class ActivityCitySelection extends Activity implements View.OnClickListener {
+public class ActivityCitySelection extends Activity implements View.OnClickListener,
+		CustomToolbar.customToolbarCallback{
 
-	Toolbar toolbar;
+	CustomToolbar toolbar;
 	ImageView imageView_return;
 	ExpandableListView expandableListView;
 	EditText editText_search;
@@ -45,13 +47,12 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 	TextView navigation_tv;
 	TextView navigation_indicator;
 	EditText cities_selection_searchtext;
-	Intent intent_return;
 	List<String> listGroup;
 	List<List<String>> listChild;
 	Map<String, List<String>> listMap;
 	List<String> listGroupTemp;
 	ActivityCitySelectionExpandableListAdapter activityCitySelectionExpandableListAdapter;
-	Handler handler;
+	CT_Handler handler;
 	PingYinTool pingYinTool;
 	String[] navigation_alpha;
 
@@ -67,11 +68,15 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 		setContentView(R.layout.activity_cities_selection);
 		expandableListView = (ExpandableListView) findViewById(R.id
 				.activity_cities_selection_expandablelist);
-		toolbar = (Toolbar) findViewById(R.id.activity_cities_selection_toolbar);
+		toolbar = (CustomToolbar) findViewById(R.id.activity_cities_selection_toolbar);
 		setActionBar(toolbar);
+
+		toolbar.center_title.setText("City Selection");
+		toolbar.setCallback(this);
+
 		expandableListView.setFocusable(true);
-		imageView_return = (ImageView) findViewById(R.id.activity_return);
-		imageView_return.setOnClickListener(this);
+//		imageView_return = (ImageView) findViewById(R.id.activity_return);
+//		imageView_return.setOnClickListener(this);
 		editText_search = (EditText) findViewById(R.id.activity_cities_selection_searchtext);
 
 		activityCitySelectionExpandableListAdapter = new
@@ -104,6 +109,11 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 
 		/*创建拼音工具类实例*/
 		pingYinTool = new PingYinTool();
+
+		/*
+		* 建立handler实例处理信息
+		* */
+		handler = new CT_Handler(this);
 
 		/*
 		* 创建city_selection的右侧导航栏
@@ -184,41 +194,6 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 		});
 
 		/*
-		* 建立handler实例处理信息
-		* */
-		handler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				if (msg.what == LOADING_CITY_NAME) {
-					activityCitySelectionExpandableListAdapter.setListGroup(listGroup);
-					activityCitySelectionExpandableListAdapter.setListChild(listChild);
-					expandableListView.setAdapter(activityCitySelectionExpandableListAdapter);
-					for (int i = 0; i < activityCitySelectionExpandableListAdapter.getGroupCount(); i++) {
-						expandableListView.expandGroup(i);
-					}
-					expandableListView.setGroupIndicator(null);
-					expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-						@Override
-						public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-							return true;
-						}
-					});
-					expandableListView.setOnChildClickListener(new ExpandableListView
-							.OnChildClickListener() {
-						@Override
-						public boolean onChildClick(ExpandableListView parent, View v,
-													int groupPosition, int childPosition, long id) {
-							Toast.makeText(ActivityCitySelection.this, "ChildItem" + childPosition +
-											" was clicked",
-									Toast.LENGTH_SHORT).show();
-							return true;
-						}
-					});
-				}
-			}
-		};
-
-		/*
 		* 新开线程处理城市名
 		* */
 		new Thread(new Runnable() {
@@ -270,20 +245,69 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 				handler.sendMessage(loadcityname);
 			}
 		}).start();
+
 	}
 
+	/*
+	* 创建静态内部类CT_Handler
+	* */
+	static class CT_Handler extends Handler{
 
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
+		WeakReference<ActivityCitySelection> activityCitySelectionWeakReference;
+		ActivityCitySelection activityCitySelection;
+
+		public CT_Handler(ActivityCitySelection activityCitySelection) {
+			activityCitySelectionWeakReference = new WeakReference<ActivityCitySelection>
+					(activityCitySelection);
+		}
+
+		@Override
+		public void handleMessage(Message msg) {
+			activityCitySelection = activityCitySelectionWeakReference.get();
+			if (msg.what == LOADING_CITY_NAME) {
+				activityCitySelection.activityCitySelectionExpandableListAdapter.setListGroup
+						(activityCitySelection.listGroup);
+				activityCitySelection.activityCitySelectionExpandableListAdapter.setListChild
+						(activityCitySelection.listChild);
+				activityCitySelection.expandableListView.setAdapter
+						(activityCitySelection.activityCitySelectionExpandableListAdapter);
+				for (int i = 0; i < activityCitySelection
+						.activityCitySelectionExpandableListAdapter.getGroupCount(); i++) {
+					activityCitySelection.expandableListView.expandGroup(i);
+				}
+				activityCitySelection.expandableListView.setGroupIndicator(null);
+				activityCitySelection.expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+					@Override
+					public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+						return true;
+					}
+				});
+				activityCitySelection.expandableListView.setOnChildClickListener(new ExpandableListView
+						.OnChildClickListener() {
+					@Override
+					public boolean onChildClick(ExpandableListView parent, View v,
+												int groupPosition, int childPosition, long id) {
+						Toast.makeText(activityCitySelection.getApplicationContext(), "ChildItem" + childPosition +
+										" was clicked",
+								Toast.LENGTH_SHORT).show();
+						return true;
+					}
+				});
+			}
+		}
 	}
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.activity_return:
-				finish();
-				break;
-		}
+
+	}
+
+	@Override
+	public void leftClick() {
+		finish();
+	}
+
+	@Override
+	public void rightClick() {
 	}
 }

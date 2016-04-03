@@ -51,7 +51,7 @@ public class ActivitiesDetailRegistrationInstruction extends Activity implements
 					intent_to_information.setAction(INTENT_TO_INFORMATION);
 					startActivity(intent_to_information);
 				} else {
-					Toast.makeText(this, "please accept protocol", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "please accept protocol", Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case R.id.activities_detail_registration_instruction_radioButton:

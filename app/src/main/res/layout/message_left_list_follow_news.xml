@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:customtoolbar="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <Toolbar
+    <com.example.macyaren.sportman.CustomToolbar
         android:id="@+id/message_left_list_follow_news_toolbar"
         android:minHeight="?android:actionBarSize"
         android:background="@color/ToolBarColorPrimary_other"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:elevation="3dp"
-        android:popupTheme="@android:style/ThemeOverlay.Material.Light">
+        android:popupTheme="@android:style/ThemeOverlay.Material.Light"
+        customtoolbar:toolbar_center_textColor="#FB8041"
+        customtoolbar:toolbar_center_textSize="20sp"
+        customtoolbar:toolbar_left_imgResources="@drawable/activity_back_color">
 
-        <ImageView
-            android:id="@+id/message_left_list_follow_return"
-            android:src="@drawable/activity_back_color"
-            android:scaleType="center"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/message_left_list_follow_return"-->
+            <!--android:src="@drawable/activity_back_color"-->
+            <!--android:scaleType="center"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="match_parent"/>-->
 
-        <TextView
-            android:id="@+id/message_left_list_follow_news_toolbar_title"
-            android:textSize="20sp"
-            android:textColor="#FB8041"
-            android:text=""
-            android:gravity="center_vertical"
-            android:paddingLeft="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        <!--<TextView-->
+            <!--android:id="@+id/message_left_list_follow_news_toolbar_title"-->
+            <!--android:textSize="20sp"-->
+            <!--android:textColor="#FB8041"-->
+            <!--android:text=""-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:paddingLeft="30dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"/>-->
 
-    </Toolbar>
+    </com.example.macyaren.sportman.CustomToolbar>
 
     <android.support.v7.widget.RecyclerView
         android:background="@color/md_grey_200"

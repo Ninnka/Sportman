@@ -48,8 +48,8 @@ public class ActivitiesFragmentBannerAdapter extends PagerAdapter {
 			@Override
 			public void onClick(View v) {
 				//				v.getParent().requestDisallowInterceptTouchEvent(true);
-				Log.i("zrh for viewpager onclick:", "item" + position + " was clicked");
-				Toast.makeText(v.getContext(), "Item" + position + " was clicked",
+				Log.i("ZRH", "item" + position + " was clicked");
+				Toast.makeText(v.getContext().getApplicationContext(), "Item" + position + " was clicked",
 						Toast.LENGTH_SHORT).show();
 			}
 		});

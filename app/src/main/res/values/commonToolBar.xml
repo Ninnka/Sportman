@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomToolbar">
+
+        <attr name="toolbar_center_text" format="string"/>
+        <attr name="toolbar_center_textSize" format="dimension"/>
+        <attr name="toolbar_center_textColor" format="color"/>
+
+        <attr name="toolbar_left_imgResources" format="reference"/>
+
+        <attr name="toolbar_right_Text" format="string"/>
+        <attr name="toolbar_right_TextColor" format="color"/>
+        <attr name="toolbar_right_TextSize" format="dimension"/>
+        <attr name="toolbar_right_TexBackground" format="reference|color"/>
+    </declare-styleable>
+
+</resources>

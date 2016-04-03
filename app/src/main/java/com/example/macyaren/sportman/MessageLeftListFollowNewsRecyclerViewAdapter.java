@@ -1,10 +1,10 @@
 package com.example.macyaren.sportman;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -12,14 +12,15 @@ import java.util.List;
  */
 public class MessageLeftListFollowNewsRecyclerViewAdapter extends RecyclerView.Adapter<MessageLeftListFollowNewsRecyclerViewHolder> {
 
-	public Context context;
+	public WeakReference<MessageLeftListFollowNews> messageLeftListFollowNewsWeakReference;
 	public List<MessageLeftListFollowNewsRecyclerViewInfo> list;
 	public LayoutInflater inflater;
 	public MessageLeftListFollowNewsRecyclerViewInfo messageLeftListFollowNewsRecyclerViewInfo;
 
-	public MessageLeftListFollowNewsRecyclerViewAdapter(Context context) {
-		this.context = context;
-		inflater = LayoutInflater.from(context);
+	public MessageLeftListFollowNewsRecyclerViewAdapter(MessageLeftListFollowNews
+																messageLeftListFollowNews) {
+		messageLeftListFollowNewsWeakReference = new WeakReference<>(messageLeftListFollowNews);
+		inflater = LayoutInflater.from(messageLeftListFollowNewsWeakReference.get());
 	}
 
 	public void setList(List<MessageLeftListFollowNewsRecyclerViewInfo> list) {
@@ -28,10 +29,9 @@ public class MessageLeftListFollowNewsRecyclerViewAdapter extends RecyclerView.A
 
 	@Override
 	public MessageLeftListFollowNewsRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		MessageLeftListFollowNewsRecyclerViewHolder recyclerViewHolder = new
+		return new
 				MessageLeftListFollowNewsRecyclerViewHolder(inflater.inflate(R.layout
 				.message_left_list_follow_news_item, parent, false));
-		return recyclerViewHolder;
 	}
 
 	@Override

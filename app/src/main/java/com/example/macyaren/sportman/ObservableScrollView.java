@@ -40,6 +40,7 @@ public class ObservableScrollView extends ScrollView {
 	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
 		super.onScrollChanged(l, t, oldl, oldt);
 		if (mCallbacks != null) {
+//			Log.i("ZRH", "onScrollChanged in ObservableScrollView");
 			mCallbacks.onScrollchanged(t);
 		}
 	}

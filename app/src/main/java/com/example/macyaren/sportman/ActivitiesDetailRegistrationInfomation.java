@@ -81,13 +81,13 @@ public class ActivitiesDetailRegistrationInfomation extends Activity implements 
 							intent_to_complete.setAction(INTENT_TO_COMPLETE);
 							startActivity(intent_to_complete);
 						} else {
-							Toast.makeText(this, "验证码格式错误", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getApplicationContext(), "验证码格式错误", Toast.LENGTH_SHORT).show();
 						}
 					} else {
-						Toast.makeText(this, "电话号码格式错误", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(), "电话号码格式错误", Toast.LENGTH_SHORT).show();
 					}
 				} else {
-					Toast.makeText(this, "身份证号码格式错误", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "身份证号码格式错误", Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case R.id.activities_detail_registration_information_applytoken:

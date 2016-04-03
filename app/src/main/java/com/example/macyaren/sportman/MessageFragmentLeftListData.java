@@ -1,7 +1,8 @@
 package com.example.macyaren.sportman;
 
 /**
- * Created by hennzr on 2016/3/6.
+ * Created by hennzr on 2016/3/6 14:59
+ * Project name is Sportman
  */
 public class MessageFragmentLeftListData {
 

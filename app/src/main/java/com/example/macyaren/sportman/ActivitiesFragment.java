@@ -185,7 +185,7 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 		listViewForScrollView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getContext(), "listItem" + position + " was clicked",
+				Toast.makeText(getContext().getApplicationContext(), "listItem" + position + " was clicked",
 						Toast.LENGTH_SHORT).show();
 				intent_in_list = new Intent();
 				intent_in_list.setAction(action_to_activity_detail);
@@ -222,10 +222,12 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.left_liner:
-				Toast.makeText(getContext(), "left_liner was clicked", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext().getApplicationContext(), "left_liner was clicked", Toast.LENGTH_SHORT)
+						.show();
 				break;
 			case R.id.right_liner:
-				Toast.makeText(getContext(), "right_liner was clicked", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext().getApplicationContext(), "right_liner was clicked", Toast.LENGTH_SHORT)
+						.show();
 				break;
 		}
 	}

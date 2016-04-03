@@ -92,7 +92,8 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 				expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 					@Override
 					public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-						Toast.makeText(getContext(), "ChildItem" + childPosition + " was clicked",
+						Toast.makeText(getContext().getApplicationContext(), "ChildItem" + childPosition + " was " +
+										"clicked",
 								Toast.LENGTH_SHORT).show();
 						return true;
 					}
@@ -488,15 +489,15 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.message_fragment_mlist_right_top_newFriend:
-				Toast.makeText(getContext(), "add new friend was clicked",
+				Toast.makeText(getContext().getApplicationContext(), "add new friend was clicked",
 						Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.message_fragment_mlist_right_top_groupChat:
-				Toast.makeText(getContext(), "initiate a group_char was clicked",
+				Toast.makeText(getContext().getApplicationContext(), "initiate a group_char was clicked",
 						Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.message_fragment_mlist_right_top_myStar:
-				Toast.makeText(getContext(), "my star was clicked", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext().getApplicationContext(), "my star was clicked", Toast.LENGTH_SHORT).show();
 				break;
 		}
 	}
