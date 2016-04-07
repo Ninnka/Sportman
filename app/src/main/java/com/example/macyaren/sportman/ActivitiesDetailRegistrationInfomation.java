@@ -30,7 +30,6 @@ public class ActivitiesDetailRegistrationInfomation extends Activity implements 
 
 	public final static String INTENT_TO_COMPLETE = "com.macya.intent.action" +
 			".ACTIVITIES_DETAIL_REGISTRATION_COMPLETE";
-	public Boolean IS_ITEM_SPINNER_FIRST = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,5 @@
 package com.example.macyaren.sportman;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,20 +7,26 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 
 /**
- * Created by hennzr on 2016/3/6.
+ * Created by hennzr on 2016/3/6 23:12
+ * Package in com.example.macyaren.sportman
+ * Project name is Sportman
  */
 public class MessageFragmentLeftListAdapter extends BaseAdapter {
 
 	List<MessageFragmentLeftListInfo> list;
-	Context context;
+	WeakReference<MessageFragment> messageFragmentWeakReference;
+	MessageFragment messageFragment;
 	LayoutInflater inflater;
 
-	public MessageFragmentLeftListAdapter(Context context) {
-		this.context = context;
+	public MessageFragmentLeftListAdapter(MessageFragment messageFragment) {
+		this.messageFragmentWeakReference = new WeakReference<MessageFragment>(messageFragment);
+		this.messageFragment = messageFragmentWeakReference.get();
+		inflater = LayoutInflater.from(messageFragment.getContext());
 	}
 
 	public void setList(List<MessageFragmentLeftListInfo> list) {
@@ -45,9 +50,8 @@ public class MessageFragmentLeftListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		inflater = LayoutInflater.from(context);
 		MessageFragmentLeftListHolder holder;
-		if(convertView ==null){
+		if (convertView == null) {
 			holder = new MessageFragmentLeftListHolder();
 			convertView = inflater.inflate(R.layout.message_fragment_listview_left, null);
 			holder.photo = (ImageView) convertView.findViewById(R.id.message_fragment_listview_photo);
@@ -56,12 +60,12 @@ public class MessageFragmentLeftListAdapter extends BaseAdapter {
 					.message_fragment_listview_profile);
 			holder.date = (TextView) convertView.findViewById(R.id.message_fragment_listview_date);
 			convertView.setTag(holder);
-		}else {
+		} else {
 			holder = (MessageFragmentLeftListHolder) convertView.getTag();
 		}
 		MessageFragmentLeftListInfo messageFragmentLeftListInfo = list.get(position);
-//		Log.i("ZRH FOR msg_fragment_left_list", messageFragmentLeftListInfo.photo +
-//				"  " + messageFragmentLeftListInfo.uname);
+		//		Log.i("ZRH FOR msg_fragment_left_list", messageFragmentLeftListInfo.photo +
+		//				"  " + messageFragmentLeftListInfo.uname);
 		holder.photo.setImageResource(messageFragmentLeftListInfo.photo);
 		holder.uname.setText(messageFragmentLeftListInfo.uname);
 		holder.profile.setText(messageFragmentLeftListInfo.profile);

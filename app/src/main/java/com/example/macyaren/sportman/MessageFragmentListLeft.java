@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,19 +17,25 @@ import java.util.List;
  * Created by hennzr on 2016/3/6
  * Project name is Sportman
  */
-public class Msg_fragment_mlist_left extends Fragment implements AdapterView.OnItemClickListener {
+public class MessageFragmentListLeft extends Fragment implements AdapterView.OnItemClickListener {
 
 	protected MsgFragmentLeftListCallback msgFragmentLeftListCallback;
 	ListView listView;
 	List<MessageFragmentLeftListInfo> list;
 	MessageFragmentLeftListAdapter messageFragmentLeftListAdapter;
 	MessageFragmentLeftListInfo[] messageFragmentLeftListInfos = new MessageFragmentLeftListInfo[7];
-//	Intent intent;
+	WeakReference<MessageFragment> messageFragmentWeakReference;
+	MessageFragment messageFragment;
 
 //	public final static String INTENT_TO_CHAT_SINGLE_KEY = "intent_from_chat_single";
 //	public final static String INTENT_TO_CHAT_GROUP_KEY = "intent_from_chat_group";
 
-	//	MessageFragmentLeftListInfo messageFragmentLeftListInfo;
+
+	public void setMessageFragment(MessageFragment messageFragment) {
+		this.messageFragmentWeakReference = new WeakReference<MessageFragment>(messageFragment);
+		this.messageFragment = messageFragmentWeakReference.get();
+	}
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,11 +60,10 @@ public class Msg_fragment_mlist_left extends Fragment implements AdapterView.OnI
 			list.add(messageFragmentLeftListInfos[i]);
 		}
 
-		messageFragmentLeftListAdapter = new MessageFragmentLeftListAdapter(getActivity());
+		messageFragmentLeftListAdapter = new MessageFragmentLeftListAdapter(messageFragment);
 		messageFragmentLeftListAdapter.setList(list);
 		listView.setAdapter(messageFragmentLeftListAdapter);
 		listView.setOnItemClickListener(this);
-
 
 		return resView;
 	}

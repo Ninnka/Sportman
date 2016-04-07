@@ -1,6 +1,5 @@
 package com.example.macyaren.sportman;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,21 +7,26 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
- * Created by hennzr on 2016/3/9.
+ * Created by hennzr on 2016/3/9 23:17
+ * Package in com.example.macyaren.sportman
+ * Project name is Sportman
  */
 public class MessageFragmentRightListAdapter extends BaseExpandableListAdapter {
 
 	List<String> listPY;
 	List<List<MessageFragmentRightListInfo>> listInfos;
-	Context context;
+	MessageFragment messageFragment;
+	WeakReference<MessageFragment> messageFragmentWeakReference;
 	LayoutInflater inflater;
 
-	public MessageFragmentRightListAdapter(Context context) {
-		this.context = context;
-		inflater = LayoutInflater.from(context);
+	public MessageFragmentRightListAdapter(MessageFragment messageFragment) {
+		this.messageFragmentWeakReference = new WeakReference<MessageFragment>(messageFragment);
+		this.messageFragment = messageFragmentWeakReference.get();
+		inflater = LayoutInflater.from(messageFragment.getContext());
 	}
 
 	public void setListInfos(List<List<MessageFragmentRightListInfo>> listInfos) {
@@ -83,7 +87,6 @@ public class MessageFragmentRightListAdapter extends BaseExpandableListAdapter {
 		}
 		String gn = listPY.get(groupPosition);
 		messageFragmentRightListHolderGroup.GROUPNAME.setText(gn);
-//		Log.i("ZRH", "in get GroupView");
 		return convertView;
 	}
 
@@ -106,7 +109,6 @@ public class MessageFragmentRightListAdapter extends BaseExpandableListAdapter {
 		messageFragmentRightListHolderChild.CHILDPHOTO.setImageResource
 				(messageFragmentRightListInfo.photo);
 		messageFragmentRightListHolderChild.CHILDNAME.setText(messageFragmentRightListInfo.uname);
-//		Log.i("ZRH", "in get ChildView");
 		return convertView;
 	}
 

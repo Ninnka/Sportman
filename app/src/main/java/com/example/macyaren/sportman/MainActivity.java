@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hennzr on 2016/2/28.
+ * Created by hennzr on 2016/2/28 16:25
+ * Package in com.example.macyaren.sportman
+ * Project name is Sportman
  */
 public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener,
 		View.OnClickListener, ObservableScrollView.Callbacks {
@@ -68,6 +70,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
 	public final static String INTENT_FOR_ACTIVITY_CITY_SELECTION = "com.macya.intent.action" +
 			".CITY_SELECTION";
+
+
 
 
 	@Override
@@ -125,6 +129,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 		tab_liner_2.setOnClickListener(this);
 		tab_liner_3 = (LinearLayout) findViewById(R.id.tab_3);
 		tab_liner_3.setOnClickListener(this);
+
 
 	}
 

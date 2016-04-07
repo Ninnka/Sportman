@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ import java.util.Map;
 /**
  * Created by hennzr on 2016/3/9.
  */
-public class Msg_fragment_mlist_right extends Fragment implements View.OnClickListener {
+public class MessageFragmentListRight extends Fragment implements View.OnClickListener {
 
 	ExpandableListView expandableListView;
 	MessageFragmentRightListAdapter messageFragmentRightListAdapter;
@@ -58,69 +59,26 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 	ViewTreeObserver viewTreeObserver_linearLayout_container;
 	ViewTreeObserver viewTreeObserver_navigation_parent;
 
-	Handler handler = new Handler(){
-		@Override
-		public void handleMessage(Message msg) {
-			if(msg.what == 0){
-				/*
-				* 设置MessageFragmentRightListAdapter
-				* */
-				messageFragmentRightListAdapter = new MessageFragmentRightListAdapter(getContext());
-				messageFragmentRightListAdapter.setListPY(listPY);
-				messageFragmentRightListAdapter.setListInfos(listInfos);
+	MSGFLR_Handler handler = new MSGFLR_Handler(this);
 
-				/*
-				* 设置ExpandableListView的Adapter
-				* 展开所有groupItem
-				* */
-				expandableListView.setAdapter(messageFragmentRightListAdapter);
-				for (int i = 0; i < messageFragmentRightListAdapter.getGroupCount(); i++) {
-					expandableListView.expandGroup(i);
-				}
+	MessageFragment messageFragment;
+	WeakReference<MessageFragment> messageFragmentWeakReference;
 
-				/*
-				* ExpandableListView的部分布局显示更改
-				* 重写ExpandableListView的group、child点击事件
-				* */
-				expandableListView.setGroupIndicator(null);
-				expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-					@Override
-					public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-						return true;
-					}
-				});
-				expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-					@Override
-					public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-						Toast.makeText(getContext().getApplicationContext(), "ChildItem" + childPosition + " was " +
-										"clicked",
-								Toast.LENGTH_SHORT).show();
-						return true;
-					}
-				});
-				/*
-				* 禁止ExpandableListView获得焦点
-				* */
-				expandableListView.setFocusable(false);
-				Utility.setListViewHeightBasedOnChildren(expandableListView);
-
-			}
-		}
-	};
+	public void setMessageFragment(MessageFragment messageFragment) {
+		this.messageFragmentWeakReference = new WeakReference<MessageFragment>(messageFragment);
+		this.messageFragment = messageFragmentWeakReference.get();
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		map = new HashMap<String, List<String>>();
-		//		messageFragmentRightListData = new MessageFragmentRightListData();
 		pingYinTool = new PingYinTool();
 		rightListData_eng = new String[MessageFragmentRightListData.UNAME.length];
 		list_group_height = Utility.dip2px(getContext(), 18);
 		list_child_height = Utility.dip2px(getContext(), 45);
 		navigation_alpha = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
-				"L", "M", "N", "O",
-				"P", "Q", "R", "S",
-				"T", "U", "V", "W", "X", "Y", "Z", "#"};
+				"L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#"};
 	}
 
 	@Nullable
@@ -140,9 +98,9 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 
 		expandableListView = (ExpandableListView) resView.findViewById(R.id
 				.message_fragment_mlist_right_expandablelist);
-		listPY = new ArrayList<String>();
-		listInfos = new ArrayList<List<MessageFragmentRightListInfo>>();
-		listPYTemp = new ArrayList<String>();
+		listPY = new ArrayList<>();
+		listInfos = new ArrayList<>();
+		listPYTemp = new ArrayList<>();
 
 		new Thread(new Runnable() {
 			@Override
@@ -180,7 +138,7 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 							Log.i("ZRH FOR HANYUPINYIN", bhypy.getMessage());
 						}
 					}
-					String[] temp = (String[]) listPYTemp.toArray(new String[listPYTemp.size()]);
+					String[] temp = listPYTemp.toArray(new String[listPYTemp.size()]);
 					Arrays.sort(temp);
 
 					/*
@@ -268,37 +226,37 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 		/*
 		* 设置MessageFragmentRightListAdapter
 		* */
-//		messageFragmentRightListAdapter = new MessageFragmentRightListAdapter(getContext());
-//		messageFragmentRightListAdapter.setListPY(listPY);
-//		messageFragmentRightListAdapter.setListInfos(listInfos);
+		//		messageFragmentRightListAdapter = new MessageFragmentRightListAdapter(getContext());
+		//		messageFragmentRightListAdapter.setListPY(listPY);
+		//		messageFragmentRightListAdapter.setListInfos(listInfos);
 
 		/*
 		*设置ExpandableListView的Adapter
 		* */
-//		expandableListView.setAdapter(messageFragmentRightListAdapter);
-//		for (int i = 0; i < messageFragmentRightListAdapter.getGroupCount(); i++) {
-//			expandableListView.expandGroup(i);
-//		}
+		//		expandableListView.setAdapter(messageFragmentRightListAdapter);
+		//		for (int i = 0; i < messageFragmentRightListAdapter.getGroupCount(); i++) {
+		//			expandableListView.expandGroup(i);
+		//		}
 
 		/*
 		* ExpandableListView的部分布局显示更改
 		* 重写ExpandableListView的group、child点击事件
 		* */
-//		expandableListView.setGroupIndicator(null);
-//		expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-//			@Override
-//			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-//				return true;
-//			}
-//		});
-//		expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-//			@Override
-//			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//				Toast.makeText(getContext(), "ChildItem" + childPosition + " was clicked",
-//						Toast.LENGTH_SHORT).show();
-//				return true;
-//			}
-//		});
+		//		expandableListView.setGroupIndicator(null);
+		//		expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+		//			@Override
+		//			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+		//				return true;
+		//			}
+		//		});
+		//		expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+		//			@Override
+		//			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		//				Toast.makeText(getContext(), "ChildItem" + childPosition + " was clicked",
+		//						Toast.LENGTH_SHORT).show();
+		//				return true;
+		//			}
+		//		});
 
 		/*
 		* 解决在切换页面时ExpandableListView定位到获得焦点的Item上的问题
@@ -348,8 +306,8 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 				navigation_parent_height = navigation_parent.getHeight();
 				navigation_tv_height = navigation_parent_height / 27;
 				navigation_parent.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-//				Log.i("ZRH", "navigation_parent_height: " + navigation_parent_height);
-//				Log.i("ZRH", "navigation_tv_height: " + navigation_tv_height);
+				//				Log.i("ZRH", "navigation_parent_height: " + navigation_parent_height);
+				//				Log.i("ZRH", "navigation_tv_height: " + navigation_tv_height);
 			}
 		});
 
@@ -363,7 +321,7 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 					case MotionEvent.ACTION_DOWN:
 						navigation_parent.setBackgroundColor(getResources().getColor(R.color
 								.navigation_press));
-						if(navigation_tv_position>=0 && navigation_tv_position <= 26){
+						if (navigation_tv_position >= 0 && navigation_tv_position <= 26) {
 							String clickStr = navigation_alpha[navigation_tv_position];
 							navigation_indicator.setText(clickStr);
 							navigation_indicator.setVisibility(View.VISIBLE);
@@ -385,7 +343,7 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 						}
 						return true;
 					case MotionEvent.ACTION_MOVE:
-						if(navigation_tv_position>=0 && navigation_tv_position <= 26){
+						if (navigation_tv_position >= 0 && navigation_tv_position <= 26) {
 							String clickStr = navigation_alpha[navigation_tv_position];
 							navigation_indicator.setText(clickStr);
 							for (int k = 0; k < listPY.size(); k++) {
@@ -424,48 +382,48 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 			navigation_tv.setTextColor(getResources().getColor(R.color.md_grey_700));
 			navigation_tv.setGravity(Gravity.CENTER_HORIZONTAL);
 			navigation_tv.setLayoutParams(layoutParams);
-//			for (curPY = 0; curPY < listPY.size(); curPY++) {
-//				/*
-//				* 虽然不知道为什么，这个if里面的“==”必须用equals()来代替
-//				* 用“==”进不去判断，A跟A肯定是相同的
-//				* 但就是进不去
-//				* 其实IDE给了warning：最好用”equals“来代替“==”
-//				* */
-// 				if (navigation_alpha[i].equals(listPY.get(curPY))) {
-//					/*
-//					* 添加onTouchListener
-//					* */
-//					navigation_tv.setPressed(true);
-//					navigation_tv.setOnTouchListener(new View.OnTouchListener() {
-//						@Override
-//						public boolean onTouch(View v, MotionEvent event) {
-//							switch (event.getAction()) {
-//								case MotionEvent.ACTION_DOWN:
-//									TextView clickTextView = (TextView) v;
-//									String clickStr = (String) clickTextView.getText();
-//									for (int k = 0; k < listPY.size(); k++) {
-//										if (clickStr.equals(listPY.get(k))) {
-//											int childDis = 0;
-//											int groupDis = k * (list_group_height + 12);
-//											for (int j = 0; j < k; j++) {
-//												int curChildDis = messageFragmentRightListAdapter
-//														.getChildrenCount(j) * (list_child_height
-//														+ 12);
-//												childDis += curChildDis;
-//											}
-//											int realDis = childDis + groupDis + container_height;
-//											scrollView.smoothScrollTo(0, realDis);
-//											break;
-//										}
-//									}
-//									break;
-//							}
-//							return false;
-//						}
-//					});
-//					break;
-//				}
-//			}
+			//			for (curPY = 0; curPY < listPY.size(); curPY++) {
+			//				/*
+			//				* 虽然不知道为什么，这个if里面的“==”必须用equals()来代替
+			//				* 用“==”进不去判断，A跟A肯定是相同的
+			//				* 但就是进不去
+			//				* 其实IDE给了warning：最好用”equals“来代替“==”
+			//				* */
+			// 				if (navigation_alpha[i].equals(listPY.get(curPY))) {
+			//					/*
+			//					* 添加onTouchListener
+			//					* */
+			//					navigation_tv.setPressed(true);
+			//					navigation_tv.setOnTouchListener(new View.OnTouchListener() {
+			//						@Override
+			//						public boolean onTouch(View v, MotionEvent event) {
+			//							switch (event.getAction()) {
+			//								case MotionEvent.ACTION_DOWN:
+			//									TextView clickTextView = (TextView) v;
+			//									String clickStr = (String) clickTextView.getText();
+			//									for (int k = 0; k < listPY.size(); k++) {
+			//										if (clickStr.equals(listPY.get(k))) {
+			//											int childDis = 0;
+			//											int groupDis = k * (list_group_height + 12);
+			//											for (int j = 0; j < k; j++) {
+			//												int curChildDis = messageFragmentRightListAdapter
+			//														.getChildrenCount(j) * (list_child_height
+			//														+ 12);
+			//												childDis += curChildDis;
+			//											}
+			//											int realDis = childDis + groupDis + container_height;
+			//											scrollView.smoothScrollTo(0, realDis);
+			//											break;
+			//										}
+			//									}
+			//									break;
+			//							}
+			//							return false;
+			//						}
+			//					});
+			//					break;
+			//				}
+			//			}
 			navigation_parent.addView(navigation_tv);
 		}
 
@@ -499,6 +457,73 @@ public class Msg_fragment_mlist_right extends Fragment implements View.OnClickLi
 			case R.id.message_fragment_mlist_right_top_myStar:
 				Toast.makeText(getContext().getApplicationContext(), "my star was clicked", Toast.LENGTH_SHORT).show();
 				break;
+		}
+	}
+
+	static class MSGFLR_Handler extends Handler {
+
+		MessageFragmentListRight messageFragmentListRight;
+		WeakReference<MessageFragmentListRight> messageFragmentListRightWeakReference;
+
+		public MSGFLR_Handler(MessageFragmentListRight messageFragmentListRight) {
+			this.messageFragmentListRightWeakReference = new
+					WeakReference<>(messageFragmentListRight);
+			this.messageFragmentListRight = messageFragmentListRightWeakReference.get();
+		}
+
+		@Override
+		public void handleMessage(Message msg) {
+			if (msg.what == 0) {
+				/*
+				* 设置MessageFragmentRightListAdapter
+				* */
+				messageFragmentListRight.messageFragmentRightListAdapter = new
+						MessageFragmentRightListAdapter(messageFragmentListRight.messageFragment);
+				messageFragmentListRight.messageFragmentRightListAdapter.setListPY
+						(messageFragmentListRight.listPY);
+				messageFragmentListRight.messageFragmentRightListAdapter.setListInfos
+						(messageFragmentListRight.listInfos);
+
+				/*
+				* 设置ExpandableListView的Adapter
+				* 展开所有groupItem
+				* */
+				messageFragmentListRight.expandableListView.setAdapter(messageFragmentListRight
+						.messageFragmentRightListAdapter);
+				for (int i = 0; i < messageFragmentListRight.messageFragmentRightListAdapter
+						.getGroupCount(); i++) {
+					messageFragmentListRight.expandableListView.expandGroup(i);
+				}
+
+				/*
+				* ExpandableListView的部分布局显示更改
+				* 重写ExpandableListView的group、child点击事件
+				* */
+				messageFragmentListRight.expandableListView.setGroupIndicator(null);
+				messageFragmentListRight.expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+					@Override
+					public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+						return true;
+					}
+				});
+				messageFragmentListRight.expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+					@Override
+					public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+						Toast.makeText(messageFragmentListRight.getContext().getApplicationContext(), "ChildItem" +
+										childPosition +
+										" was " +
+										"clicked",
+								Toast.LENGTH_SHORT).show();
+						return true;
+					}
+				});
+				/*
+				* 禁止ExpandableListView获得焦点
+				* */
+				messageFragmentListRight.expandableListView.setFocusable(false);
+				Utility.setListViewHeightBasedOnChildren(messageFragmentListRight.expandableListView);
+
+			}
 		}
 	}
 }

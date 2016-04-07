@@ -31,7 +31,6 @@ public class MessageLeftListFollowNews extends Activity implements View.OnClickL
 	protected final static int INTENT_FROM_FOLLOW = 0;
 	protected final static int INTENT_FROM_NEWS = 1;
 
-
 	protected MLL_Handler mll_handler = new MLL_Handler(this);
 
 	@Override

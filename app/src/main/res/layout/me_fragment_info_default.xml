@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/me_fragment_info_background"
+        android:gravity="center"
+        android:text="SIGN IN"
+        android:textColor="@color/md_orange_800"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/me_fragment_info_background"
+        android:gravity="center"
+        android:text="SIGN UP"
+        android:textColor="@color/md_orange_800"
+        android:textSize="14sp"/>
+
+</LinearLayout>

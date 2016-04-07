@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,92 +66,7 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 
 	public Intent intent_to_next;
 
-	Handler handler = new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-				case EXPAND_REGIS:
-					if (cachedView.getTag(R.id.EXPAND_REGIS) == null) {
-						registrationdetail_expanded_tv = new TextView(ActivitiesDetail.this);
-						registrationdetail_expanded_tv.setLayoutParams(sample.getLayoutParams());
-						registrationdetail_expanded_tv.setGravity(Gravity.CENTER | Gravity.LEFT);
-						registrationdetail_expanded_tv.setPadding(Utility.dip2px(ActivitiesDetail.this, 20), 0, 0, 0);
-						registrationdetail_expanded_tv.setTextSize(14);
-						registrationdetail_expanded_tv.setText("登记材料：身份证明，联系方式等");
-						cachedView.setTag(R.id.EXPAND_REGIS, registrationdetail_expanded_tv);
-					} else {
-						registrationdetail_expanded_tv = (TextView) cachedView.getTag(R.id
-								.EXPAND_REGIS);
-					}
-					registrationdetail_container.addView(registrationdetail_expanded_tv);
-					registrationdetail_container.removeView(registrationdetailMore);
-					registrationdetailMore.setText("Collapse view <<");
-					registrationdetail_container.addView(registrationdetailMore);
-					hasExpanded_registrationdetail = true;
-					break;
-				case COLLAPSE_REGIS:
-					registrationdetail_container.removeView(registrationdetailMore);
-					registrationdetailMore.setText("Click to view more >>");
-					registrationdetail_container.removeView(registrationdetail_expanded_tv);
-					registrationdetail_container.addView(registrationdetailMore);
-					hasExpanded_registrationdetail = false;
-					break;
-				case EXPAND_PRO:
-					if (cachedView.getTag(R.id.EXPAND_PRO) == null) {
-						process_expand_tv = new TextView(ActivitiesDetail.this);
-						process_expand_tv.setLayoutParams(process_sample.getLayoutParams());
-						process_expand_tv.setPadding(Utility.dip2px(ActivitiesDetail.this, 20), 0,
-								0, 0);
-						process_expand_tv.setGravity(Gravity.CENTER | Gravity.LEFT);
-						process_expand_tv.setSingleLine(false);
-						//						process_expand_tv.setMaxLines(30);
-						//						process_expand_tv.setEllipsize(TextUtils.TruncateAt.END);
-						process_expand_tv.setTextSize(14);
-						process_expand_tv.setText("II. Race Course \n(I) Mini Marathon: \n" +
-								"Huacheng Square (Starting Point) → Linjiang Ave (Eastwards) →" +
-								" Tunnel →Linjiang Ave (Westwards) → Guangzhou Middle Ave.→ Tianhe " +
-								"North Rd. → North Gate, Tianhe Sports Center → Ring Road of " +
-								"Tianhe Stadium →South Gate Square, Tianhe Sports Center " +
-								"(Finishing Point) \n(II) Half Marathon \n" +
-								"Huacheng Square (Starting point) → Linjiang Ave (Eastwards) →" +
-								" U turn at Chebei South Rd. → Linjiang Ave. (Westwards) →" +
-								" Liede Ave → U turn at the top of Huacheng Ave Tunnel. →" +
-								" Liede Bridge →Yuejiang Rd. (Eastwards) → Intersection of " +
-								"Yuejiang Rd. and Huizhan Middle Rd. → Yuejiang Rd " +
-								"(Reserve Direction) → U turn at Yuejiang Rd (under Pazhou Bridge)" +
-								" → Yuejiang Middle Rd (North to the Poly International Plaza, " +
-								"Finishing Point) \n(III) Marathon: \n" +
-								"Huacheng Square (Starting point) → Linjiang Ave (Eastwards) →" +
-								" U turn at Chebei South Rd. → Linjiang Ave. (Westwards) →" +
-								" Liede Ave → U turn at the top of Huacheng Ave Tunnel. " +
-								"→ Liede Bridge →Yuejiang Rd. (Eastwards) → U turn at the " +
-								"intersection of Yuejiang Rd. and Huizhan Middle Rd. → " +
-								"Yuejiang Rd (Westwards) → Binjiang East Rd. → U turn at " +
-								"Binjiang Rd. → Binjiang Rd → Yiyuan Rd. → Yizhou Rd. → Binjiang " +
-								"Rd (Westwards) → Hongde Rd. (Southwards) → People Bridge → " +
-								"Yanjiang Rd. (Eastwards) → Datong Rd. (Eastwards) → Tanyue Street" +
-								" → Qingbo Rd. → Hai Xin Sha → No. 1 Bridge of Hai Xin Sha →" +
-								" Linjiang Ave. → Huacheng Square (Finishing Point)");
-						cachedView.setTag(R.id.EXPAND_PRO);
-					} else {
-						process_expand_tv = (TextView) cachedView.getTag(R.id.EXPAND_PRO);
-					}
-					process_container.addView(process_expand_tv);
-					process_container.removeView(processMore);
-					processMore.setText("Collapse view <<");
-					process_container.addView(processMore);
-					hasExpanded_process = true;
-					break;
-				case COLLAPSE_PRO:
-					process_container.removeView(processMore);
-					processMore.setText("Click to view more >>");
-					process_container.removeView(process_expand_tv);
-					process_container.addView(processMore);
-					hasExpanded_process = false;
-					break;
-			}
-		}
-	};
+	AD_Handler handler = new AD_Handler(this);
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -326,6 +242,104 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 				intent_to_next.setAction(INTENT_TO_NEXT);
 				startActivity(intent_to_next);
 				break;
+		}
+	}
+
+	static class AD_Handler extends Handler{
+
+		ActivitiesDetail activitiesDetail;
+		WeakReference<ActivitiesDetail> activitiesDetailWeakReference;
+
+		public AD_Handler(ActivitiesDetail activitiesDetail) {
+			this.activitiesDetailWeakReference = new WeakReference<ActivitiesDetail>
+					(activitiesDetail);
+			this.activitiesDetail = activitiesDetailWeakReference.get();
+		}
+
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+				case EXPAND_REGIS:
+					if (activitiesDetail.cachedView.getTag(R.id.EXPAND_REGIS) == null) {
+						activitiesDetail.registrationdetail_expanded_tv = new TextView(activitiesDetail);
+						activitiesDetail.registrationdetail_expanded_tv.setLayoutParams
+								(activitiesDetail.sample.getLayoutParams());
+						activitiesDetail.registrationdetail_expanded_tv.setGravity(Gravity.CENTER | Gravity.LEFT);
+						activitiesDetail.registrationdetail_expanded_tv.setPadding(Utility.dip2px(activitiesDetail, 20), 0, 0, 0);
+						activitiesDetail.registrationdetail_expanded_tv.setTextSize(14);
+						activitiesDetail.registrationdetail_expanded_tv.setText("登记材料：身份证明，联系方式等");
+						activitiesDetail.cachedView.setTag(R.id.EXPAND_REGIS, activitiesDetail.registrationdetail_expanded_tv);
+					} else {
+						activitiesDetail.registrationdetail_expanded_tv = (TextView) activitiesDetail.cachedView.getTag(R.id
+								.EXPAND_REGIS);
+					}
+					activitiesDetail.registrationdetail_container.addView(activitiesDetail.registrationdetail_expanded_tv);
+					activitiesDetail.registrationdetail_container.removeView(activitiesDetail.registrationdetailMore);
+					activitiesDetail.registrationdetailMore.setText("Collapse view <<");
+					activitiesDetail.registrationdetail_container.addView(activitiesDetail.registrationdetailMore);
+					activitiesDetail.hasExpanded_registrationdetail = true;
+					break;
+				case COLLAPSE_REGIS:
+					activitiesDetail.registrationdetail_container.removeView(activitiesDetail.registrationdetailMore);
+					activitiesDetail.registrationdetailMore.setText("Click to view more >>");
+					activitiesDetail.registrationdetail_container.removeView(activitiesDetail.registrationdetail_expanded_tv);
+					activitiesDetail.registrationdetail_container.addView(activitiesDetail.registrationdetailMore);
+					activitiesDetail.hasExpanded_registrationdetail = false;
+					break;
+				case EXPAND_PRO:
+					if (activitiesDetail.cachedView.getTag(R.id.EXPAND_PRO) == null) {
+						activitiesDetail.process_expand_tv = new TextView(activitiesDetail);
+						activitiesDetail.process_expand_tv.setLayoutParams(activitiesDetail.process_sample.getLayoutParams());
+						activitiesDetail.process_expand_tv.setPadding(Utility.dip2px(activitiesDetail, 20), 0,
+								0, 0);
+						activitiesDetail.process_expand_tv.setGravity(Gravity.CENTER | Gravity.LEFT);
+						activitiesDetail.process_expand_tv.setSingleLine(false);
+						//						process_expand_tv.setMaxLines(30);
+						//						process_expand_tv.setEllipsize(TextUtils.TruncateAt.END);
+						activitiesDetail.process_expand_tv.setTextSize(14);
+						activitiesDetail.process_expand_tv.setText("II. Race Course \n(I) Mini Marathon: \n" +
+								"Huacheng Square (Starting Point) → Linjiang Ave (Eastwards) →" +
+								" Tunnel →Linjiang Ave (Westwards) → Guangzhou Middle Ave.→ Tianhe " +
+								"North Rd. → North Gate, Tianhe Sports Center → Ring Road of " +
+								"Tianhe Stadium →South Gate Square, Tianhe Sports Center " +
+								"(Finishing Point) \n(II) Half Marathon \n" +
+								"Huacheng Square (Starting point) → Linjiang Ave (Eastwards) →" +
+								" U turn at Chebei South Rd. → Linjiang Ave. (Westwards) →" +
+								" Liede Ave → U turn at the top of Huacheng Ave Tunnel. →" +
+								" Liede Bridge →Yuejiang Rd. (Eastwards) → Intersection of " +
+								"Yuejiang Rd. and Huizhan Middle Rd. → Yuejiang Rd " +
+								"(Reserve Direction) → U turn at Yuejiang Rd (under Pazhou Bridge)" +
+								" → Yuejiang Middle Rd (North to the Poly International Plaza, " +
+								"Finishing Point) \n(III) Marathon: \n" +
+								"Huacheng Square (Starting point) → Linjiang Ave (Eastwards) →" +
+								" U turn at Chebei South Rd. → Linjiang Ave. (Westwards) →" +
+								" Liede Ave → U turn at the top of Huacheng Ave Tunnel. " +
+								"→ Liede Bridge →Yuejiang Rd. (Eastwards) → U turn at the " +
+								"intersection of Yuejiang Rd. and Huizhan Middle Rd. → " +
+								"Yuejiang Rd (Westwards) → Binjiang East Rd. → U turn at " +
+								"Binjiang Rd. → Binjiang Rd → Yiyuan Rd. → Yizhou Rd. → Binjiang " +
+								"Rd (Westwards) → Hongde Rd. (Southwards) → People Bridge → " +
+								"Yanjiang Rd. (Eastwards) → Datong Rd. (Eastwards) → Tanyue Street" +
+								" → Qingbo Rd. → Hai Xin Sha → No. 1 Bridge of Hai Xin Sha →" +
+								" Linjiang Ave. → Huacheng Square (Finishing Point)");
+						activitiesDetail.cachedView.setTag(R.id.EXPAND_PRO);
+					} else {
+						activitiesDetail.process_expand_tv = (TextView) activitiesDetail.cachedView.getTag(R.id.EXPAND_PRO);
+					}
+					activitiesDetail.process_container.addView(activitiesDetail.process_expand_tv);
+					activitiesDetail.process_container.removeView(activitiesDetail.processMore);
+					activitiesDetail.processMore.setText("Collapse view <<");
+					activitiesDetail.process_container.addView(activitiesDetail.processMore);
+					activitiesDetail.hasExpanded_process = true;
+					break;
+				case COLLAPSE_PRO:
+					activitiesDetail.process_container.removeView(activitiesDetail.processMore);
+					activitiesDetail.processMore.setText("Click to view more >>");
+					activitiesDetail.process_container.removeView(activitiesDetail.process_expand_tv);
+					activitiesDetail.process_container.addView(activitiesDetail.processMore);
+					activitiesDetail.hasExpanded_process = false;
+					break;
+			}
 		}
 	}
 }

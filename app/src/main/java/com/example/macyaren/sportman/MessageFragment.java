@@ -17,7 +17,7 @@ import android.widget.TextView;
  * Project name is Sportman
  */
 public class MessageFragment extends Fragment implements View.OnClickListener,
-		Msg_fragment_mlist_left.MsgFragmentLeftListCallback {
+		MessageFragmentListLeft.MsgFragmentLeftListCallback {
 
 	TextView msgf_tt_left_tv;
 	TextView msgf_tt_left_line;
@@ -26,8 +26,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 	RelativeLayout msgf_tt_left;
 	RelativeLayout msgf_tt_right;
 	FragmentManager fragmentManager;
-	Msg_fragment_mlist_left msg_fragment_mlist_left;
-	Msg_fragment_mlist_right msg_fragment_mlist_right;
+	MessageFragmentListLeft messageFragmentListLeft;
+	MessageFragmentListRight messageFragmentListRight;
 	Intent intent;
 
 	public final static String INTENT_TO_FOLLOW_KEY = "intent_from_follow";
@@ -56,11 +56,13 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 		msgf_tt_left.setOnClickListener(this);
 		msgf_tt_right.setOnClickListener(this);
 		fragmentManager = getChildFragmentManager();
-		msg_fragment_mlist_left = new Msg_fragment_mlist_left();
-		msg_fragment_mlist_right = new Msg_fragment_mlist_right();
+		messageFragmentListLeft = new MessageFragmentListLeft();
+		messageFragmentListLeft.setMessageFragment(this);
+		messageFragmentListRight = new MessageFragmentListRight();
+		messageFragmentListRight.setMessageFragment(this);
 		fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
-				msg_fragment_mlist_left).commit();
-		msg_fragment_mlist_left.setMsgFragmentLeftListCallback(this);
+				messageFragmentListLeft).commit();
+		messageFragmentListLeft.setMsgFragmentLeftListCallback(this);
 		return resView;
 	}
 
@@ -73,7 +75,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 				msgf_tt_right_tv.setTextColor(getResources().getColor(R.color.md_grey_600));
 				msgf_tt_right_line.setVisibility(View.INVISIBLE);
 				fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
-						msg_fragment_mlist_left).commit();
+						messageFragmentListLeft).commit();
 				break;
 			case R.id.msg_fragment_top_tab_right:
 				msgf_tt_right_tv.setTextColor(getResources().getColor(R.color.md_orange_600));
@@ -81,7 +83,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 				msgf_tt_left_tv.setTextColor(getResources().getColor(R.color.md_grey_600));
 				msgf_tt_left_line.setVisibility(View.INVISIBLE);
 				fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
-						msg_fragment_mlist_right).commit();
+						messageFragmentListRight).commit();
 				break;
 		}
 	}

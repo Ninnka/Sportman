@@ -22,9 +22,6 @@ public class ActivitiesDetailRegistrationComplete extends Activity implements Vi
 	public LinearLayout toolbar_container;
 
 	public int TOOL_SCROLL;
-	public double FINALLY_SCROLLY = 0;
-	public double CURR_SCROLLY = 0;
-//	public static Boolean TOOL_HAS_HIDE = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

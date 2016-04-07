@@ -5,15 +5,11 @@ import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,16 +33,16 @@ import java.util.Map;
  * Project name is Sportman
  */
 public class ActivityCitySelection extends Activity implements View.OnClickListener,
-		CustomToolbar.customToolbarCallback{
+		CustomToolbar.customToolbarCallback, VerticalScrollNavigation.VerticalScrollNavigationCallback {
 
 	CustomToolbar toolbar;
-	ImageView imageView_return;
+	//	ImageView imageView_return;
 	ExpandableListView expandableListView;
 	EditText editText_search;
-	LinearLayout cities_selection_navigation;
+	//	LinearLayout cities_selection_navigation;
 	TextView navigation_tv;
 	TextView navigation_indicator;
-	EditText cities_selection_searchtext;
+	//	EditText cities_selection_searchtext;
 	List<String> listGroup;
 	List<List<String>> listChild;
 	Map<String, List<String>> listMap;
@@ -55,11 +51,13 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 	CT_Handler handler;
 	PingYinTool pingYinTool;
 	String[] navigation_alpha;
+	//	FrameLayout content_container;
+	VerticalScrollNavigation verticalScrollNavigation;
 
 	ViewTreeObserver viewTreeObserver_city_selection_navigation;
 
 	float navigation_container_height;
-	float navigation_tv_height;
+	float navigation_tv_height = 0;
 	public final static int LOADING_CITY_NAME = 233;
 
 	@Override
@@ -75,8 +73,8 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 		toolbar.setCallback(this);
 
 		expandableListView.setFocusable(true);
-//		imageView_return = (ImageView) findViewById(R.id.activity_return);
-//		imageView_return.setOnClickListener(this);
+		//		imageView_return = (ImageView) findViewById(R.id.activity_return);
+		//		imageView_return.setOnClickListener(this);
 		editText_search = (EditText) findViewById(R.id.activity_cities_selection_searchtext);
 
 		activityCitySelectionExpandableListAdapter = new
@@ -118,80 +116,92 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 		/*
 		* 创建city_selection的右侧导航栏
 		* */
-		cities_selection_navigation = (LinearLayout) findViewById(R.id
-				.activity_cities_selection_navigation);
+		//		cities_selection_navigation = (LinearLayout) findViewById(R.id
+		//				.activity_cities_selection_navigation);
 		navigation_alpha = new String[]{"#", "$", "*", "A", "B", "C", "D", "E", "F", "G", "H",
 				"I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
 				"T", "U", "V", "W", "X", "Y", "Z"};
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup
-				.LayoutParams.MATCH_PARENT, 0, 1);
-		for (int i = 0; i < navigation_alpha.length; i++) {
-			navigation_tv = new TextView(this);
-			navigation_tv.setText(navigation_alpha[i]);
-			//noinspection deprecation
-			navigation_tv.setTextColor(getResources().getColor(R.color.md_grey_700));
-			navigation_tv.setGravity(Gravity.CENTER_HORIZONTAL);
-			navigation_tv.setLayoutParams(layoutParams);
-			cities_selection_navigation.addView(navigation_tv);
-		}
-
-		/*
-		* 右侧导航栏的手势action事件*/
-		viewTreeObserver_city_selection_navigation = cities_selection_navigation
-				.getViewTreeObserver();
-		viewTreeObserver_city_selection_navigation.addOnGlobalLayoutListener(new ViewTreeObserver
-				.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				navigation_container_height = cities_selection_navigation.getHeight();
-				navigation_tv_height = navigation_container_height / 29;
-				cities_selection_navigation.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-			}
-		});
+		verticalScrollNavigation = (VerticalScrollNavigation) findViewById(R.id
+				.activity_cities_selection_navigation);
 
 		navigation_indicator = (TextView) findViewById(R.id
 				.activity_cities_selection_expandablelist_navigation_indicator);
-		cities_selection_navigation.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				float currentPointY = event.getY();
-				int navigation_tv_position = (int) Math.floor
-						(currentPointY / navigation_tv_height);
-				switch (event.getAction()) {
-					case MotionEvent.ACTION_DOWN:
-						cities_selection_navigation.setBackgroundColor(getResources().getColor(R
-								.color.navigation_press));
-						if (navigation_tv_position >= 0 && navigation_tv_position <= 29) {
-							String clickStr = navigation_alpha[navigation_tv_position];
-							navigation_indicator.setText(clickStr);
-							navigation_indicator.setVisibility(View.VISIBLE);
-							for (int i = 0; i < listGroup.size(); i++) {
-								if (clickStr.equals(listGroup.get(i))) {
-									expandableListView.setSelectedGroup(i);
-								}
-							}
-						}
-						return true;
-					case MotionEvent.ACTION_MOVE:
-						if (navigation_tv_position >= 0 && navigation_tv_position <= 29) {
-							String clickStr = navigation_alpha[navigation_tv_position];
-							navigation_indicator.setText(clickStr);
-							for (int i = 0; i < listGroup.size(); i++) {
-								if (clickStr.equals(listGroup.get(i))) {
-									expandableListView.setSelectedGroup(i);
-								}
-							}
-						}
-						return true;
-					case MotionEvent.ACTION_UP:
-						cities_selection_navigation.setBackgroundColor(getResources().getColor(R
-								.color.navigatiom_release));
-						navigation_indicator.setVisibility(View.INVISIBLE);
-						return false;
-				}
-				return false;
-			}
-		});
+
+		//		content_container = (FrameLayout) findViewById(R.id
+		//				.activity_cities_selection_content_container);
+
+
+//		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup
+//				.LayoutParams.MATCH_PARENT, 0, 1);
+//		for (int i = 0; i < navigation_alpha.length; i++) {
+//			navigation_tv = new TextView(this);
+//			navigation_tv.setText(navigation_alpha[i]);
+//			//noinspection deprecation
+//			navigation_tv.setTextColor(getResources().getColor(R.color.md_grey_700));
+//			navigation_tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//			navigation_tv.setLayoutParams(layoutParams);
+//			cities_selection_navigation.addView(navigation_tv);
+//		}
+
+		/*
+		* 右侧导航栏的手势action事件*/
+//		viewTreeObserver_city_selection_navigation = cities_selection_navigation
+//				.getViewTreeObserver();
+//		viewTreeObserver_city_selection_navigation.addOnGlobalLayoutListener(new ViewTreeObserver
+//				.OnGlobalLayoutListener() {
+//			@Override
+//			public void onGlobalLayout() {
+//				navigation_container_height = cities_selection_navigation.getHeight();
+//				navigation_tv_height = navigation_container_height / 29;
+//				cities_selection_navigation.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//			}
+//		});
+
+
+		/*
+		* navigation的ontouch事件
+		* */
+//		cities_selection_navigation.setOnTouchListener(new View.OnTouchListener() {
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				float currentPointY = event.getY();
+//				int navigation_tv_position = (int) Math.floor
+//						(currentPointY / navigation_tv_height);
+//				switch (event.getAction()) {
+//					case MotionEvent.ACTION_DOWN:
+//						cities_selection_navigation.setBackgroundColor(getResources().getColor(R
+//								.color.navigation_press));
+//						if (navigation_tv_position >= 0 && navigation_tv_position < 29) {
+//							String clickStr = navigation_alpha[navigation_tv_position];
+//							navigation_indicator.setText(clickStr);
+//							navigation_indicator.setVisibility(View.VISIBLE);
+//							for (int i = 0; i < listGroup.size(); i++) {
+//								if (clickStr.equals(listGroup.get(i))) {
+//									expandableListView.setSelectedGroup(i);
+//								}
+//							}
+//						}
+//						return true;
+//					case MotionEvent.ACTION_MOVE:
+//						if (navigation_tv_position >= 0 && navigation_tv_position < 29) {
+//							String clickStr = navigation_alpha[navigation_tv_position];
+//							navigation_indicator.setText(clickStr);
+//							for (int i = 0; i < listGroup.size(); i++) {
+//								if (clickStr.equals(listGroup.get(i))) {
+//									expandableListView.setSelectedGroup(i);
+//								}
+//							}
+//						}
+//						return true;
+//					case MotionEvent.ACTION_UP:
+//						cities_selection_navigation.setBackgroundColor(getResources().getColor(R
+//								.color.navigatiom_release));
+//						navigation_indicator.setVisibility(View.INVISIBLE);
+//						return false;
+//				}
+//				return false;
+//			}
+//		});
 
 		/*
 		* 新开线程处理城市名
@@ -237,8 +247,6 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 					}
 				}
 				listGroup.addAll(listGroupTemp);
-//				Log.i("ZRH", "listGroup的长度：" + listGroup.size());
-//				Log.i("ZRH", "listChild的长度：" + listChild.size());
 
 				Message loadcityname = new Message();
 				loadcityname.what = LOADING_CITY_NAME;
@@ -246,12 +254,59 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 			}
 		}).start();
 
+		verticalScrollNavigation
+				.setNavigationAttribute(navigation_alpha, this);
+		verticalScrollNavigation.setVerticalScrollNavigationCallback(this);
+
+	}
+
+	@Override
+	public void scrollNavigation(float positionY, int navigation_container_height, int
+			eventAction) {
+		if (navigation_tv_height == 0) {
+			navigation_tv_height = navigation_container_height / 29;
+		}
+		float currentPointY = positionY;
+		int navigation_tv_position = (int) Math.floor
+				(currentPointY / navigation_tv_height);
+		switch (eventAction) {
+			case MotionEvent.ACTION_DOWN:
+				verticalScrollNavigation.setBackgroundColor(getResources().getColor(R
+						.color.navigation_press));
+				if (navigation_tv_position >= 0 && navigation_tv_position < 29) {
+					String clickStr = navigation_alpha[navigation_tv_position];
+					navigation_indicator.setText(clickStr);
+					navigation_indicator.setVisibility(View.VISIBLE);
+					for (int i = 0; i < listGroup.size(); i++) {
+						if (clickStr.equals(listGroup.get(i))) {
+							expandableListView.setSelectedGroup(i);
+						}
+					}
+				}
+				break;
+			case MotionEvent.ACTION_MOVE:
+				if (navigation_tv_position >= 0 && navigation_tv_position < 29) {
+					String clickStr = navigation_alpha[navigation_tv_position];
+					navigation_indicator.setText(clickStr);
+					for (int i = 0; i < listGroup.size(); i++) {
+						if (clickStr.equals(listGroup.get(i))) {
+							expandableListView.setSelectedGroup(i);
+						}
+					}
+				}
+				break;
+			case MotionEvent.ACTION_UP:
+				verticalScrollNavigation.setBackgroundColor(getResources().getColor(R
+						.color.navigatiom_release));
+				navigation_indicator.setVisibility(View.INVISIBLE);
+				break;
+		}
 	}
 
 	/*
 	* 创建静态内部类CT_Handler
 	* */
-	static class CT_Handler extends Handler{
+	static class CT_Handler extends Handler {
 
 		WeakReference<ActivityCitySelection> activityCitySelectionWeakReference;
 		ActivityCitySelection activityCitySelection;
@@ -259,11 +314,12 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 		public CT_Handler(ActivityCitySelection activityCitySelection) {
 			activityCitySelectionWeakReference = new WeakReference<ActivityCitySelection>
 					(activityCitySelection);
+			this.activityCitySelection = activityCitySelectionWeakReference.get();
 		}
 
 		@Override
 		public void handleMessage(Message msg) {
-			activityCitySelection = activityCitySelectionWeakReference.get();
+
 			if (msg.what == LOADING_CITY_NAME) {
 				activityCitySelection.activityCitySelectionExpandableListAdapter.setListGroup
 						(activityCitySelection.listGroup);

@@ -71,6 +71,7 @@
 
 
     <FrameLayout
+        android:id="@+id/activity_cities_selection_content_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -91,16 +92,16 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <com.example.macyaren.sportman.VerticalScrollNavigation
             android:id="@+id/activity_cities_selection_navigation"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:layout_gravity="right"
+            android:layout_gravity="right|center_vertical"
             android:background="@color/navigatiom_release"
             android:orientation="vertical">
 
 
-        </LinearLayout>
+        </com.example.macyaren.sportman.VerticalScrollNavigation>
 
         <TextView
             android:id="@+id/activity_cities_selection_expandablelist_navigation_indicator"

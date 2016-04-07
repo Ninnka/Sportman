@@ -1,6 +1,5 @@
 package com.example.macyaren.sportman;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by hennzr on 2016/3/20.
@@ -16,13 +17,16 @@ import java.util.List;
 public class ActivitiesDetailCommentsListAdapter extends BaseAdapter {
 
 	LayoutInflater inflater;
-	Context context;
+	ActivitiesDetail activitiesDetail;
 	List<ActivitiesDetailCommentsListCommInfo> list;
+	WeakReference<ActivitiesDetail> activitiesDetailWeakReference;
 
 
-	public ActivitiesDetailCommentsListAdapter(Context context) {
-		this.context = context;
-		inflater = LayoutInflater.from(context);
+	public ActivitiesDetailCommentsListAdapter(ActivitiesDetail activitiesDetail) {
+//		this.context = context;
+		activitiesDetailWeakReference = new WeakReference<ActivitiesDetail>(activitiesDetail);
+		this.activitiesDetail = activitiesDetailWeakReference.get();
+		inflater = LayoutInflater.from(activitiesDetail);
 	}
 
 	@Override
@@ -78,7 +82,7 @@ public class ActivitiesDetailCommentsListAdapter extends BaseAdapter {
 		activitiesDetailCommentsListHolder.praise.setText(String.valueOf
 				(activitiesDetailCommentsListCommInfo.praise));
 		String name = activitiesDetailCommentsListCommInfo.uname;
-		if(name == "天上的日"){
+		if(Objects.equals(name, "天上的日")){
 			activitiesDetailCommentsListHolder.good.setImageResource(R.drawable.praise_small);
 		}
 		activitiesDetailCommentsListHolder.date.setText(activitiesDetailCommentsListCommInfo.date);

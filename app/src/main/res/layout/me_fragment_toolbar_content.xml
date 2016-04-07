@@ -17,12 +17,12 @@
 
     <ImageView
         android:id="@+id/me_fragment_toolbar_content_setting"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="14dp"
-        android:src="@drawable/setting_big"
+        android:src="@drawable/setting_normal"
         android:gravity="center"/>
 
 </RelativeLayout>

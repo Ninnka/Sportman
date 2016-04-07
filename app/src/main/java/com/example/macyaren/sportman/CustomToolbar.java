@@ -46,8 +46,8 @@ public class CustomToolbar extends Toolbar {
 	public CustomToolbar(final Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		initComp(context);
-		obtainPara(context, attrs);
+		initComponent(context);
+		obtainParameters(context, attrs);
 
 		relativeLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams
 				.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -84,6 +84,7 @@ public class CustomToolbar extends Toolbar {
 				} else {
 					Toast.makeText(context.getApplicationContext(), "this activity have not implement " +
 							"customToolbarCallback", Toast.LENGTH_SHORT).show();
+
 				}
 			}
 		});
@@ -112,14 +113,14 @@ public class CustomToolbar extends Toolbar {
 		super(context, attrs, defStyleAttr, defStyleRes);
 	}
 
-	protected void initComp(Context context) {
+	protected void initComponent(Context context) {
 		left_back = new TextView(context);
 		center_title = new TextView(context);
 		right_ti = new TextView(context);
 		relativeLayout = new RelativeLayout(context);
 	}
 
-	protected void obtainPara(Context context, AttributeSet attrs) {
+	protected void obtainParameters(Context context, AttributeSet attrs) {
 		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomToolbar);
 		center_title_color = typedArray.getColor(R.styleable
 				.CustomToolbar_toolbar_center_textColor, 0);
@@ -132,9 +133,6 @@ public class CustomToolbar extends Toolbar {
 
 	protected void setCallback(customToolbarCallback callback) {
 		this.callback = callback;
-		//		if (this.callback != null) {
-		//			Log.i("ZRH", "callback is not empty");
-		//		}
 	}
 
 	/*
