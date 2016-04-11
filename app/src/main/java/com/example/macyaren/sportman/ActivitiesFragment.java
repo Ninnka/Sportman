@@ -25,10 +25,9 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 
 	ViewPager mViewPager;
 	ListView listViewForScrollView;
-	private static final float FLIP_DISTANCE = 50;
 
-	List<Fragment> fragmentList = new ArrayList<Fragment>();
-	List<View> imageList = new ArrayList<View>();
+	List<Fragment> fragmentList = new ArrayList<>();
+	List<View> imageList = new ArrayList<>();
 
 	TopFragmentPagerAdapter topFragmentPagerAdapter;
 	ActivitiesFragmentBannerAdapter activitiesFragmentBannerAdapter;
@@ -51,9 +50,6 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 
 	Intent intent_in_list;
 
-	public final static int LEFT_SWITCHER = 1;
-	public final static int OTHER_SWITCHER = 2;
-
 	int margin_other;
 	int margin_top_bottom;
 
@@ -71,7 +67,6 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 		activitiesFragmentListData = new ActivitiesFragmentListData();
 		activitiesFragmentListInfoList = new ArrayList<ActivitiesFragmentListInfo>();
 
-//		margin_left = Utility.dip2px(getContext(), 8);
 		margin_top_bottom = Utility.dip2px(getContext(), 2);
 		margin_other = Utility.dip2px(getContext(), 5);
 	}
@@ -352,7 +347,7 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 
 		@Override
 		public void onPageScrollStateChanged(int state) {
-			if(imageList.size() > 1){
+			if (imageList.size() > 1) {
 				if (state == ViewPager.SCROLL_STATE_DRAGGING) {
 					banner_switcher_container.setBackground(getResources().getDrawable(R.drawable
 							.banner_container_in));
@@ -361,13 +356,13 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 					banner_switcher_container.setBackground(getResources().getDrawable(R.drawable
 							.banner_container_out));
 				}
-				if(final_position == 0){
-					if(state == ViewPager.SCROLL_STATE_IDLE){
+				if (final_position == 0) {
+					if (state == ViewPager.SCROLL_STATE_IDLE) {
 						mViewPager.setCurrentItem(3, false);
 					}
 				}
-				if(final_position == 4){
-					if(state == ViewPager.SCROLL_STATE_IDLE){
+				if (final_position == 4) {
+					if (state == ViewPager.SCROLL_STATE_IDLE) {
 						mViewPager.setCurrentItem(1, false);
 					}
 				}

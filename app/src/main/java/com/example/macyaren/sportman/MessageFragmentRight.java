@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * Created by hennzr on 2016/3/9.
  */
-public class MessageFragmentListRight extends Fragment implements View.OnClickListener {
+public class MessageFragmentRight extends Fragment implements View.OnClickListener {
 
 	ExpandableListView expandableListView;
 	MessageFragmentRightListAdapter messageFragmentRightListAdapter;
@@ -462,13 +462,13 @@ public class MessageFragmentListRight extends Fragment implements View.OnClickLi
 
 	static class MSGFLR_Handler extends Handler {
 
-		MessageFragmentListRight messageFragmentListRight;
-		WeakReference<MessageFragmentListRight> messageFragmentListRightWeakReference;
+		MessageFragmentRight messageFragmentRight;
+		WeakReference<MessageFragmentRight> messageFragmentListRightWeakReference;
 
-		public MSGFLR_Handler(MessageFragmentListRight messageFragmentListRight) {
+		public MSGFLR_Handler(MessageFragmentRight messageFragmentRight) {
 			this.messageFragmentListRightWeakReference = new
-					WeakReference<>(messageFragmentListRight);
-			this.messageFragmentListRight = messageFragmentListRightWeakReference.get();
+					WeakReference<>(messageFragmentRight);
+			this.messageFragmentRight = messageFragmentListRightWeakReference.get();
 		}
 
 		@Override
@@ -477,39 +477,39 @@ public class MessageFragmentListRight extends Fragment implements View.OnClickLi
 				/*
 				* 设置MessageFragmentRightListAdapter
 				* */
-				messageFragmentListRight.messageFragmentRightListAdapter = new
-						MessageFragmentRightListAdapter(messageFragmentListRight.messageFragment);
-				messageFragmentListRight.messageFragmentRightListAdapter.setListPY
-						(messageFragmentListRight.listPY);
-				messageFragmentListRight.messageFragmentRightListAdapter.setListInfos
-						(messageFragmentListRight.listInfos);
+				messageFragmentRight.messageFragmentRightListAdapter = new
+						MessageFragmentRightListAdapter(messageFragmentRight.messageFragment);
+				messageFragmentRight.messageFragmentRightListAdapter.setListPY
+						(messageFragmentRight.listPY);
+				messageFragmentRight.messageFragmentRightListAdapter.setListInfos
+						(messageFragmentRight.listInfos);
 
 				/*
 				* 设置ExpandableListView的Adapter
 				* 展开所有groupItem
 				* */
-				messageFragmentListRight.expandableListView.setAdapter(messageFragmentListRight
+				messageFragmentRight.expandableListView.setAdapter(messageFragmentRight
 						.messageFragmentRightListAdapter);
-				for (int i = 0; i < messageFragmentListRight.messageFragmentRightListAdapter
+				for (int i = 0; i < messageFragmentRight.messageFragmentRightListAdapter
 						.getGroupCount(); i++) {
-					messageFragmentListRight.expandableListView.expandGroup(i);
+					messageFragmentRight.expandableListView.expandGroup(i);
 				}
 
 				/*
 				* ExpandableListView的部分布局显示更改
 				* 重写ExpandableListView的group、child点击事件
 				* */
-				messageFragmentListRight.expandableListView.setGroupIndicator(null);
-				messageFragmentListRight.expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+				messageFragmentRight.expandableListView.setGroupIndicator(null);
+				messageFragmentRight.expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 					@Override
 					public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 						return true;
 					}
 				});
-				messageFragmentListRight.expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+				messageFragmentRight.expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 					@Override
 					public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-						Toast.makeText(messageFragmentListRight.getContext().getApplicationContext(), "ChildItem" +
+						Toast.makeText(messageFragmentRight.getContext().getApplicationContext(), "ChildItem" +
 										childPosition +
 										" was " +
 										"clicked",
@@ -520,8 +520,8 @@ public class MessageFragmentListRight extends Fragment implements View.OnClickLi
 				/*
 				* 禁止ExpandableListView获得焦点
 				* */
-				messageFragmentListRight.expandableListView.setFocusable(false);
-				Utility.setListViewHeightBasedOnChildren(messageFragmentListRight.expandableListView);
+				messageFragmentRight.expandableListView.setFocusable(false);
+				Utility.setListViewHeightBasedOnChildren(messageFragmentRight.expandableListView);
 
 			}
 		}

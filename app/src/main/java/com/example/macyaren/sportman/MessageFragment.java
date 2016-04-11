@@ -1,9 +1,9 @@
 package com.example.macyaren.sportman;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +17,7 @@ import android.widget.TextView;
  * Project name is Sportman
  */
 public class MessageFragment extends Fragment implements View.OnClickListener,
-		MessageFragmentListLeft.MsgFragmentLeftListCallback {
+		MessageFragmentLeft.MsgFragmentLeftListCallback {
 
 	TextView msgf_tt_left_tv;
 	TextView msgf_tt_left_line;
@@ -26,8 +26,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 	RelativeLayout msgf_tt_left;
 	RelativeLayout msgf_tt_right;
 	FragmentManager fragmentManager;
-	MessageFragmentListLeft messageFragmentListLeft;
-	MessageFragmentListRight messageFragmentListRight;
+	MessageFragmentLeft messageFragmentLeft;
+	MessageFragmentRight messageFragmentRight;
 	Intent intent;
 
 	public final static String INTENT_TO_FOLLOW_KEY = "intent_from_follow";
@@ -56,13 +56,13 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 		msgf_tt_left.setOnClickListener(this);
 		msgf_tt_right.setOnClickListener(this);
 		fragmentManager = getChildFragmentManager();
-		messageFragmentListLeft = new MessageFragmentListLeft();
-		messageFragmentListLeft.setMessageFragment(this);
-		messageFragmentListRight = new MessageFragmentListRight();
-		messageFragmentListRight.setMessageFragment(this);
+		messageFragmentLeft = new MessageFragmentLeft();
+		messageFragmentLeft.setMessageFragment(this);
+		messageFragmentRight = new MessageFragmentRight();
+		messageFragmentRight.setMessageFragment(this);
 		fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
-				messageFragmentListLeft).commit();
-		messageFragmentListLeft.setMsgFragmentLeftListCallback(this);
+				messageFragmentLeft).commit();
+		messageFragmentLeft.setMsgFragmentLeftListCallback(this);
 		return resView;
 	}
 
@@ -75,7 +75,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 				msgf_tt_right_tv.setTextColor(getResources().getColor(R.color.md_grey_600));
 				msgf_tt_right_line.setVisibility(View.INVISIBLE);
 				fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
-						messageFragmentListLeft).commit();
+						messageFragmentLeft).commit();
 				break;
 			case R.id.msg_fragment_top_tab_right:
 				msgf_tt_right_tv.setTextColor(getResources().getColor(R.color.md_orange_600));
@@ -83,7 +83,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 				msgf_tt_left_tv.setTextColor(getResources().getColor(R.color.md_grey_600));
 				msgf_tt_left_line.setVisibility(View.INVISIBLE);
 				fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
-						messageFragmentListRight).commit();
+						messageFragmentRight).commit();
 				break;
 		}
 	}
@@ -96,10 +96,12 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 	@Override
 	public void listItemClick(MessageFragmentLeftListInfo messageFragmentLeftListInfo) {
 		String intent_for = messageFragmentLeftListInfo.type;
+		String uname = messageFragmentLeftListInfo.uname;
 		switch (intent_for) {
 			case "chat":
-			case "groupchar":
+			case "groupchat":
 				intent = new Intent();
+				intent.putExtra("data", uname);
 				intent.setAction(INTENT_TO_CHAT_SINGLE_GROUP);
 				startActivity(intent);
 				break;

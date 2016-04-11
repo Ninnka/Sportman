@@ -131,6 +131,7 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 		//				.activity_cities_selection_content_container);
 
 
+
 //		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup
 //				.LayoutParams.MATCH_PARENT, 0, 1);
 //		for (int i = 0; i < navigation_alpha.length; i++) {
@@ -266,9 +267,8 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 		if (navigation_tv_height == 0) {
 			navigation_tv_height = navigation_container_height / 29;
 		}
-		float currentPointY = positionY;
 		int navigation_tv_position = (int) Math.floor
-				(currentPointY / navigation_tv_height);
+				(positionY / navigation_tv_height);
 		switch (eventAction) {
 			case MotionEvent.ACTION_DOWN:
 				verticalScrollNavigation.setBackgroundColor(getResources().getColor(R

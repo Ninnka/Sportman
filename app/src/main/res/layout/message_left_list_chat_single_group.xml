@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:customtoolbar="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/message_left_list_chat_single_group_root"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -20,16 +21,93 @@
 
     </com.example.macyaren.sportman.CustomToolbar>
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/MessageLeftListChat_single_group_recyclerview"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/message_left_list_chat_single_group_swiperefreshlayout"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp">
 
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/message_left_list_chat_single_group_recyclerview"
+            android:background="@color/md_grey_50"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-    </android.support.v7.widget.RecyclerView>
 
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    <LinearLayout
+        android:id="@+id/message_left_list_chat_single_group_responsebar_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/md_white_1000"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:translationZ="5dp">
+
+        <ImageView
+            android:src="@drawable/audio_voice_big"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="3dp"
+            android:layout_width="0dp"
+            android:layout_height="26dp"
+            android:layout_weight="1"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/md_grey_400"/>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:background="@color/md_white_1000"
+                    android:id="@+id/message_left_list_chat_single_group_edittext"
+                    android:layout_weight="6"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"/>
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/emoticon_big"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/message_left_list_chat_single_group_addother"
+            android:scaleType="fitCenter"
+            android:src="@drawable/add_other_big"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

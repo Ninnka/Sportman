@@ -20,13 +20,13 @@ import java.util.Objects;
 public class MessageLeftListFollowNews extends Activity implements View.OnClickListener,
 		CustomToolbar.customToolbarCallback{
 
-	protected static MessageLeftListFollowNewsRecyclerViewAdapter
+	protected MessageLeftListFollowNewsRecyclerViewAdapter
 			messageLeftListFollowNewsRecyclerViewAdapter;
 
-	protected static RecyclerView recyclerView;
+	protected RecyclerView recyclerView;
 	public CustomToolbar customToolbar;
 
-	protected static LinearLayoutManager linearLayoutManager;
+	protected LinearLayoutManager linearLayoutManager;
 
 	protected final static int INTENT_FROM_FOLLOW = 0;
 	protected final static int INTENT_FROM_NEWS = 1;
@@ -165,13 +165,17 @@ public class MessageLeftListFollowNews extends Activity implements View.OnClickL
 			switch (msg.what) {
 				case INTENT_FROM_FOLLOW:
 					messageLeftListFollowNews.customToolbar.setCenter_title_attrs("Follows");
-					recyclerView.setLayoutManager(linearLayoutManager);
-					recyclerView.setAdapter(messageLeftListFollowNewsRecyclerViewAdapter);
+					messageLeftListFollowNews.recyclerView.setLayoutManager
+							(messageLeftListFollowNews.linearLayoutManager);
+					messageLeftListFollowNews.recyclerView.setAdapter(messageLeftListFollowNews
+							.messageLeftListFollowNewsRecyclerViewAdapter);
 					break;
 				case INTENT_FROM_NEWS:
 					messageLeftListFollowNews.customToolbar.setCenter_title_attrs("News");
-					recyclerView.setLayoutManager(linearLayoutManager);
-					recyclerView.setAdapter(messageLeftListFollowNewsRecyclerViewAdapter);
+					messageLeftListFollowNews.recyclerView.setLayoutManager
+							(messageLeftListFollowNews.linearLayoutManager);
+					messageLeftListFollowNews.recyclerView.setAdapter(messageLeftListFollowNews
+							.messageLeftListFollowNewsRecyclerViewAdapter);
 					break;
 			}
 		}

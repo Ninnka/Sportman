@@ -44,8 +44,6 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 	LinearLayout tab_liner_1;
 	LinearLayout tab_liner_2;
 	LinearLayout tab_liner_3;
-	int[] toolbar_loca = new int[2];
-	int[] filter_loca = new int[2];
 	LinearLayout filter;
 	LinearLayout placeholder;
 	ObservableScrollView observableScrollView;
@@ -53,9 +51,6 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 	RelativeLayout filter_time;
 	RelativeLayout filter_distance;
 	RelativeLayout filter_price;
-	RelativeLayout activities_fragment_tc;
-	LinearLayout message_fragment_tc;
-	LinearLayout me_fragment_tc;
 	LayoutInflater inflater;
 
 	LinearLayout activities_fragment_toolbar_content_location;
@@ -70,9 +65,6 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
 	public final static String INTENT_FOR_ACTIVITY_CITY_SELECTION = "com.macya.intent.action" +
 			".CITY_SELECTION";
-
-
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +86,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 		//		toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
 		setActionBar(toolbar);
 
-//		toolbar = (Toolbar) inflater.inflate(R.layout.activities_fragment_toolbar_content, toolbar,
-//				true);
+		//		toolbar = (Toolbar) inflater.inflate(R.layout.activities_fragment_toolbar_content, toolbar,
+		//				true);
 		addActivitiesToolBarContent();
 
 		/*
@@ -155,9 +147,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 				@Override
 				public void onGlobalLayout() {
 					onScrollchanged(observableScrollView.getScrollY());
-					//					Log.i("ZRH", "onScrollChanged in onGlobalLayoutListener");
 					observableScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-					//					Log.i("ZRH","remove this onGlobalLayoutListener");
 				}
 			});
 
@@ -322,7 +312,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
 	}
 
-	protected void addActivitiesToolBarContent(){
+	protected void addActivitiesToolBarContent() {
 		toolbar.removeAllViews();
 		toolbar = (Toolbar) inflater.inflate(R.layout.activities_fragment_toolbar_content, toolbar,
 				true);
@@ -334,7 +324,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 		activities_fragment_toolbar_content_search.setOnClickListener(this);
 	}
 
-	protected void addMessageToolBarContent(){
+	protected void addMessageToolBarContent() {
 		toolbar.removeAllViews();
 		toolbar = (Toolbar) inflater.inflate(R.layout.message_fragment_toolbar_content, toolbar,
 				true);
@@ -346,7 +336,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 		message_fragment_toolbar_content_add.setOnClickListener(this);
 	}
 
-	protected void addMeToolBarContent(){
+	protected void addMeToolBarContent() {
 		toolbar.removeAllViews();
 		toolbar = (Toolbar) inflater.inflate(R.layout.me_fragment_toolbar_content, toolbar,
 				true);

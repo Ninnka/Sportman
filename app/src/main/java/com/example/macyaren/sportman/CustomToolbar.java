@@ -243,7 +243,7 @@ public class CustomToolbar extends Toolbar {
 	* @params drawableID
 	* 					use the value to set the background of right textview
 	* */
-	protected void setRight_ti_image(int drawableID){
+	protected void setRight_ti_image(int drawableID) {
 		right_ti.setBackgroundResource(drawableID);
 	}
 

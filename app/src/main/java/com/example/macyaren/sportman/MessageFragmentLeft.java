@@ -17,7 +17,7 @@ import java.util.List;
  * Created by hennzr on 2016/3/6
  * Project name is Sportman
  */
-public class MessageFragmentListLeft extends Fragment implements AdapterView.OnItemClickListener {
+public class MessageFragmentLeft extends Fragment implements AdapterView.OnItemClickListener {
 
 	protected MsgFragmentLeftListCallback msgFragmentLeftListCallback;
 	ListView listView;
@@ -26,10 +26,6 @@ public class MessageFragmentListLeft extends Fragment implements AdapterView.OnI
 	MessageFragmentLeftListInfo[] messageFragmentLeftListInfos = new MessageFragmentLeftListInfo[7];
 	WeakReference<MessageFragment> messageFragmentWeakReference;
 	MessageFragment messageFragment;
-
-//	public final static String INTENT_TO_CHAT_SINGLE_KEY = "intent_from_chat_single";
-//	public final static String INTENT_TO_CHAT_GROUP_KEY = "intent_from_chat_group";
-
 
 	public void setMessageFragment(MessageFragment messageFragment) {
 		this.messageFragmentWeakReference = new WeakReference<MessageFragment>(messageFragment);
@@ -70,7 +66,7 @@ public class MessageFragmentListLeft extends Fragment implements AdapterView.OnI
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		if(msgFragmentLeftListCallback != null){
+		if (msgFragmentLeftListCallback != null) {
 			MessageFragmentLeftListInfo messageFragmentLeftListInfo = (MessageFragmentLeftListInfo)
 					listView.getAdapter().getItem(position);
 			msgFragmentLeftListCallback.listItemClick(messageFragmentLeftListInfo);
@@ -82,7 +78,7 @@ public class MessageFragmentListLeft extends Fragment implements AdapterView.OnI
 		this.msgFragmentLeftListCallback = msgFragmentLeftListCallback;
 	}
 
-	public interface MsgFragmentLeftListCallback{
+	public interface MsgFragmentLeftListCallback {
 		void listItemClick(MessageFragmentLeftListInfo messageFragmentLeftListInfo);
 	}
 }

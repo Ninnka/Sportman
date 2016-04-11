@@ -75,8 +75,7 @@
         </activity>
 
         <activity
-            android:name=".MessageLeftListChat_Single_Group"
-            android:noHistory="true">
+            android:name=".MessageLeftListChat_Single_Group">
 
             <intent-filter>
 
