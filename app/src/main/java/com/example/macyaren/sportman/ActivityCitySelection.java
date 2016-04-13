@@ -265,7 +265,7 @@ public class ActivityCitySelection extends Activity implements View.OnClickListe
 	public void scrollNavigation(float positionY, int navigation_container_height, int
 			eventAction) {
 		if (navigation_tv_height == 0) {
-			navigation_tv_height = navigation_container_height / 29;
+			navigation_tv_height = navigation_container_height / navigation_alpha.length;
 		}
 		int navigation_tv_position = (int) Math.floor
 				(positionY / navigation_tv_height);

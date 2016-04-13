@@ -16,13 +16,13 @@
         android:textSize="22sp"/>
 
     <ImageView
-        android:id="@+id/me_fragment_toolbar_content_setting"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:id="@+id/me_fragment_toolbar_content_search"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="14dp"
-        android:src="@drawable/setting_normal"
+        android:src="@drawable/search"
         android:gravity="center"/>
 
 </RelativeLayout>

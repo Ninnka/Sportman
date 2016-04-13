@@ -13,8 +13,8 @@ public class MessageFragmentLeftListData {
 	public final static String[] PROFILE = {"来打球啊儿子，老爸帮你定场", "来关注我的微信号", "鬼冢虎新运动鞋", "阿迪达斯又发起了街头篮球活动",
 			"怪蜀黍我又参加了两场活动", "胸不平何以平天下",
 			"乳不巨何以聚人心"};
-	public final static String[] DATE = {"03：25", "07：55", "12：12", "16：46", "昨天", "前天",
-			"03.03 - 12:48"};
+	public final static String[] DATE = {"03:25", "07:55", "12:12", "16:46", "昨天", "前天",
+			"3月3日"};
 	public final static String[] TYPE = {"chat", "chat", "follow", "news", "groupchat", "chat",
 			"chat"};
 

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,13 @@ public class MessageFragmentLeft extends Fragment implements AdapterView.OnItemC
 		for (int i = 0; i < messageFragmentLeftListInfos.length; i++) {
 			messageFragmentLeftListInfos[i] = new MessageFragmentLeftListInfo();
 		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		RefWatcher refWatcher = ExampleApp.getRefWatcher(getActivity());
+		refWatcher.watch(this);
 	}
 
 	@Nullable

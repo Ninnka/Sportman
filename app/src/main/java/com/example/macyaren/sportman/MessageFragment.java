@@ -11,13 +11,16 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 /**
  * Created by hennzr on 2016/2/29 14:20
  * Package in com.example.macyaren.sportman
  * Project name is Sportman
  */
 public class MessageFragment extends Fragment implements View.OnClickListener,
-		MessageFragmentLeft.MsgFragmentLeftListCallback {
+		MessageFragmentLeft.MsgFragmentLeftListCallback, MessageFragmentRight
+				.MsgFragmentRightListCallback {
 
 	TextView msgf_tt_left_tv;
 	TextView msgf_tt_left_line;
@@ -37,6 +40,11 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 
 	public final static String INTENT_TO_CHAT_SINGLE_GROUP = "com.macya.intent.action" +
 			".MessageLeftListChat_Single_Group";
+
+	public final static String FRAGMENT_TAG_LEFT = "left";
+	public final static String FRAGMENT_TAG_RIGHT = "right";
+
+	public static String FRAGMENT_STATUS = "left_fragment";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,9 +68,14 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 		messageFragmentLeft.setMessageFragment(this);
 		messageFragmentRight = new MessageFragmentRight();
 		messageFragmentRight.setMessageFragment(this);
-		fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
-				messageFragmentLeft).commit();
+		messageFragmentRight.setMsgFragmentRightListCallback(this);
+		fragmentManager.beginTransaction()
+				//				.replace(R.id.msg_fragment_mlist,messageFragmentLeft)
+				.add(R.id.msg_fragment_mlist, messageFragmentLeft, FRAGMENT_TAG_LEFT)
+				.commit();
+
 		messageFragmentLeft.setMsgFragmentLeftListCallback(this);
+
 		return resView;
 	}
 
@@ -70,20 +83,35 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.msg_fragment_top_tab_left:
-				msgf_tt_left_tv.setTextColor(getResources().getColor(R.color.md_orange_600));
-				msgf_tt_left_line.setVisibility(View.VISIBLE);
-				msgf_tt_right_tv.setTextColor(getResources().getColor(R.color.md_grey_600));
-				msgf_tt_right_line.setVisibility(View.INVISIBLE);
-				fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
-						messageFragmentLeft).commit();
+				if (Objects.equals(FRAGMENT_STATUS, "right_fragment")) {
+					FRAGMENT_STATUS = "left_fragment";
+					msgf_tt_left_tv.setTextColor(getResources().getColor(R.color.md_orange_600));
+					msgf_tt_left_line.setVisibility(View.VISIBLE);
+					msgf_tt_right_tv.setTextColor(getResources().getColor(R.color.md_grey_600));
+					msgf_tt_right_line.setVisibility(View.INVISIBLE);
+					//				fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
+					//						messageFragmentLeft).commit();
+					fragmentManager.beginTransaction().hide(messageFragmentRight)
+							.show(messageFragmentLeft).commit();
+				}
 				break;
 			case R.id.msg_fragment_top_tab_right:
-				msgf_tt_right_tv.setTextColor(getResources().getColor(R.color.md_orange_600));
-				msgf_tt_right_line.setVisibility(View.VISIBLE);
-				msgf_tt_left_tv.setTextColor(getResources().getColor(R.color.md_grey_600));
-				msgf_tt_left_line.setVisibility(View.INVISIBLE);
-				fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
-						messageFragmentRight).commit();
+				if(Objects.equals(FRAGMENT_STATUS, "left_fragment")){
+					FRAGMENT_STATUS = "right_fragment";
+					msgf_tt_right_tv.setTextColor(getResources().getColor(R.color.md_orange_600));
+					msgf_tt_right_line.setVisibility(View.VISIBLE);
+					msgf_tt_left_tv.setTextColor(getResources().getColor(R.color.md_grey_600));
+					msgf_tt_left_line.setVisibility(View.INVISIBLE);
+					//				fragmentManager.beginTransaction().replace(R.id.msg_fragment_mlist,
+					//						messageFragmentRight).commit();
+					if (fragmentManager.findFragmentByTag(FRAGMENT_TAG_RIGHT) == null) {
+						fragmentManager.beginTransaction().hide(messageFragmentLeft).add(R.id
+								.msg_fragment_mlist, messageFragmentRight, FRAGMENT_TAG_RIGHT).commit();
+					} else {
+						fragmentManager.beginTransaction().hide(messageFragmentLeft)
+								.show(messageFragmentRight).commit();
+					}
+				}
 				break;
 		}
 	}
@@ -118,5 +146,10 @@ public class MessageFragment extends Fragment implements View.OnClickListener,
 				startActivity(intent);
 				break;
 		}
+	}
+
+	@Override
+	public void rightFragmentItemClick() {
+
 	}
 }

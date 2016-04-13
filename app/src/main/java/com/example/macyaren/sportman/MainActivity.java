@@ -86,8 +86,6 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 		//		toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
 		setActionBar(toolbar);
 
-		//		toolbar = (Toolbar) inflater.inflate(R.layout.activities_fragment_toolbar_content, toolbar,
-		//				true);
 		addActivitiesToolBarContent();
 
 		/*
@@ -284,11 +282,13 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 			case R.id.message_fragment_toolbar_content_friendgroup:
 				Toast.makeText(getApplicationContext(), "toolbar_friendgroup was clicked", Toast.LENGTH_SHORT).show();
 				break;
-			case R.id.message_fragment_toolbar_content_add:
-				Toast.makeText(getApplicationContext(), "toolbar_add was clicked", Toast.LENGTH_SHORT).show();
+			case R.id.message_fragment_toolbar_content_search:
+				Toast.makeText(getApplicationContext(), "toolbar_search was clicked", Toast
+						.LENGTH_SHORT).show();
 				break;
-			case R.id.me_fragment_toolbar_content_setting:
-				Toast.makeText(getApplicationContext(), "toolbar_setting was clicked", Toast.LENGTH_SHORT).show();
+			case R.id.me_fragment_toolbar_content_search:
+				Toast.makeText(getApplicationContext(), "toolbar_search was clicked", Toast
+						.LENGTH_SHORT).show();
 				break;
 		}
 	}
@@ -331,7 +331,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 		message_fragment_toolbar_content_friendgroup = (ImageView) toolbar.findViewById(R.id
 				.message_fragment_toolbar_content_friendgroup);
 		message_fragment_toolbar_content_add = (ImageView) toolbar.findViewById(R.id
-				.message_fragment_toolbar_content_add);
+				.message_fragment_toolbar_content_search);
 		message_fragment_toolbar_content_friendgroup.setOnClickListener(this);
 		message_fragment_toolbar_content_add.setOnClickListener(this);
 	}
@@ -341,7 +341,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 		toolbar = (Toolbar) inflater.inflate(R.layout.me_fragment_toolbar_content, toolbar,
 				true);
 		me_fragment_toolbar_content_setting = (ImageView) toolbar.findViewById(R.id
-				.me_fragment_toolbar_content_setting);
+				.me_fragment_toolbar_content_search);
 		me_fragment_toolbar_content_setting.setOnClickListener(this);
 	}
+
 }

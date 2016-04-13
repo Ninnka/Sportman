@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hennzr on 2016/3/19.
+ * Created by hennzr on 2016/3/19 11:22
+ * Package in com.example.macyaren.sportman
+ * Project name is Sportman
  */
 public class ActivitiesDetail extends Activity implements ObservableScrollView.Callbacks,
 		View.OnClickListener {
@@ -94,7 +96,7 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 		commentsListView = (ListView) findViewById(R.id
 				.activities_detail_content_center_commentslist);
 		activitiesDetailCommentsListAdapter = new ActivitiesDetailCommentsListAdapter(this);
-		list = new ArrayList<ActivitiesDetailCommentsListCommInfo>();
+		list = new ArrayList<>();
 		activitiesDetailCommentsListCommInfo = new ActivitiesDetailCommentsListCommInfo[2];
 		activitiesDetailCommentsListCommData = new ActivitiesDetailCommentsListCommData();
 		for (int i = 0; i < 2; i++) {
@@ -109,7 +111,6 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 					.PRAISES[i];
 			activitiesDetailCommentsListCommInfo[i].date = activitiesDetailCommentsListCommData
 					.DATES[i];
-			//			list.add(activitiesDetailCommentsListCommInfo[i]);
 		}
 		activitiesDetailCommentsListAdapter.setList(list);
 		commentsListView.setAdapter(activitiesDetailCommentsListAdapter);
@@ -143,6 +144,34 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 		sample = (TextView) findViewById(R.id.detail_sample);
 		process_sample = (TextView) findViewById(R.id
 				.activities_detail_content_center_process_sample_tv);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+//		headerView = null;
+//		scrollView = null;
+//		toolbar = null;
+//		container_registration = null;
+//		commentsListView = null;
+//		commentsCollapse = null;
+//		commentsMore = null;
+//		processMore = null;
+//		registrationdetailMore = null;
+//		sample = null;
+//		process_sample = null;
+//		process_container = null;
+//		registrationdetail_container = null;
+//		process_expand_tv = null;
+//		registrationdetail_expanded_tv = null;
+//		list = null;
+//		detail_return = null;
+//		registration_button_tv = null;
+//		cachedView = null;
+//		activitiesDetailCommentsListAdapter = null;
+//		activitiesDetailCommentsListCommData = null;
+//		activitiesDetailCommentsListCommInfo = null;
+//		handler = null;
 	}
 
 	@Override
@@ -208,7 +237,7 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 					activitiesDetailCommentsListAdapter.notifyDataSetChanged();
 					Utility.setListViewHeightBasedOnChildren(commentsListView);
 					commentsCollapse.setText("");
-					if(commentsMore.getText().toString().equals("最后一页")){
+					if (commentsMore.getText().toString().equals("最后一页")) {
 						commentsMore.setText("Click to view more >>");
 					}
 				}
@@ -245,7 +274,7 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 		}
 	}
 
-	static class AD_Handler extends Handler{
+	static class AD_Handler extends Handler {
 
 		ActivitiesDetail activitiesDetail;
 		WeakReference<ActivitiesDetail> activitiesDetailWeakReference;

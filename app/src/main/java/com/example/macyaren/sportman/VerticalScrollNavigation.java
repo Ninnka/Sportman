@@ -72,8 +72,8 @@ public class VerticalScrollNavigation extends LinearLayout {
 				navigation_container_top = getTop();
 				if (navigation_container_height != 0) {
 					getViewTreeObserver().removeOnGlobalLayoutListener(this);
-					Log.i("ZRH", "navigation_container_height: " + navigation_container_height);
-					Log.i("ZRH", "remove globalTree in verticalScrollNavigation");
+//					Log.i("ZRH", "navigation_container_height: " + navigation_container_height);
+//					Log.i("ZRH", "remove globalTree in verticalScrollNavigation");
 				}
 			}
 		});

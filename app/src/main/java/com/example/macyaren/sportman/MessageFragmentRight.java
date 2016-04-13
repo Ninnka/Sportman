@@ -1,12 +1,12 @@
 package com.example.macyaren.sportman;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +18,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 import java.lang.ref.WeakReference;
@@ -28,10 +30,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by hennzr on 2016/3/9.
+ * Created by hennzr on 2016/3/9 16:42
+ * Package in com.example.macyaren.sportman
+ * Project name is Sportman
  */
-public class MessageFragmentRight extends Fragment implements View.OnClickListener {
+public class MessageFragmentRight extends Fragment implements View.OnClickListener,
+		VerticalScrollNavigation.VerticalScrollNavigationCallback {
 
+	ScrollView scrollView;
 	ExpandableListView expandableListView;
 	MessageFragmentRightListAdapter messageFragmentRightListAdapter;
 	List<String> listPYTemp;
@@ -43,48 +49,139 @@ public class MessageFragmentRight extends Fragment implements View.OnClickListen
 	Map<String, List<String>> map;
 	LinearLayout linearLayout_container;
 	int container_height;
-	float navigation_parent_height;
-	float navigation_tv_height;
+//	float navigation_parent_height;
+	float navigation_tv_height = 0;
 	int list_group_height;
 	int list_child_height;
-	TextView navigation_tv;
-	String[] navigation_alpha;
-	LinearLayout navigation_parent;
-	int curPY = 0;
+	//	TextView navigation_tv;
+	public String[] navigation_alpha = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I",
+			"J",
+			"K",
+			"L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#"};
+	VerticalScrollNavigation navigation_parent;
+//	int curPY = 0;
 	LinearLayout right_top_newfriend;
 	LinearLayout right_top_groupchat;
 	LinearLayout right_top_star;
 	TextView counter;
 	TextView navigation_indicator;
 	ViewTreeObserver viewTreeObserver_linearLayout_container;
-	ViewTreeObserver viewTreeObserver_navigation_parent;
+//	ViewTreeObserver viewTreeObserver_navigation_parent;
 
 	MSGFLR_Handler handler = new MSGFLR_Handler(this);
 
 	MessageFragment messageFragment;
 	WeakReference<MessageFragment> messageFragmentWeakReference;
 
+	protected MsgFragmentRightListCallback msgFragmentRightListCallback;
+
 	public void setMessageFragment(MessageFragment messageFragment) {
 		this.messageFragmentWeakReference = new WeakReference<MessageFragment>(messageFragment);
 		this.messageFragment = messageFragmentWeakReference.get();
 	}
 
+	public void setMsgFragmentRightListCallback(MsgFragmentRightListCallback msgFragmentRightListCallback) {
+		this.msgFragmentRightListCallback = msgFragmentRightListCallback;
+	}
+
+	@Override
+	public void scrollNavigation(float positionY, int navigation_container_height, int eventAction) {
+		if (navigation_tv_height == 0) {
+			navigation_tv_height = navigation_container_height / navigation_alpha.length;
+		}
+		int navigation_tv_position = (int) Math.floor
+				(positionY / navigation_tv_height);
+		switch (eventAction) {
+			case MotionEvent.ACTION_DOWN:
+				navigation_parent.setBackgroundColor(getResources().getColor(R.color
+						.navigation_press));
+				if (navigation_tv_position >= 0 && navigation_tv_position <= 26) {
+					String clickStr = navigation_alpha[navigation_tv_position];
+					navigation_indicator.setText(clickStr);
+					navigation_indicator.setVisibility(View.VISIBLE);
+					for (int k = 0; k < listPY.size(); k++) {
+						if (clickStr.equals(listPY.get(k))) {
+							int childDis = 0;
+							int groupDis = k * (list_group_height + 12);
+							for (int j = 0; j < k; j++) {
+								int curChildDis = messageFragmentRightListAdapter
+										.getChildrenCount(j) * (list_child_height
+										+ 12);
+								childDis += curChildDis;
+							}
+							int realDis = childDis + groupDis + container_height;
+							scrollView.smoothScrollTo(0, realDis);
+							break;
+						}
+					}
+				}
+				break;
+			case MotionEvent.ACTION_MOVE:
+				if (navigation_tv_position >= 0 && navigation_tv_position <= 26) {
+					String clickStr = navigation_alpha[navigation_tv_position];
+					navigation_indicator.setText(clickStr);
+					for (int k = 0; k < listPY.size(); k++) {
+						if (clickStr.equals(listPY.get(k))) {
+							int childDis = 0;
+							int groupDis = k * (list_group_height + 12);
+							for (int j = 0; j < k; j++) {
+								int curChildDis = messageFragmentRightListAdapter
+										.getChildrenCount(j) * (list_child_height
+										+ 12);
+								childDis += curChildDis;
+							}
+							int realDis = childDis + groupDis + container_height;
+							scrollView.smoothScrollTo(0, realDis);
+							break;
+						}
+					}
+				}
+				break;
+			case MotionEvent.ACTION_UP:
+				navigation_parent.setBackgroundColor(getResources().getColor(R.color
+						.navigatiom_release));
+				navigation_indicator.setText("");
+				navigation_indicator.setVisibility(View.INVISIBLE);
+				break;
+		}
+	}
+
+	public interface MsgFragmentRightListCallback {
+
+		void rightFragmentItemClick();
+
+	}
+
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		map = new HashMap<String, List<String>>();
-		pingYinTool = new PingYinTool();
-		rightListData_eng = new String[MessageFragmentRightListData.UNAME.length];
-		list_group_height = Utility.dip2px(getContext(), 18);
-		list_child_height = Utility.dip2px(getContext(), 45);
-		navigation_alpha = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
-				"L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#"};
+
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		RefWatcher refWatcher = ExampleApp.getRefWatcher(getActivity());
+		refWatcher.watch(this);
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
 							 @Nullable Bundle savedInstanceState) {
+
+		map = new HashMap<String, List<String>>();
+		pingYinTool = new PingYinTool();
+		rightListData_eng = new String[MessageFragmentRightListData.UNAME.length];
+		list_group_height = Utility.dip2px(getContext(), 18);
+		list_child_height = Utility.dip2px(getContext(), 45);
+
 		View resView = inflater.inflate(R.layout.message_fragment_mlist_right, container, false);
 		right_top_newfriend = (LinearLayout) resView.findViewById(R.id
 				.message_fragment_mlist_right_top_newFriend);
@@ -150,8 +247,8 @@ public class MessageFragmentRight extends Fragment implements View.OnClickListen
 						listPY.add(temp[i]);
 					}
 
-					Log.i("ZRH", "listPY is preparing");
-					Log.i("ZRH", "-----------------------------------------------------");
+//					Log.i("ZRH", "listPY is preparing");
+//					Log.i("ZRH", "-----------------------------------------------------");
 
 					/*
 					* 准备listInfos
@@ -175,7 +272,7 @@ public class MessageFragmentRight extends Fragment implements View.OnClickListen
 										messageFragmentRightListInfo.photo = MessageFragmentRightListData
 												.PHOTO[k];
 										listInfo.add(messageFragmentRightListInfo);
-										Log.i("ZRH", "添加成功");
+//										Log.i("ZRH", "添加成功");
 										break;
 									}
 								}
@@ -215,7 +312,7 @@ public class MessageFragmentRight extends Fragment implements View.OnClickListen
 					Log.i("ZRH", ee.getMessage());
 				}
 
-				Log.i("ZRH", "----------------------------------------------------");
+//				Log.i("ZRH", "----------------------------------------------------");
 
 				Message msg = new Message();
 				msg.what = 0;
@@ -224,44 +321,9 @@ public class MessageFragmentRight extends Fragment implements View.OnClickListen
 		}).start();
 
 		/*
-		* 设置MessageFragmentRightListAdapter
-		* */
-		//		messageFragmentRightListAdapter = new MessageFragmentRightListAdapter(getContext());
-		//		messageFragmentRightListAdapter.setListPY(listPY);
-		//		messageFragmentRightListAdapter.setListInfos(listInfos);
-
-		/*
-		*设置ExpandableListView的Adapter
-		* */
-		//		expandableListView.setAdapter(messageFragmentRightListAdapter);
-		//		for (int i = 0; i < messageFragmentRightListAdapter.getGroupCount(); i++) {
-		//			expandableListView.expandGroup(i);
-		//		}
-
-		/*
-		* ExpandableListView的部分布局显示更改
-		* 重写ExpandableListView的group、child点击事件
-		* */
-		//		expandableListView.setGroupIndicator(null);
-		//		expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-		//			@Override
-		//			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-		//				return true;
-		//			}
-		//		});
-		//		expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-		//			@Override
-		//			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		//				Toast.makeText(getContext(), "ChildItem" + childPosition + " was clicked",
-		//						Toast.LENGTH_SHORT).show();
-		//				return true;
-		//			}
-		//		});
-
-		/*
 		* 解决在切换页面时ExpandableListView定位到获得焦点的Item上的问题
 		* */
-		final ScrollView scrollView = (ScrollView) resView.findViewById(R.id
+		scrollView = (ScrollView) resView.findViewById(R.id
 				.message_fragment_mlist_right_scrollview);
 		scrollView.setFocusable(true);
 		scrollView.scrollTo(0, 0);
@@ -290,149 +352,103 @@ public class MessageFragmentRight extends Fragment implements View.OnClickListen
 				.message_fragment_mlist_right_expandablelist_navigation_indicator);
 
 		/*
-		* 动态创建右边的导航栏
-		* 根据当前已有的分组动态添加点击事件
-		* 设置navigation_parent全局视图树监听
-		* 获取navigation_parent的高度
+		* 获取navigation的container
 		* */
-		navigation_parent = (LinearLayout) resView.findViewById(R.id
+		navigation_parent = (VerticalScrollNavigation) resView.findViewById(R.id
 				.message_fragment_mlist_right_expandablelist_navigation_parent);
-		viewTreeObserver_navigation_parent = navigation_parent
-				.getViewTreeObserver();
-		viewTreeObserver_navigation_parent.addOnGlobalLayoutListener(new ViewTreeObserver
-				.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				navigation_parent_height = navigation_parent.getHeight();
-				navigation_tv_height = navigation_parent_height / 27;
-				navigation_parent.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				//				Log.i("ZRH", "navigation_parent_height: " + navigation_parent_height);
-				//				Log.i("ZRH", "navigation_tv_height: " + navigation_tv_height);
-			}
-		});
+		navigation_parent.setVerticalScrollNavigationCallback(this);
 
-		navigation_parent.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				float currentPointY = event.getY();
-				int navigation_tv_position = (int) Math.floor
-						(currentPointY / navigation_tv_height);
-				switch (event.getAction()) {
-					case MotionEvent.ACTION_DOWN:
-						navigation_parent.setBackgroundColor(getResources().getColor(R.color
-								.navigation_press));
-						if (navigation_tv_position >= 0 && navigation_tv_position <= 26) {
-							String clickStr = navigation_alpha[navigation_tv_position];
-							navigation_indicator.setText(clickStr);
-							navigation_indicator.setVisibility(View.VISIBLE);
-							for (int k = 0; k < listPY.size(); k++) {
-								if (clickStr.equals(listPY.get(k))) {
-									int childDis = 0;
-									int groupDis = k * (list_group_height + 12);
-									for (int j = 0; j < k; j++) {
-										int curChildDis = messageFragmentRightListAdapter
-												.getChildrenCount(j) * (list_child_height
-												+ 12);
-										childDis += curChildDis;
-									}
-									int realDis = childDis + groupDis + container_height;
-									scrollView.smoothScrollTo(0, realDis);
-									break;
-								}
-							}
-						}
-						return true;
-					case MotionEvent.ACTION_MOVE:
-						if (navigation_tv_position >= 0 && navigation_tv_position <= 26) {
-							String clickStr = navigation_alpha[navigation_tv_position];
-							navigation_indicator.setText(clickStr);
-							for (int k = 0; k < listPY.size(); k++) {
-								if (clickStr.equals(listPY.get(k))) {
-									int childDis = 0;
-									int groupDis = k * (list_group_height + 12);
-									for (int j = 0; j < k; j++) {
-										int curChildDis = messageFragmentRightListAdapter
-												.getChildrenCount(j) * (list_child_height
-												+ 12);
-										childDis += curChildDis;
-									}
-									int realDis = childDis + groupDis + container_height;
-									scrollView.smoothScrollTo(0, realDis);
-									break;
-								}
-							}
-						}
-						return true;
-					case MotionEvent.ACTION_UP:
-						navigation_parent.setBackgroundColor(getResources().getColor(R.color
-								.navigatiom_release));
-						navigation_indicator.setText("");
-						navigation_indicator.setVisibility(View.INVISIBLE);
-						return false;
-				}
-				return false;
-			}
-		});
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup
-				.LayoutParams.MATCH_PARENT, 0, 1);
-		for (int i = 0; i < navigation_alpha.length; i++) {
-			navigation_tv = new TextView(getContext());
-			navigation_tv.setText(navigation_alpha[i]);
-			//noinspection deprecation
-			navigation_tv.setTextColor(getResources().getColor(R.color.md_grey_700));
-			navigation_tv.setGravity(Gravity.CENTER_HORIZONTAL);
-			navigation_tv.setLayoutParams(layoutParams);
-			//			for (curPY = 0; curPY < listPY.size(); curPY++) {
-			//				/*
-			//				* 虽然不知道为什么，这个if里面的“==”必须用equals()来代替
-			//				* 用“==”进不去判断，A跟A肯定是相同的
-			//				* 但就是进不去
-			//				* 其实IDE给了warning：最好用”equals“来代替“==”
-			//				* */
-			// 				if (navigation_alpha[i].equals(listPY.get(curPY))) {
-			//					/*
-			//					* 添加onTouchListener
-			//					* */
-			//					navigation_tv.setPressed(true);
-			//					navigation_tv.setOnTouchListener(new View.OnTouchListener() {
-			//						@Override
-			//						public boolean onTouch(View v, MotionEvent event) {
-			//							switch (event.getAction()) {
-			//								case MotionEvent.ACTION_DOWN:
-			//									TextView clickTextView = (TextView) v;
-			//									String clickStr = (String) clickTextView.getText();
-			//									for (int k = 0; k < listPY.size(); k++) {
-			//										if (clickStr.equals(listPY.get(k))) {
-			//											int childDis = 0;
-			//											int groupDis = k * (list_group_height + 12);
-			//											for (int j = 0; j < k; j++) {
-			//												int curChildDis = messageFragmentRightListAdapter
-			//														.getChildrenCount(j) * (list_child_height
-			//														+ 12);
-			//												childDis += curChildDis;
-			//											}
-			//											int realDis = childDis + groupDis + container_height;
-			//											scrollView.smoothScrollTo(0, realDis);
-			//											break;
-			//										}
-			//									}
-			//									break;
-			//							}
-			//							return false;
-			//						}
-			//					});
-			//					break;
-			//				}
-			//			}
-			navigation_parent.addView(navigation_tv);
-		}
 
-		/*
-		* 部分核心数据测试日志
-		* */
-		//		Log.i("ZRH", "list_group_height: " + list_group_height);
-		//		Log.i("ZRH", "list_child_height: " + list_child_height);
-		//		Log.i("ZRH", "container_height_translate" + Utility.dip2px(getContext(), 145));
+		//		navigation_parent.setVerticalScrollNavigationCallback();
+
+		//		viewTreeObserver_navigation_parent = navigation_parent
+		//				.getViewTreeObserver();
+		//		viewTreeObserver_navigation_parent.addOnGlobalLayoutListener(new ViewTreeObserver
+		//				.OnGlobalLayoutListener() {
+		//			@Override
+		//			public void onGlobalLayout() {
+		//				navigation_parent_height = navigation_parent.getHeight();
+		//				navigation_tv_height = navigation_parent_height / 27;
+		//				navigation_parent.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+		//				//				Log.i("ZRH", "navigation_parent_height: " + navigation_parent_height);
+		//				//				Log.i("ZRH", "navigation_tv_height: " + navigation_tv_height);
+		//			}
+		//		});
+
+		//		navigation_parent.setOnTouchListener(new View.OnTouchListener() {
+		//			@Override
+		//			public boolean onTouch(View v, MotionEvent event) {
+		//				float currentPointY = event.getY();
+		//				int navigation_tv_position = (int) Math.floor
+		//						(currentPointY / navigation_tv_height);
+		//				switch (event.getAction()) {
+		//					case MotionEvent.ACTION_DOWN:
+		//						navigation_parent.setBackgroundColor(getResources().getColor(R.color
+		//								.navigation_press));
+		//						if (navigation_tv_position >= 0 && navigation_tv_position <= 26) {
+		//							String clickStr = navigation_alpha[navigation_tv_position];
+		//							navigation_indicator.setText(clickStr);
+		//							navigation_indicator.setVisibility(View.VISIBLE);
+		//							for (int k = 0; k < listPY.size(); k++) {
+		//								if (clickStr.equals(listPY.get(k))) {
+		//									int childDis = 0;
+		//									int groupDis = k * (list_group_height + 12);
+		//									for (int j = 0; j < k; j++) {
+		//										int curChildDis = messageFragmentRightListAdapter
+		//												.getChildrenCount(j) * (list_child_height
+		//												+ 12);
+		//										childDis += curChildDis;
+		//									}
+		//									int realDis = childDis + groupDis + container_height;
+		//									scrollView.smoothScrollTo(0, realDis);
+		//									break;
+		//								}
+		//							}
+		//						}
+		//						return true;
+		//					case MotionEvent.ACTION_MOVE:
+		//						if (navigation_tv_position >= 0 && navigation_tv_position <= 26) {
+		//							String clickStr = navigation_alpha[navigation_tv_position];
+		//							navigation_indicator.setText(clickStr);
+		//							for (int k = 0; k < listPY.size(); k++) {
+		//								if (clickStr.equals(listPY.get(k))) {
+		//									int childDis = 0;
+		//									int groupDis = k * (list_group_height + 12);
+		//									for (int j = 0; j < k; j++) {
+		//										int curChildDis = messageFragmentRightListAdapter
+		//												.getChildrenCount(j) * (list_child_height
+		//												+ 12);
+		//										childDis += curChildDis;
+		//									}
+		//									int realDis = childDis + groupDis + container_height;
+		//									scrollView.smoothScrollTo(0, realDis);
+		//									break;
+		//								}
+		//							}
+		//						}
+		//						return true;
+		//					case MotionEvent.ACTION_UP:
+		//						navigation_parent.setBackgroundColor(getResources().getColor(R.color
+		//								.navigatiom_release));
+		//						navigation_indicator.setText("");
+		//						navigation_indicator.setVisibility(View.INVISIBLE);
+		//						return false;
+		//				}
+		//				return false;
+		//			}
+		//		});
+
+		//		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup
+		//				.LayoutParams.MATCH_PARENT, 0, 1);
+		//		for (int i = 0; i < navigation_alpha.length; i++) {
+		//			navigation_tv = new TextView(getContext());
+		//			navigation_tv.setText(navigation_alpha[i]);
+		//			//noinspection deprecation
+		//			navigation_tv.setTextColor(getResources().getColor(R.color.md_grey_700));
+		//			navigation_tv.setGravity(Gravity.CENTER_HORIZONTAL);
+		//			navigation_tv.setLayoutParams(layoutParams);
+		//			navigation_parent.addView(navigation_tv);
+		//		}
 
 		/*
 		* 设置总人数显示
@@ -523,6 +539,9 @@ public class MessageFragmentRight extends Fragment implements View.OnClickListen
 				messageFragmentRight.expandableListView.setFocusable(false);
 				Utility.setListViewHeightBasedOnChildren(messageFragmentRight.expandableListView);
 
+				messageFragmentRight.navigation_parent.setNavigationAttribute
+						(messageFragmentRight.navigation_alpha, messageFragmentRight
+								.messageFragment.getActivity());
 			}
 		}
 	}
