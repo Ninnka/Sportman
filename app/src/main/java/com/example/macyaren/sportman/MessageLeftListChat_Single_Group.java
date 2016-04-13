@@ -59,7 +59,6 @@ public class MessageLeftListChat_Single_Group extends Activity implements Custom
 			public void onClick(View v) {
 				responseText.clearFocus();
 				hideSoftInput(v.getWindowToken());
-				Snackbar.make(v, "scratch the focus", Snackbar.LENGTH_SHORT).show();
 			}
 		});
 
