@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="240dp"/>
 
-    <com.example.macyaren.sportman.ObservableScrollView
+    <com.example.macyaren.sportman.customwidget.ObservableScrollView
         android:scrollbars="none"
         android:id="@+id/activities_detail_observableScrollView"
         android:layout_width="match_parent"
@@ -437,7 +437,7 @@
 
         </FrameLayout>
 
-    </com.example.macyaren.sportman.ObservableScrollView>
+    </com.example.macyaren.sportman.customwidget.ObservableScrollView>
 
     <Toolbar
         android:layout_gravity="top"

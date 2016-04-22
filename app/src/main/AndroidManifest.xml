@@ -1,29 +1,32 @@
 <manifest package="com.example.macyaren.sportman"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-        android:name=".ExampleApp"
+        android:name=".main.ExampleApp"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/app_icom"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity">
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <action android:name="com.macya.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".ActivityCitySelection"
+            android:launchMode="singleTask"
+            android:name=".activities.view.ActivityCitySelection"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
 
             <intent-filter>
@@ -32,7 +35,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActivitiesDetail">
+        <activity
+            android:name=".activities.view.ActivitiesDetail"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="com.macya.intent.action.ACTIVITIES_DETAIL"/>
@@ -40,7 +45,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActivitiesDetailRegistrationInstruction">
+        <activity
+            android:name=".activities.model.dataHelper.ActivitiesDetailRegistrationInstruction"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action
@@ -49,7 +56,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActivitiesDetailRegistrationInfomation">
+        <activity
+            android:name=".activities.model.dataHelper.ActivitiesDetailRegistrationInfomation"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action
@@ -58,7 +67,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActivitiesDetailRegistrationComplete">
+        <activity
+            android:name=".activities.model.dataHelper.ActivitiesDetailRegistrationComplete"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action
@@ -68,8 +79,9 @@
         </activity>
 
         <activity
-            android:name=".MessageLeftListFollowNews"
-            android:noHistory="true">
+            android:name=".message.MessageLeftListFollowNews"
+            android:noHistory="true"
+            android:screenOrientation="portrait">
 
             <intent-filter>
 
@@ -79,7 +91,8 @@
         </activity>
 
         <activity
-            android:name=".MessageLeftListChat_Single_Group">
+            android:name=".message.MessageLeftListChat_Single_Group"
+            android:screenOrientation="portrait">
 
             <intent-filter>
 

@@ -194,7 +194,7 @@
 
     </ScrollView>
 
-    <com.example.macyaren.sportman.VerticalScrollNavigation
+    <com.example.macyaren.sportman.customwidget.VerticalScrollNavigation
         android:id="@+id/message_fragment_mlist_right_expandablelist_navigation_parent"
         android:layout_gravity="right"
         android:background="@color/navigatiom_release"
@@ -202,7 +202,7 @@
         android:layout_width="19dp"
         android:layout_height="match_parent">
 
-    </com.example.macyaren.sportman.VerticalScrollNavigation>
+    </com.example.macyaren.sportman.customwidget.VerticalScrollNavigation>
 
     <TextView
         android:layout_gravity="center"

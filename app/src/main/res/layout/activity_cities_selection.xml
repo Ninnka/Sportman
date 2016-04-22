@@ -31,7 +31,7 @@
 
     <!--</Toolbar>-->
 
-    <com.example.macyaren.sportman.CustomToolbar
+    <com.example.macyaren.sportman.customwidget.CustomToolbar
         android:id="@+id/activity_cities_selection_toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -43,7 +43,7 @@
         customtoolbar:toolbar_center_textSize="20sp"
         customtoolbar:toolbar_left_imgResources="@drawable/activity_back_color">
 
-    </com.example.macyaren.sportman.CustomToolbar>
+    </com.example.macyaren.sportman.customwidget.CustomToolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,7 +92,7 @@
 
         </LinearLayout>
 
-        <com.example.macyaren.sportman.VerticalScrollNavigation
+        <com.example.macyaren.sportman.customwidget.VerticalScrollNavigation
             android:id="@+id/activity_cities_selection_navigation"
             android:layout_width="20dp"
             android:layout_height="match_parent"
@@ -101,7 +101,7 @@
             android:orientation="vertical">
 
 
-        </com.example.macyaren.sportman.VerticalScrollNavigation>
+        </com.example.macyaren.sportman.customwidget.VerticalScrollNavigation>
 
         <TextView
             android:id="@+id/activity_cities_selection_expandablelist_navigation_indicator"

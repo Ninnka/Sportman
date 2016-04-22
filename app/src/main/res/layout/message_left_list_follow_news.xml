@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <com.example.macyaren.sportman.CustomToolbar
+    <com.example.macyaren.sportman.customwidget.CustomToolbar
         android:id="@+id/message_left_list_follow_news_toolbar"
         android:minHeight="?android:actionBarSize"
         android:background="@color/ToolBarColorPrimary_other"
@@ -34,7 +34,7 @@
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="match_parent"/>-->
 
-    </com.example.macyaren.sportman.CustomToolbar>
+    </com.example.macyaren.sportman.customwidget.CustomToolbar>
 
     <android.support.v7.widget.RecyclerView
         android:background="@color/md_grey_200"

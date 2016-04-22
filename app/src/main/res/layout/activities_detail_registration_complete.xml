@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.macyaren.sportman.ObservableScrollView
+        <com.example.macyaren.sportman.customwidget.ObservableScrollView
             android:id="@+id/activities_detail_registration_complete_observablescrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -448,7 +448,7 @@
 
             </LinearLayout>
 
-        </com.example.macyaren.sportman.ObservableScrollView>
+        </com.example.macyaren.sportman.customwidget.ObservableScrollView>
 
     </LinearLayout>
 

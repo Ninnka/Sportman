@@ -6,7 +6,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.example.macyaren.sportman.CustomToolbar
+    <com.example.macyaren.sportman.customwidget.CustomToolbar
         android:id="@+id/message_left_list_chat_single_group_toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -19,7 +19,7 @@
         customtoolbar:toolbar_left_imgResources="@drawable/activity_back_color">
 
 
-    </com.example.macyaren.sportman.CustomToolbar>
+    </com.example.macyaren.sportman.customwidget.CustomToolbar>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/message_left_list_chat_single_group_swiperefreshlayout"
