@@ -1,7 +1,6 @@
 package com.example.macyaren.sportman.activities.model;
 
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +47,7 @@ public class ActivitiesFragmentBannerAdapter extends PagerAdapter {
 			@Override
 			public void onClick(View v) {
 				//				v.getParent().requestDisallowInterceptTouchEvent(true);
-				Log.i("ZRH", "item" + position + " was clicked");
+//				Log.i("ZRH", "item" + position + " was clicked");
 				Toast.makeText(v.getContext().getApplicationContext(), "Item" + position + " was clicked",
 						Toast.LENGTH_SHORT).show();
 			}

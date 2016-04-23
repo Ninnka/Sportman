@@ -1,12 +1,12 @@
 package com.example.macyaren.sportman.message;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,8 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.example.macyaren.sportman.customwidget.CustomToolbar;
 import com.example.macyaren.sportman.R;
+import com.example.macyaren.sportman.customwidget.CustomToolbar;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -26,7 +26,8 @@ import java.util.List;
  * Created by hennzr on 2016/4/1 14:50
  * Project name is Sportman
  */
-public class MessageLeftListChat_Single_Group extends Activity implements CustomToolbar.customToolbarCallback {
+public class MessageLeftListChat_Single_Group extends AppCompatActivity implements CustomToolbar
+		.customToolbarCallback {
 
 	protected CustomToolbar chat_toolbar;
 	protected RecyclerView chat_recyclerView;

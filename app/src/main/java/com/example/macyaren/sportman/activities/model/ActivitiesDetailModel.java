@@ -17,6 +17,7 @@ public class ActivitiesDetailModel implements ActivitiesDetailModelInterator {
 	* */
 	public ActivitiesDetailCommentsListCommData activitiesDetailCommentsListCommData;
 	public ActivitiesDetailCommentsListCommInfo[] activitiesDetailCommentsListCommInfo;
+	public ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter;
 
 	/*
 	* 需要返回的变量
@@ -25,7 +26,7 @@ public class ActivitiesDetailModel implements ActivitiesDetailModelInterator {
 	String activities_detail_process_more = "";
 //	List<ActivitiesDetailCommentsListCommInfo> list;
 
-	public ActivitiesDetailModel() {
+	public ActivitiesDetailModel(ActivitiesDetail activitiesDetail) {
 //		list = new ArrayList<>();
 		activitiesDetailCommentsListCommInfo = new ActivitiesDetailCommentsListCommInfo[2];
 		activitiesDetailCommentsListCommData = new ActivitiesDetailCommentsListCommData();
@@ -42,6 +43,8 @@ public class ActivitiesDetailModel implements ActivitiesDetailModelInterator {
 			activitiesDetailCommentsListCommInfo[i].date = activitiesDetailCommentsListCommData
 					.DATES[i];
 		}
+		activitiesDetailCommentsListAdapter = ActivitiesDetailCommentsListAdapter.getInstance
+				(activitiesDetail);
 	}
 
 	@Override
@@ -103,9 +106,8 @@ public class ActivitiesDetailModel implements ActivitiesDetailModelInterator {
 		* 得到了最终的结果
 		* 以下模拟获得数据的过程
 		* */
-
 		for (int i = 0; i < 2; i++) {
-			ActivitiesDetail.list.add(activitiesDetailCommentsListCommInfo[i]);
+			activitiesDetailCommentsListAdapter.addList(activitiesDetailCommentsListCommInfo[i]);
 		}
 	}
 
@@ -116,6 +118,6 @@ public class ActivitiesDetailModel implements ActivitiesDetailModelInterator {
 		* 数据清除操作
 		* 无需访问网络
 		* */
-		ActivitiesDetail.list.clear();
+		activitiesDetailCommentsListAdapter.clearList();
 	}
 }

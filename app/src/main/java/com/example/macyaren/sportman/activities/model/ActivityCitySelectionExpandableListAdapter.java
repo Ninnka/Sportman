@@ -1,6 +1,6 @@
 package com.example.macyaren.sportman.activities.model;
 
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +10,29 @@ import android.widget.TextView;
 import com.example.macyaren.sportman.R;
 import com.example.macyaren.sportman.activities.model.dataHelper.ActivityCitySelectionExpandableListHolderChild;
 import com.example.macyaren.sportman.activities.model.dataHelper.ActivityCitySelectionExpandableListHolderGroup;
+import com.example.macyaren.sportman.activities.view.ActivityCitySelection;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
- * Created by hennzr on 2016/3/14.
+ * Created by hennzr on 2016/3/14 14:19
+ * Project name is Sportman
  */
 public class ActivityCitySelectionExpandableListAdapter extends BaseExpandableListAdapter {
 
 	LayoutInflater inflater;
-	Context context;
-	List<String> listGroup;
-	List<List<String>> listChild;
-	public static int OTHER_SELECTION = 0;
-	public static int NORMAL_SELECTION = 1;
+	//	Context context;
+	public List<String> listGroup;
+	public List<List<String>> listChild;
+	//	public static int OTHER_SELECTION = 0;
+	//	public static int NORMAL_SELECTION = 1;
+
+	public static ActivityCitySelectionExpandableListAdapter
+			activityCitySelectionExpandableListAdapter = null;
+
+	public WeakReference<ActivityCitySelection> activityCitySelectionWeakReference;
+	public ActivityCitySelection activityCitySelection;
 
 	public void setListGroup(List<String> listGroup) {
 		this.listGroup = listGroup;
@@ -33,10 +42,36 @@ public class ActivityCitySelectionExpandableListAdapter extends BaseExpandableLi
 		this.listChild = listChild;
 	}
 
-	public ActivityCitySelectionExpandableListAdapter(Context context) {
-		this.context = context;
-		inflater = LayoutInflater.from(context);
+	public void changeListGroup(List<String> listGroup) {
+		Log.i("ZRH","传进来的listGroup长度："+ listGroup.size());
+		this.listGroup.clear();
+		for (int i = 0; i < listGroup.size(); i++) {
+			this.listGroup.add(listGroup.get(i));
+//			Log.i("ZRH", "listgroup item" + i + " : " + this.listGroup.get(i));
+		}
+	}
 
+	public void changeListChild(List<List<String>> listChild) {
+		Log.i("ZRH","传进来的listChild长度："+ listChild.size());
+		this.listChild.clear();
+		for (int i = 0; i < listChild.size(); i++) {
+			this.listChild.add(listChild.get(i));
+//			Log.i("ZRH", "listchild item" + i + " : " + this.listChild.get(i));
+		}
+	}
+
+	public ActivityCitySelectionExpandableListAdapter(ActivityCitySelection activityCitySelection) {
+		this.activityCitySelectionWeakReference = new WeakReference<>(activityCitySelection);
+		this.activityCitySelection = activityCitySelectionWeakReference.get();
+		inflater = LayoutInflater.from(this.activityCitySelection);
+	}
+
+	public static ActivityCitySelectionExpandableListAdapter getInstance(ActivityCitySelection activityCitySelection) {
+		if (activityCitySelectionExpandableListAdapter == null) {
+			activityCitySelectionExpandableListAdapter = new
+					ActivityCitySelectionExpandableListAdapter(activityCitySelection);
+		}
+		return activityCitySelectionExpandableListAdapter;
 	}
 
 	@Override
@@ -82,7 +117,7 @@ public class ActivityCitySelectionExpandableListAdapter extends BaseExpandableLi
 			activityCitySelectionExpandableListHolderGroup = new
 					ActivityCitySelectionExpandableListHolderGroup();
 			convertView = inflater.inflate(R.layout.activity_city_selection_expandablelist_group,
-					null);
+					parent, false);
 			activityCitySelectionExpandableListHolderGroup.groupName = (TextView) convertView.findViewById(R
 					.id.activity_city_selection_expandablelist_group_groupname);
 			convertView.setTag(activityCitySelectionExpandableListHolderGroup);
@@ -115,7 +150,7 @@ public class ActivityCitySelectionExpandableListAdapter extends BaseExpandableLi
 			activityCitySelectionExpandableListHolderChild = new
 					ActivityCitySelectionExpandableListHolderChild();
 			convertView = inflater.inflate(R.layout.activity_city_selection_expandablelist_child,
-					null);
+					parent, false);
 			activityCitySelectionExpandableListHolderChild.childname = (TextView) convertView.findViewById(R
 					.id.activity_city_selection_expandablelist_child_childname);
 			convertView.setTag(activityCitySelectionExpandableListHolderChild);
@@ -125,55 +160,8 @@ public class ActivityCitySelectionExpandableListAdapter extends BaseExpandableLi
 		}
 		String cn = listChild.get(groupPosition).get(childPosition);
 		activityCitySelectionExpandableListHolderChild.childname.setText(cn);
-		return convertView;
 
-//		if (groupPosition < 3) {
-//			ActivityCitySelectionExpandableListHolderChild_Other
-//					activityCitySelectionExpandableListHolderChild_other;
-//			List<String> listTemp = listChild.get(groupPosition);
-//			int gridrow = (int) Math.ceil(listTemp.size() / 4);
-//			//				int gridcol = 4;
-//			//			if (convertView == null) {
-//			activityCitySelectionExpandableListHolderChild_other = new
-//					ActivityCitySelectionExpandableListHolderChild_Other();
-//			convertView = inflater.inflate(R.layout
-//					.activity_city_selection_expandablelist_child_other, parent, false);
-//			activityCitySelectionExpandableListHolderChild_other.gridLayout = (GridLayout)
-//					convertView.findViewById(R.id
-//							.activity_city_selection_expandablelist_child_other_container);
-//			activityCitySelectionExpandableListHolderChild_other.gridLayout.setRowCount
-//					(gridrow);
-//			for (int i = 0; i < listTemp.size(); i++) {
-//				TextView textView = new TextView(context);
-//				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
-//						(Utility.dip2px(context, 60), Utility.dip2px(context, 40));
-//				layoutParams.setMargins(Utility.dip2px(context, 10), Utility.dip2px(context,
-//						5), Utility.dip2px(context, 10), Utility.dip2px(context, 5));
-//				textView.setLayoutParams(layoutParams);
-//				textView.setText(listTemp.get(i));
-//				textView.setGravity(Gravity.CENTER);
-//				textView.setBackgroundColor(context.getResources().getColor(R.color
-//						.md_white_1000));
-//				textView.setPadding(Utility.dip2px(context, 6), Utility.dip2px(context,
-//						3), Utility.dip2px(context, 6), Utility.dip2px(context, 3));
-//				activityCitySelectionExpandableListHolderChild_other.gridLayout.addView
-//						(textView);
-//			}
-//
-//		} else {
-//			ActivityCitySelectionExpandableListHolderChild
-//					activityCitySelectionExpandableListHolderChild;
-//			//			if (convertView == null) {
-//			activityCitySelectionExpandableListHolderChild = new
-//					ActivityCitySelectionExpandableListHolderChild();
-//			convertView = inflater.inflate(R.layout
-//					.activity_city_selection_expandablelist_child, null);
-//			activityCitySelectionExpandableListHolderChild.childname = (TextView) convertView
-//					.findViewById(R.id.activity_city_selection_expandablelist_child_childname);
-//			String cn = listChild.get(groupPosition).get(childPosition);
-//			activityCitySelectionExpandableListHolderChild.childname.setText(cn);
-//		}
-//		return convertView;
+		return convertView;
 	}
 
 	@Override

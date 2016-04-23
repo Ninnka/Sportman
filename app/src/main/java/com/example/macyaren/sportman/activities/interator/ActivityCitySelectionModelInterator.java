@@ -6,6 +6,7 @@ package com.example.macyaren.sportman.activities.interator;
  */
 public interface ActivityCitySelectionModelInterator {
 
-
+	void setActivityCitySelectionExpandableList();
+//	void getActivityCitySelectionExpandableList();
 
 }

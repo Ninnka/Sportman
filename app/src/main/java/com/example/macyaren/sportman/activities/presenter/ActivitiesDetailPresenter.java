@@ -3,6 +3,7 @@ package com.example.macyaren.sportman.activities.presenter;
 import com.example.macyaren.sportman.activities.interator.ActivitiesDetailModelInterator;
 import com.example.macyaren.sportman.activities.interator.ActivitiesDetailViewInterator;
 import com.example.macyaren.sportman.activities.model.ActivitiesDetailModel;
+import com.example.macyaren.sportman.activities.view.ActivitiesDetail;
 
 /**
  * Created by hennzr on 2016/4/14 16:39
@@ -14,9 +15,10 @@ public class ActivitiesDetailPresenter {
 	ActivitiesDetailViewInterator activitiesDetailViewInterator;
 	ActivitiesDetailModelInterator activitiesDetailModelInterator;
 
-	public ActivitiesDetailPresenter(ActivitiesDetailViewInterator activitiesDetailViewInterator) {
+	public ActivitiesDetailPresenter(ActivitiesDetail activitiesDetail, ActivitiesDetailViewInterator
+			activitiesDetailViewInterator) {
 		this.activitiesDetailViewInterator = activitiesDetailViewInterator;
-		this.activitiesDetailModelInterator = new ActivitiesDetailModel();
+		this.activitiesDetailModelInterator = new ActivitiesDetailModel(activitiesDetail);
 	}
 
 	public void getActivities_detail_registration_more() {

@@ -6,14 +6,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-        android:name=".main.ExampleApp"
+        android:name=".main.view.ExampleApp"
         android:allowBackup="true"
         android:icon="@drawable/app_icom"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".main.MainActivity"
+            android:name=".main.view.MainActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -46,7 +46,7 @@
         </activity>
 
         <activity
-            android:name=".activities.model.dataHelper.ActivitiesDetailRegistrationInstruction"
+            android:name=".activities.view.ActivitiesDetailRegistrationInstruction"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -57,7 +57,7 @@
         </activity>
 
         <activity
-            android:name=".activities.model.dataHelper.ActivitiesDetailRegistrationInfomation"
+            android:name=".activities.view.ActivitiesDetailRegistrationInfomation"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -68,7 +68,7 @@
         </activity>
 
         <activity
-            android:name=".activities.model.dataHelper.ActivitiesDetailRegistrationComplete"
+            android:name=".activities.view.ActivitiesDetailRegistrationComplete"
             android:screenOrientation="portrait">
 
             <intent-filter>

@@ -1,6 +1,6 @@
 package com.example.macyaren.sportman.activities.interator;
 
-import android.content.Context;
+import com.example.macyaren.sportman.main.view.MainActivity;
 
 /**
  * Created by hennzr on 2016/4/14 15:18
@@ -9,6 +9,6 @@ import android.content.Context;
  */
 public interface ActivitiesFragmentListModelInterator {
 
-	void getActivitiesFragmentList(Context context);
+	void getActivitiesFragmentList(MainActivity mainActivity);
 
 }

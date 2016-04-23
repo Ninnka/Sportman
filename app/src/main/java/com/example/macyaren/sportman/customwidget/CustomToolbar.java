@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 
 import com.example.macyaren.sportman.R;
 import com.example.macyaren.sportman.helper.Utility;
@@ -112,9 +112,6 @@ public class CustomToolbar extends Toolbar {
 		super(context, attrs, defStyleAttr);
 	}
 
-	public CustomToolbar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
-	}
 
 	protected void initComponent(Context context) {
 		left_back = new TextView(context);

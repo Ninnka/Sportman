@@ -1,15 +1,15 @@
 package com.example.macyaren.sportman.message;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.macyaren.sportman.customwidget.CustomToolbar;
 import com.example.macyaren.sportman.R;
+import com.example.macyaren.sportman.customwidget.CustomToolbar;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.Objects;
  * Created by hennzr on 2016/3/27
  * Project name is Sportman
  */
-public class MessageLeftListFollowNews extends Activity implements View.OnClickListener,
+public class MessageLeftListFollowNews extends AppCompatActivity implements View.OnClickListener,
 		CustomToolbar.customToolbarCallback {
 
 	protected MessageLeftListFollowNewsRecyclerViewAdapter

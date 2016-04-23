@@ -1,8 +1,8 @@
-package com.example.macyaren.sportman.activities.model.dataHelper;
+package com.example.macyaren.sportman.activities.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,7 +17,7 @@ import java.util.Random;
 /**
  * Created by hennzr on 2016/3/22.
  */
-public class ActivitiesDetailRegistrationInfomation extends Activity implements View
+public class ActivitiesDetailRegistrationInfomation extends AppCompatActivity implements View
 		.OnClickListener {
 
 	public Spinner item_spinner;

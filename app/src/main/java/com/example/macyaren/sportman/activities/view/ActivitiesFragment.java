@@ -17,14 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.macyaren.sportman.R;
-import com.example.macyaren.sportman.activities.model.ActivitiesFragmentBannerAdapter;
 import com.example.macyaren.sportman.activities.interator.ActivitiesFragmentListViewInterator;
+import com.example.macyaren.sportman.activities.model.ActivitiesFragmentBannerAdapter;
 import com.example.macyaren.sportman.activities.model.ActivitiesFragmentListAdapter;
 import com.example.macyaren.sportman.activities.model.dataHelper.ActivitiesFragmentListInfo;
-import com.example.macyaren.sportman.activities.presenter.ActivitiesFragmentListPresenter;
+import com.example.macyaren.sportman.activities.presenter.ActivitiesFragmentPresenter;
 import com.example.macyaren.sportman.customwidget.ObservableScrollView;
 import com.example.macyaren.sportman.helper.Utility;
+import com.example.macyaren.sportman.main.view.MainActivity;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +68,15 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 	public final static String action_to_activity_detail = "com.macya.intent.action" +
 			".ACTIVITIES_DETAIL";
 
-	public ActivitiesFragmentListPresenter activitiesFragmentListPresenter;
+	public ActivitiesFragmentPresenter activitiesFragmentPresenter;
+
+	public WeakReference<MainActivity> mainActivityWeakReference;
+	public MainActivity mainActivity;
+
+	public void setMainActivityWeakReference(MainActivity mainActivity){
+		this.mainActivityWeakReference = new WeakReference<>(mainActivity);
+		this.mainActivity = mainActivityWeakReference.get();
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +85,7 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 		/*
 		* 创建活动list的presenter
 		* */
-		activitiesFragmentListPresenter = new ActivitiesFragmentListPresenter(this);
+		activitiesFragmentPresenter = new ActivitiesFragmentPresenter(this);
 
 		/*
 		* banner的indicator变化指数
@@ -176,13 +186,35 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 		* */
 		listViewForScrollView = (ListView) resView.findViewById(R.id.activities_fragment_list);
 
+		/*
+		* 创建空ArrayList
+		* 用于初始化activitiesFragmentListAdapter的list
+		* */
 		activitiesFragmentListInfoList = new ArrayList<>();
-		activitiesFragmentListAdapter = ActivitiesFragmentListAdapter.getInstance(getContext());
+
+		/*
+		* 获取单例ActivitiesFragmentListAdapter
+		* */
+		activitiesFragmentListAdapter = ActivitiesFragmentListAdapter.getInstance(mainActivity);
 		Log.i("ZRH","first get ActivitiesFragmentListAdapter");
 
+		/*
+		* 给activitiesFragmentListAdapter的list赋值
+		* */
 		activitiesFragmentListAdapter.setList(activitiesFragmentListInfoList);
+
+		/*
+		*
+		* 获取活动列表的内容
+		* 方法继承于此fragment的presenter
+		* 这里调用，有对应的model直接操作ActivitiesFragmentListAdapter的list
+		* */
 		getActivitiesFragmentList();
 
+		/*
+		* 设置list的adapter
+		* 控制list在scrollView中的高度显示
+		* */
 		listViewForScrollView.setAdapter(activitiesFragmentListAdapter);
 		Utility.setListViewHeightBasedOnChildren(listViewForScrollView);
 		listViewForScrollView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -195,9 +227,11 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 		});
 		scrollView.smoothScrollTo(0, 0);
 
+		/*
+		* 控制list的焦点获取
+		* */
 		listViewForScrollView.setFocusable(false);
-		//		resView.setFocusable(false);
-		//		resView.setFocusable(true);
+
 		return resView;
 	}
 
@@ -236,11 +270,14 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 		}
 	}
 
+	/*
+	* 继承于此fragment的presenter
+	* 用于获取活动列表的数据
+	* */
 	@Override
 	public void getActivitiesFragmentList() {
-		activitiesFragmentListPresenter.getActivitiesFragmentList(getContext().getApplicationContext());
+		activitiesFragmentPresenter.getActivitiesFragmentList(mainActivity);
 	}
-
 
 	/*实现banner上的ViewPager监听接口*/
 	class myOnPageChangeListener implements ViewPager.OnPageChangeListener {

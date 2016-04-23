@@ -17,21 +17,30 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Created by hennzr on 2016/3/20.
+ * Created by hennzr on 2016/3/20 22:29
+ * Project name is Sportman
  */
 public class ActivitiesDetailCommentsListAdapter extends BaseAdapter {
 
 	LayoutInflater inflater;
 	ActivitiesDetail activitiesDetail;
-	List<ActivitiesDetailCommentsListCommInfo> list;
 	WeakReference<ActivitiesDetail> activitiesDetailWeakReference;
+	List<ActivitiesDetailCommentsListCommInfo> list;
 
+	public static ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter = null;
 
 	public ActivitiesDetailCommentsListAdapter(ActivitiesDetail activitiesDetail) {
-//		this.context = context;
-		activitiesDetailWeakReference = new WeakReference<ActivitiesDetail>(activitiesDetail);
+		activitiesDetailWeakReference = new WeakReference<>(activitiesDetail);
 		this.activitiesDetail = activitiesDetailWeakReference.get();
-		inflater = LayoutInflater.from(activitiesDetail);
+		inflater = LayoutInflater.from(this.activitiesDetail);
+	}
+
+	public static ActivitiesDetailCommentsListAdapter getInstance(ActivitiesDetail activitiesDetail) {
+		if(activitiesDetailCommentsListAdapter == null){
+			activitiesDetailCommentsListAdapter = new ActivitiesDetailCommentsListAdapter
+					(activitiesDetail);
+		}
+		return activitiesDetailCommentsListAdapter;
 	}
 
 	@Override
@@ -51,6 +60,14 @@ public class ActivitiesDetailCommentsListAdapter extends BaseAdapter {
 
 	public void setList(List<ActivitiesDetailCommentsListCommInfo> list) {
 		this.list = list;
+	}
+
+	public void addList(ActivitiesDetailCommentsListCommInfo activitiesDetailCommentsListCommInfo){
+		this.list.add(activitiesDetailCommentsListCommInfo);
+	}
+
+	public void clearList(){
+		this.list.clear();
 	}
 
 	@Override

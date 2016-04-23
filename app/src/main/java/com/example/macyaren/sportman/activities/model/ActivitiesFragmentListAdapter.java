@@ -1,7 +1,5 @@
 package com.example.macyaren.sportman.activities.model;
 
-import android.content.Context;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,7 +12,9 @@ import android.widget.TextView;
 import com.example.macyaren.sportman.R;
 import com.example.macyaren.sportman.activities.model.dataHelper.ActivitiesFragmentListHolder;
 import com.example.macyaren.sportman.activities.model.dataHelper.ActivitiesFragmentListInfo;
+import com.example.macyaren.sportman.main.view.MainActivity;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -24,19 +24,28 @@ import java.util.List;
 public class ActivitiesFragmentListAdapter extends BaseAdapter {
 
 	public LayoutInflater inflater;
-	public Context context;
 	public List<ActivitiesFragmentListInfo> list;
 
 	public static ActivitiesFragmentListAdapter activitiesFragmentListAdapter = null;
 
-	public ActivitiesFragmentListAdapter(Context context) {
-		this.context = context;
+	public WeakReference<MainActivity> mainActivityWeakReference;
+	public MainActivity mainActivity;
+
+	//	public Context context;
+
+	public ActivitiesFragmentListAdapter(MainActivity mainActivity) {
+		this.mainActivityWeakReference = new WeakReference<>(mainActivity);
+		this.mainActivity = mainActivityWeakReference.get();
 	}
 
-	synchronized public static ActivitiesFragmentListAdapter getInstance(Context context){
-		if(activitiesFragmentListAdapter == null){
-			activitiesFragmentListAdapter = new ActivitiesFragmentListAdapter(context);
-			Log.i("ZRH","ActivitiesFragmentListAdapter getInstance");
+	//	public ActivitiesFragmentListAdapter(Context context) {
+	//		this.context = context;
+	//	}
+
+	synchronized public static ActivitiesFragmentListAdapter getInstance(MainActivity mainActivity) {
+		if (activitiesFragmentListAdapter == null) {
+			activitiesFragmentListAdapter = new ActivitiesFragmentListAdapter(mainActivity);
+//			Log.i("ZRH", "ActivitiesFragmentListAdapter getInstance");
 		}
 		return activitiesFragmentListAdapter;
 	}
@@ -45,7 +54,7 @@ public class ActivitiesFragmentListAdapter extends BaseAdapter {
 		this.list = list;
 	}
 
-	public void addList(List<ActivitiesFragmentListInfo> listInfos){
+	public void addList(List<ActivitiesFragmentListInfo> listInfos) {
 		this.list.addAll(listInfos);
 	}
 
@@ -67,9 +76,9 @@ public class ActivitiesFragmentListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ActivitiesFragmentListHolder holder = new ActivitiesFragmentListHolder();
-		inflater = LayoutInflater.from(context);
+		inflater = LayoutInflater.from(mainActivity);
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.activities_fragment_listview, null);
+			convertView = inflater.inflate(R.layout.activities_fragment_listview, parent, false);
 			holder.photo = (ImageView) convertView.findViewById(R.id.activities_fragment_list_photo);
 			holder.name = (TextView) convertView.findViewById(R.id.activity_name);
 			holder.hold = (TextView) convertView.findViewById(R.id.activity_hold);
@@ -92,7 +101,7 @@ public class ActivitiesFragmentListAdapter extends BaseAdapter {
 		holder.join.setText("30");
 		holder.join.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
 		holder.join.setGravity(Gravity.CENTER);
-		holder.join.setTextColor(context.getResources().getColor(R.color.md_white_1000));
+		holder.join.setTextColor(mainActivity.getResources().getColor(R.color.md_white_1000));
 		holder.price.setText(afInfo.price);
 		holder.date.setText(afInfo.date);
 		return convertView;

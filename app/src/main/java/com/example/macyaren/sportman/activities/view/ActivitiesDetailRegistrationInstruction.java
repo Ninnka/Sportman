@@ -1,9 +1,9 @@
-package com.example.macyaren.sportman.activities.model.dataHelper;
+package com.example.macyaren.sportman.activities.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -15,7 +15,7 @@ import com.example.macyaren.sportman.R;
 /**
  * Created by hennzr on 2016/3/22.
  */
-public class ActivitiesDetailRegistrationInstruction extends Activity implements View.OnClickListener {
+public class ActivitiesDetailRegistrationInstruction extends AppCompatActivity implements View.OnClickListener {
 
 	public Intent intent_to_information;
 	public CheckBox accept_button;

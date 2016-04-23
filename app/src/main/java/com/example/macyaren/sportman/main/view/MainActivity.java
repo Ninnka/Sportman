@@ -1,10 +1,11 @@
-package com.example.macyaren.sportman.main;
+package com.example.macyaren.sportman.main.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,11 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.macyaren.sportman.R;
 import com.example.macyaren.sportman.activities.view.ActivitiesFragment;
 import com.example.macyaren.sportman.customwidget.ObservableScrollView;
+import com.example.macyaren.sportman.main.model.MainFragmentPagerAdapter;
 import com.example.macyaren.sportman.me.MeFragment;
 import com.example.macyaren.sportman.message.MessageFragment;
 
@@ -32,7 +33,7 @@ import java.util.List;
  * Package in com.example.macyaren.sportman
  * Project name is Sportman
  */
-public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener,
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,
 		View.OnClickListener, ObservableScrollView.Callbacks {
 	/*
 	* 实现ViewPager.OnPageChangeListener接口，控制page的跳转
@@ -43,9 +44,9 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 	Toolbar toolbar;
 	ViewPager viewPager;
 	public List<Fragment> fragmentList;
-	Fragment activitiesfragment;
-	Fragment msgfragment;
-	Fragment mefragment;
+	ActivitiesFragment activitiesfragment;
+	MessageFragment msgfragment;
+	MeFragment mefragment;
 	ImageView currentImageView = null;
 	ImageView prevImageView = null;
 	LinearLayout tab_liner_1;
@@ -92,10 +93,11 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 		* 在ActionBar的位置替换成ToolBar
 		* 进行一些ToolBar的简单设置
 		* */
-		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
 		toolbar.setTitle("");
 		//		toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
-		setActionBar(toolbar);
+//		setActionBar(toolbar);
+		setSupportActionBar(toolbar);
 
 		addActivitiesToolBarContent();
 
@@ -103,9 +105,10 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 		* 准备主页上的三个页面
 		* */
 		viewPager = (ViewPager) findViewById(R.id.mainViewPager);
-		fragmentList = new ArrayList<Fragment>();
+		fragmentList = new ArrayList<>();
 		if (activitiesfragment == null) {
 			activitiesfragment = new ActivitiesFragment();
+			activitiesfragment.setMainActivityWeakReference(this);
 		}
 		if (msgfragment == null) {
 			msgfragment = new MessageFragment();
@@ -125,11 +128,17 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 		* 主页底部导航栏添加跳转事件
 		* */
 		tab_liner_1 = (LinearLayout) findViewById(R.id.tab_1);
-		tab_liner_1.setOnClickListener(this);
+		if (tab_liner_1 != null) {
+			tab_liner_1.setOnClickListener(this);
+		}
 		tab_liner_2 = (LinearLayout) findViewById(R.id.tab_2);
-		tab_liner_2.setOnClickListener(this);
+		if (tab_liner_2 != null) {
+			tab_liner_2.setOnClickListener(this);
+		}
 		tab_liner_3 = (LinearLayout) findViewById(R.id.tab_3);
-		tab_liner_3.setOnClickListener(this);
+		if (tab_liner_3 != null) {
+			tab_liner_3.setOnClickListener(this);
+		}
 	}
 
 	@Override

@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <Toolbar
+    <android.support.v7.widget.Toolbar
         android:layout_gravity="top"
         android:id="@+id/activities_detail_registration_information_toolbar"
         android:minHeight="?android:actionBarSize"
@@ -48,7 +48,7 @@
         </LinearLayout>
 
 
-    </Toolbar>
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:background="@color/md_white_1000"

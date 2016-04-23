@@ -3,10 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
     defaultConfig {
         applicationId "com.example.macyaren.sportman"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -16,6 +15,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 
@@ -30,4 +31,8 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:okhttp-integration:1.4.0'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
+    compile 'jp.wasabeef:glide-transformations:2.0.0'
 }

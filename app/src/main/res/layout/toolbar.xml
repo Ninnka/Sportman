@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Toolbar
+<android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="?android:attr/colorPrimary"
+    android:background="@color/ToolBarColorPrimary"
     android:elevation="3dp"
     android:minHeight="?android:attr/actionBarSize"
     android:popupTheme="@android:style/ThemeOverlay.Material.Light">
 
-</Toolbar>
+</android.support.v7.widget.Toolbar>

@@ -1,12 +1,12 @@
 package com.example.macyaren.sportman.activities.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.example.macyaren.sportman.R;
 import com.example.macyaren.sportman.activities.interator.ActivitiesDetailViewInterator;
@@ -33,7 +32,7 @@ import java.util.Objects;
  * Created by hennzr on 2016/3/19 11:22
  * Project name is Sportman
  */
-public class ActivitiesDetail extends Activity implements ObservableScrollView.Callbacks,
+public class ActivitiesDetail extends AppCompatActivity implements ObservableScrollView.Callbacks,
 		View.OnClickListener, ActivitiesDetailViewInterator {
 
 	public ImageView headerView;
@@ -51,7 +50,7 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 	public LinearLayout registrationdetail_container;
 	public TextView process_expand_tv;
 	public TextView registrationdetail_expanded_tv;
-	public static List<ActivitiesDetailCommentsListCommInfo> list;
+	public List<ActivitiesDetailCommentsListCommInfo> list;
 	public ImageView detail_return;
 	public TextView registration_button_tv;
 
@@ -87,7 +86,7 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activities_detail);
 
-		activitiesDetailPresenter = new ActivitiesDetailPresenter(this);
+		activitiesDetailPresenter = new ActivitiesDetailPresenter(this, this);
 
 		cachedView = new View(this);
 
@@ -98,21 +97,35 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 		headerView = (ImageView) findViewById(R.id.activities_detail_headerView);
 		scrollView = (ObservableScrollView) findViewById(R.id
 				.activities_detail_observableScrollView);
-		scrollView.setmCallbacks(this);
-		scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				onScrollchanged(scrollView.getScrollY());
-			}
-		});
+		if (scrollView != null) {
+			scrollView.setmCallbacks(this);
+		}
+		if (scrollView != null) {
+			scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					onScrollchanged(scrollView.getScrollY());
+				}
+			});
+		}
 		container_registration = (LinearLayout) findViewById(R.id
 				.activities_detail_content_center_container_registration);
 		commentsListView = (ListView) findViewById(R.id
 				.activities_detail_content_center_commentslist);
 
-		activitiesDetailCommentsListAdapter = new ActivitiesDetailCommentsListAdapter(this);
+		/*
+		* 获取activitiesDetailCommentsListAdapter单例
+		* */
+		activitiesDetailCommentsListAdapter = ActivitiesDetailCommentsListAdapter.getInstance(this);
+		/*
+		* 创建空的活动list
+		* activitiesDetailCommentsListAdapter先设置成空list
+		* */
 		list = new ArrayList<>();
 		activitiesDetailCommentsListAdapter.setList(list);
+		/*
+		*
+		* */
 		commentsListView.setAdapter(activitiesDetailCommentsListAdapter);
 		Utility.setListViewHeightBasedOnChildren(commentsListView);
 
@@ -149,6 +162,8 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		handler.removeCallbacksAndMessages(null);
+
 	}
 
 	@Override
@@ -173,7 +188,6 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 		container_registration.setTranslationY(translation);
 
 		alphaReal = (int) Math.ceil(255 * alphaFactor);
-		Log.i("ZRH", "alphaReal: " + alphaReal);
 		toolbar.setBackgroundColor(Color.argb(alphaReal, 254, 254, 254));
 
 		int scaleSpeed = (int) (t * 0.5);
@@ -200,10 +214,6 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 				}
 				if (size < 10) {
 					getActivities_detail_comment_more(true);
-					Log.i("ZRH",""+ list.size());
-					for(int i = 0;i<2;i++){
-						Log.i("ZRH",list.get(i).comment);
-					}
 					activitiesDetailCommentsListAdapter.notifyDataSetChanged();
 					Utility.setListViewHeightBasedOnChildren(commentsListView);
 
@@ -279,10 +289,10 @@ public class ActivitiesDetail extends Activity implements ObservableScrollView.C
 		activitiesDetailPresenter.getActivities_detail_comment_more(flag);
 	}
 
-//	@Override
-//	public void setActivities_detail_comment_more(List<ActivitiesDetailCommentsListCommInfo> list) {
-//		this.list = list;
-//	}
+	//	@Override
+	//	public void setActivities_detail_comment_more(List<ActivitiesDetailCommentsListCommInfo> list) {
+	//		this.list = list;
+	//	}
 
 
 	static class AD_Handler extends Handler {

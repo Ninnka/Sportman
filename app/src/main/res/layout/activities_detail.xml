@@ -439,15 +439,14 @@
 
     </com.example.macyaren.sportman.customwidget.ObservableScrollView>
 
-    <Toolbar
+    <android.support.v7.widget.Toolbar
         android:layout_gravity="top"
         android:id="@+id/activities_detail_toolbar"
         android:minHeight="?android:actionBarSize"
         android:background="#00FEFEFE"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:elevation="3dp"
-        android:popupTheme="@android:style/ThemeOverlay.Material.Light">
+        android:translationZ="3dp">
 
         <LinearLayout
             android:gravity="left|center"
@@ -497,6 +496,6 @@
         </LinearLayout>
 
 
-    </Toolbar>
+    </android.support.v7.widget.Toolbar>
 
 </FrameLayout>

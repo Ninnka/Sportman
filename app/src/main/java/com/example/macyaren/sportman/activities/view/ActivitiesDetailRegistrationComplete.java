@@ -1,20 +1,21 @@
-package com.example.macyaren.sportman.activities.model.dataHelper;
+package com.example.macyaren.sportman.activities.view;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.macyaren.sportman.customwidget.ObservableScrollView;
 import com.example.macyaren.sportman.R;
+import com.example.macyaren.sportman.customwidget.ObservableScrollView;
 import com.example.macyaren.sportman.helper.Utility;
 
 /**
- * Created by hennzr on 2016/3/22.
+ * Created by hennzr on 2016/3/22 20:53
+ * Project name is Sportman
  */
-public class ActivitiesDetailRegistrationComplete extends Activity implements View
+public class ActivitiesDetailRegistrationComplete extends AppCompatActivity implements View
 		.OnClickListener, ObservableScrollView.Callbacks {
 
 	public ImageView registration_complete_back;
@@ -36,18 +37,24 @@ public class ActivitiesDetailRegistrationComplete extends Activity implements Vi
 
 		registration_complete_back = (ImageView) findViewById(R.id
 				.activity_detail_registration_complete_return);
-		registration_complete_back.setOnClickListener(this);
+		if (registration_complete_back != null) {
+			registration_complete_back.setOnClickListener(this);
+		}
 		registration_complete_floatnotification = (LinearLayout) findViewById(R.id
 				.activities_detail_registration_complete_floatnotification);
 		registration_complete_notificationtext = (TextView) findViewById(R.id
 				.activities_detail_registration_complete_notificationtext);
 		registration_complete_closenotification = (ImageView) findViewById(R.id
 				.activities_detail_registration_complete_closenotification);
-		registration_complete_closenotification.setOnClickListener(this);
+		if (registration_complete_closenotification != null) {
+			registration_complete_closenotification.setOnClickListener(this);
+		}
 
 		observableScrollView = (ObservableScrollView) findViewById(R.id
 				.activities_detail_registration_complete_observablescrollview);
-		observableScrollView.setmCallbacks(this);
+		if (observableScrollView != null) {
+			observableScrollView.setmCallbacks(this);
+		}
 		toolbar_container = (LinearLayout) findViewById(R.id
 				.activities_detail_registration_complete_toolbar_container);
 		scrollView_container = (LinearLayout) findViewById(R.id

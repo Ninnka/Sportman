@@ -1,11 +1,9 @@
 package com.example.macyaren.sportman.activities.model;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.example.macyaren.sportman.activities.interator.ActivitiesFragmentListModelInterator;
 import com.example.macyaren.sportman.activities.model.dataHelper.ActivitiesFragmentListData;
 import com.example.macyaren.sportman.activities.model.dataHelper.ActivitiesFragmentListInfo;
+import com.example.macyaren.sportman.main.view.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +30,9 @@ public class ActivitiesFragmentListModel implements ActivitiesFragmentListModelI
 	}
 
 	@Override
-	public void getActivitiesFragmentList(Context context) {
+	public void getActivitiesFragmentList(MainActivity mainActivity) {
 		if(activitiesFragmentListAdapter == null){
-			activitiesFragmentListAdapter = ActivitiesFragmentListAdapter.getInstance(context);
-			Log.i("ZRH","second get ActivitiesFragmentListAdapter");
+			activitiesFragmentListAdapter = ActivitiesFragmentListAdapter.getInstance(mainActivity);
 		}
 		activitiesFragmentListAdapter.addList(activitiesFragmentListInfoList);
 	}
