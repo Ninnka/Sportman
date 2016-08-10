@@ -7,7 +7,7 @@ import android.os.Message;
 import com.example.macyaren.sportman.R;
 import com.example.macyaren.sportman.activities.interator.ActivityCitySelectionModelInterator;
 import com.example.macyaren.sportman.activities.model.dataHelper.ActivityCitySelectionExpandableListData;
-import com.example.macyaren.sportman.activities.view.ActivitiesCitySelection_Handler;
+import com.example.macyaren.sportman.activities.view.ActivityCitySelection_Handler;
 import com.example.macyaren.sportman.activities.view.ActivityCitySelection;
 import com.example.macyaren.sportman.helper.PingYinTool;
 
@@ -37,7 +37,7 @@ public class ActivityCitySelectionModel implements ActivityCitySelectionModelInt
 	public List<String> listGroupTemp;
 	public PingYinTool pingYinTool;
 
-	public ActivitiesCitySelection_Handler activitiesCitySelection_Handler;
+	public ActivityCitySelection_Handler activityCitySelection_Handler;
 
 	public static Boolean status = false;
 
@@ -64,7 +64,7 @@ public class ActivityCitySelectionModel implements ActivityCitySelectionModelInt
 		/*
 		* 实例化handler
 		* */
-		activitiesCitySelection_Handler = new ActivitiesCitySelection_Handler
+		activityCitySelection_Handler = new ActivityCitySelection_Handler
 				(this.activityCitySelection);
 
 		/*创建拼音工具类实例*/
@@ -174,7 +174,7 @@ public class ActivityCitySelectionModel implements ActivityCitySelectionModelInt
 						.setListGroup(activityCitySelectionModel.listGroup);
 				activityCitySelectionModel.activityCitySelectionExpandableListAdapter
 						.notifyDataSetChanged();
-				activityCitySelectionModel.activitiesCitySelection_Handler.sendEmptyMessage
+				activityCitySelectionModel.activityCitySelection_Handler.sendEmptyMessage
 						(ActivityCitySelection.LOADING_CITY_NAME);
 			}
 		}

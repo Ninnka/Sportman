@@ -167,8 +167,30 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
 	@Override
 	protected void onDestroy() {
+		fragmentPagerAdapter = null;
+		toolbar = null;
+		viewPager = null;
+		activitiesfragment = null;
+		msgfragment = null;
+		mefragment = null;
+		observableScrollView = null;
+		inflater = null;
 		super.onDestroy();
 //		Log.i("ZRH", "ACTIVITY DESTORY");
+
+		/*
+		* 结束进程方法一
+		* */
+//		Intent intent = new Intent(Intent.ACTION_MAIN);
+//		intent.addCategory(Intent.CATEGORY_HOME);
+//		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//		this.startActivity(intent);
+//		System.exit(0);
+
+		/*
+		* 结束进程方法二
+		* */
+//		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 
 	@Override

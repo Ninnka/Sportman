@@ -26,29 +26,28 @@ public class ActivitiesFragmentListAdapter extends BaseAdapter {
 	public LayoutInflater inflater;
 	public List<ActivitiesFragmentListInfo> list;
 
-	public static ActivitiesFragmentListAdapter activitiesFragmentListAdapter = null;
+//	public static ActivitiesFragmentListAdapter activitiesFragmentListAdapter = null;
 
 	public WeakReference<MainActivity> mainActivityWeakReference;
 	public MainActivity mainActivity;
 
-	//	public Context context;
+//		public Context context;
 
 	public ActivitiesFragmentListAdapter(MainActivity mainActivity) {
 		this.mainActivityWeakReference = new WeakReference<>(mainActivity);
 		this.mainActivity = mainActivityWeakReference.get();
 	}
 
-	//	public ActivitiesFragmentListAdapter(Context context) {
-	//		this.context = context;
-	//	}
+//		public ActivitiesFragmentListAdapter(Context context) {
+//			this.context = context;
+//		}
 
-	synchronized public static ActivitiesFragmentListAdapter getInstance(MainActivity mainActivity) {
-		if (activitiesFragmentListAdapter == null) {
-			activitiesFragmentListAdapter = new ActivitiesFragmentListAdapter(mainActivity);
-//			Log.i("ZRH", "ActivitiesFragmentListAdapter getInstance");
-		}
-		return activitiesFragmentListAdapter;
-	}
+//	synchronized public static ActivitiesFragmentListAdapter getInstance(MainActivity mainActivity) {
+//		if (activitiesFragmentListAdapter == null) {
+//			activitiesFragmentListAdapter = new ActivitiesFragmentListAdapter(mainActivity);
+//		}
+//		return activitiesFragmentListAdapter;
+//	}
 
 	public void setList(List<ActivitiesFragmentListInfo> list) {
 		this.list = list;
@@ -101,7 +100,7 @@ public class ActivitiesFragmentListAdapter extends BaseAdapter {
 		holder.join.setText("30");
 		holder.join.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
 		holder.join.setGravity(Gravity.CENTER);
-		holder.join.setTextColor(mainActivity.getResources().getColor(R.color.md_white_1000));
+		holder.join.setTextColor(mainActivity.getApplicationContext().getResources().getColor(R.color.md_white_1000));
 		holder.price.setText(afInfo.price);
 		holder.date.setText(afInfo.date);
 		return convertView;

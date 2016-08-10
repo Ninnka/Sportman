@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -67,7 +68,7 @@ public class ActivitiesDetail extends AppCompatActivity implements ObservableScr
 	public final static int EXPAND_PRO = 2;
 	public final static int COLLAPSE_PRO = 3;
 
-	public final static String INTENT_TO_NEXT = "com.macya.intent.action" +
+	public String INTENT_TO_NEXT = "com.macya.intent.action" +
 			".ACTIVITIES_DETAIL_REGISTRATION_INSTRUCTION";
 
 	public ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter;
@@ -114,9 +115,9 @@ public class ActivitiesDetail extends AppCompatActivity implements ObservableScr
 				.activities_detail_content_center_commentslist);
 
 		/*
-		* 获取activitiesDetailCommentsListAdapter单例
+		* 获取activitiesDetailCommentsListAdapter实例
 		* */
-		activitiesDetailCommentsListAdapter = ActivitiesDetailCommentsListAdapter.getInstance(this);
+		activitiesDetailCommentsListAdapter = new ActivitiesDetailCommentsListAdapter(this);
 		/*
 		* 创建空的活动list
 		* activitiesDetailCommentsListAdapter先设置成空list
@@ -162,8 +163,13 @@ public class ActivitiesDetail extends AppCompatActivity implements ObservableScr
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		Log.i("ZRH","detail ondestory");
 		handler.removeCallbacksAndMessages(null);
-
+		handler = null;
+		activitiesDetailPresenter = null;
+		cachedView = null;
+		scrollView.setmCallbacks(null);
+		scrollView = null;
 	}
 
 	@Override
@@ -286,7 +292,7 @@ public class ActivitiesDetail extends AppCompatActivity implements ObservableScr
 
 	@Override
 	public void getActivities_detail_comment_more(Boolean flag) {
-		activitiesDetailPresenter.getActivities_detail_comment_more(flag);
+		activitiesDetailPresenter.getActivities_detail_comment_more(flag, activitiesDetailCommentsListAdapter);
 	}
 
 	//	@Override

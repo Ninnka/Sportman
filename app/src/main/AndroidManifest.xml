@@ -36,6 +36,7 @@
         </activity>
 
         <activity
+            android:launchMode="singleTask"
             android:name=".activities.view.ActivitiesDetail"
             android:screenOrientation="portrait">
 

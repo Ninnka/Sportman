@@ -22,26 +22,25 @@ import java.util.Objects;
  */
 public class ActivitiesDetailCommentsListAdapter extends BaseAdapter {
 
+	List<ActivitiesDetailCommentsListCommInfo> list;
 	LayoutInflater inflater;
 	ActivitiesDetail activitiesDetail;
 	WeakReference<ActivitiesDetail> activitiesDetailWeakReference;
-	List<ActivitiesDetailCommentsListCommInfo> list;
 
-	public static ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter = null;
+//	public static ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter = null;
 
 	public ActivitiesDetailCommentsListAdapter(ActivitiesDetail activitiesDetail) {
 		activitiesDetailWeakReference = new WeakReference<>(activitiesDetail);
 		this.activitiesDetail = activitiesDetailWeakReference.get();
-		inflater = LayoutInflater.from(this.activitiesDetail);
 	}
 
-	public static ActivitiesDetailCommentsListAdapter getInstance(ActivitiesDetail activitiesDetail) {
-		if(activitiesDetailCommentsListAdapter == null){
-			activitiesDetailCommentsListAdapter = new ActivitiesDetailCommentsListAdapter
-					(activitiesDetail);
-		}
-		return activitiesDetailCommentsListAdapter;
-	}
+//	public static ActivitiesDetailCommentsListAdapter getInstance(ActivitiesDetail activitiesDetail) {
+//		if(activitiesDetailCommentsListAdapter == null){
+//			activitiesDetailCommentsListAdapter = new ActivitiesDetailCommentsListAdapter
+//					(activitiesDetail);
+//		}
+//		return activitiesDetailCommentsListAdapter;
+//	}
 
 	@Override
 	public int getCount() {
@@ -72,6 +71,7 @@ public class ActivitiesDetailCommentsListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		inflater = LayoutInflater.from(activitiesDetail);
 		ActivitiesDetailCommentsListHolder activitiesDetailCommentsListHolder;
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.activities_detail_comments_list, parent, false);

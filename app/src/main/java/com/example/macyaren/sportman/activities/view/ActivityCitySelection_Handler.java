@@ -14,12 +14,12 @@ import java.lang.ref.WeakReference;
  * Created by hennzr on 2016/4/23 16:39
  * Project name is Sportman
  */
-public class ActivitiesCitySelection_Handler extends Handler {
+public class ActivityCitySelection_Handler extends Handler {
 
 	WeakReference<ActivityCitySelection> activityCitySelectionWeakReference;
 	ActivityCitySelection activityCitySelection;
 
-	public ActivitiesCitySelection_Handler(ActivityCitySelection activityCitySelection) {
+	public ActivityCitySelection_Handler(ActivityCitySelection activityCitySelection) {
 		activityCitySelectionWeakReference = new WeakReference<>
 				(activityCitySelection);
 		this.activityCitySelection = activityCitySelectionWeakReference.get();

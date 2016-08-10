@@ -2,6 +2,7 @@ package com.example.macyaren.sportman.activities.presenter;
 
 import com.example.macyaren.sportman.activities.interator.ActivitiesDetailModelInterator;
 import com.example.macyaren.sportman.activities.interator.ActivitiesDetailViewInterator;
+import com.example.macyaren.sportman.activities.model.ActivitiesDetailCommentsListAdapter;
 import com.example.macyaren.sportman.activities.model.ActivitiesDetailModel;
 import com.example.macyaren.sportman.activities.view.ActivitiesDetail;
 
@@ -31,11 +32,12 @@ public class ActivitiesDetailPresenter {
 				(activitiesDetailModelInterator.getActivities_detail_process_more());
 	}
 
-	public void getActivities_detail_comment_more(Boolean flag) {
+	public void getActivities_detail_comment_more(Boolean flag,
+												  ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter) {
 		if (flag) {
-			activitiesDetailModelInterator.getActivities_detail_comment_more();
+			activitiesDetailModelInterator.getActivities_detail_comment_more(activitiesDetailCommentsListAdapter);
 		} else {
-			activitiesDetailModelInterator.resetActivities_detail_comment();
+			activitiesDetailModelInterator.resetActivities_detail_comment(activitiesDetailCommentsListAdapter);
 		}
 	}
 }

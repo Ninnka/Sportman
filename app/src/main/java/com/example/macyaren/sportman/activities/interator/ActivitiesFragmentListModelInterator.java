@@ -1,6 +1,6 @@
 package com.example.macyaren.sportman.activities.interator;
 
-import com.example.macyaren.sportman.main.view.MainActivity;
+import com.example.macyaren.sportman.activities.model.ActivitiesFragmentListAdapter;
 
 /**
  * Created by hennzr on 2016/4/14 15:18
@@ -9,6 +9,6 @@ import com.example.macyaren.sportman.main.view.MainActivity;
  */
 public interface ActivitiesFragmentListModelInterator {
 
-	void getActivitiesFragmentList(MainActivity mainActivity);
+	void getActivitiesFragmentList(ActivitiesFragmentListAdapter activitiesFragmentListAdapter);
 
 }

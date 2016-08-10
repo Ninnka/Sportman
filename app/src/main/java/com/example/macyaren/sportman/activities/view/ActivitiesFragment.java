@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -195,8 +194,8 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 		/*
 		* 获取单例ActivitiesFragmentListAdapter
 		* */
-		activitiesFragmentListAdapter = ActivitiesFragmentListAdapter.getInstance(mainActivity);
-		Log.i("ZRH","first get ActivitiesFragmentListAdapter");
+		activitiesFragmentListAdapter = new ActivitiesFragmentListAdapter(mainActivity);
+//		Log.i("ZRH","first get ActivitiesFragmentListAdapter");
 
 		/*
 		* 给activitiesFragmentListAdapter的list赋值
@@ -276,7 +275,7 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 	* */
 	@Override
 	public void getActivitiesFragmentList() {
-		activitiesFragmentPresenter.getActivitiesFragmentList(mainActivity);
+		activitiesFragmentPresenter.getActivitiesFragmentList(activitiesFragmentListAdapter);
 	}
 
 	/*实现banner上的ViewPager监听接口*/
@@ -439,6 +438,7 @@ public class ActivitiesFragment extends Fragment implements View.OnClickListener
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		activitiesFragmentListAdapter = null;
 //		Log.i("ZRH","FRAGMENT: Destory");
 	}
 

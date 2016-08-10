@@ -48,10 +48,6 @@ public class VerticalScrollNavigation extends LinearLayout {
 		super(context, attrs, defStyleAttr);
 	}
 
-	public VerticalScrollNavigation(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
-	}
-
 	public void setNavigationAttribute(String[] navigationAttribute, Activity activity) {
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup
 				.LayoutParams.MATCH_PARENT, 0, 1);
@@ -62,6 +58,7 @@ public class VerticalScrollNavigation extends LinearLayout {
 			navigation_tv.setText(navigationAttribute[i]);
 			//noinspection deprecation
 			navigation_tv.setTextColor(getResources().getColor(R.color.md_grey_700));
+			navigation_tv.setBackgroundResource(R.color.navigatiom_release);
 			navigation_tv.setGravity(Gravity.CENTER);
 			navigation_tv.setLayoutParams(layoutParams);
 			addView(navigation_tv);

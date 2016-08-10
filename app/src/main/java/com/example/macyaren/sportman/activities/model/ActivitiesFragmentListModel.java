@@ -3,7 +3,6 @@ package com.example.macyaren.sportman.activities.model;
 import com.example.macyaren.sportman.activities.interator.ActivitiesFragmentListModelInterator;
 import com.example.macyaren.sportman.activities.model.dataHelper.ActivitiesFragmentListData;
 import com.example.macyaren.sportman.activities.model.dataHelper.ActivitiesFragmentListInfo;
-import com.example.macyaren.sportman.main.view.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,17 +22,17 @@ public class ActivitiesFragmentListModel implements ActivitiesFragmentListModelI
 
 	List<ActivitiesFragmentListInfo> activitiesFragmentListInfoList;
 
-	ActivitiesFragmentListAdapter activitiesFragmentListAdapter;
+//	ActivitiesFragmentListAdapter activitiesFragmentListAdapter;
 
 	public ActivitiesFragmentListModel() {
 		initActivitiesFragmentList();
 	}
 
 	@Override
-	public void getActivitiesFragmentList(MainActivity mainActivity) {
-		if(activitiesFragmentListAdapter == null){
-			activitiesFragmentListAdapter = ActivitiesFragmentListAdapter.getInstance(mainActivity);
-		}
+	public void getActivitiesFragmentList(ActivitiesFragmentListAdapter activitiesFragmentListAdapter) {
+//		if(activitiesFragmentListAdapter == null){
+//			activitiesFragmentListAdapter = ActivitiesFragmentListAdapter.getInstance(mainActivity);
+//		}
 		activitiesFragmentListAdapter.addList(activitiesFragmentListInfoList);
 	}
 

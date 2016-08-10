@@ -17,7 +17,7 @@ public class ActivitiesDetailModel implements ActivitiesDetailModelInterator {
 	* */
 	public ActivitiesDetailCommentsListCommData activitiesDetailCommentsListCommData;
 	public ActivitiesDetailCommentsListCommInfo[] activitiesDetailCommentsListCommInfo;
-	public ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter;
+//	public ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter;
 
 	/*
 	* 需要返回的变量
@@ -43,8 +43,8 @@ public class ActivitiesDetailModel implements ActivitiesDetailModelInterator {
 			activitiesDetailCommentsListCommInfo[i].date = activitiesDetailCommentsListCommData
 					.DATES[i];
 		}
-		activitiesDetailCommentsListAdapter = ActivitiesDetailCommentsListAdapter.getInstance
-				(activitiesDetail);
+//		activitiesDetailCommentsListAdapter = ActivitiesDetailCommentsListAdapter.getInstance
+//				(activitiesDetail);
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class ActivitiesDetailModel implements ActivitiesDetailModelInterator {
 	}
 
 	@Override
-	public void getActivities_detail_comment_more() {
+	public void getActivities_detail_comment_more(ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter) {
 
 		/*
 		* 假设这里经过了一系列的逻辑判断以及网络请求
@@ -112,7 +112,7 @@ public class ActivitiesDetailModel implements ActivitiesDetailModelInterator {
 	}
 
 	@Override
-	public void resetActivities_detail_comment() {
+	public void resetActivities_detail_comment(ActivitiesDetailCommentsListAdapter activitiesDetailCommentsListAdapter) {
 
 		/*
 		* 数据清除操作
